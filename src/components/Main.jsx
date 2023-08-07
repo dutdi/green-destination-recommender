@@ -9,14 +9,14 @@ const Main = () => {
         <Grid
             container
             direction='row'
-            justifyContent='center'
+            justifyContent='flex-start'
             alignItems='center'
             sx={{
                 backgroundImage: `url(${BackgroundImage})`,
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
-                height: '60vh',
+                height: '70vh',
                 mt: 1,
                 position: 'relative',
                 display: 'flex',
@@ -51,7 +51,7 @@ const Main = () => {
                     Where Conservation Meets Adventure
                 </Typography>
             </Grid>
-            <Grid item xs={8} sm={8} md={8}>
+            <Grid item xs={10} sm={10} md={10}>
                 <UserInput />
             </Grid>
         </Grid>

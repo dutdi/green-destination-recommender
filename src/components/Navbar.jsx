@@ -71,7 +71,7 @@ const Navbar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        Green Destination Recommender
+                        Green Destination
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, justifyContent: { xs: 'flex-end', md: 'none' } }}>
                         <IconButton
