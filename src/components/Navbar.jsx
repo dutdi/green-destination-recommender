@@ -38,7 +38,7 @@ const Navbar = () => {
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
-                            fontFamily: 'monospace',
+                            fontFamily: 'Open Sans',
                             fontWeight: 700,
                             letterSpacing: '.1rem',
                             color: 'inherit',

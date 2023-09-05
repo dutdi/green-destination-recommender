@@ -1,10 +1,8 @@
-import * as React from 'react';
-import { Container, Grid, Card, CardActions, CardContent, CardMedia, Button, Typography } from '@mui/material';
-import { Destinations } from '../helpers/Destinations.js';
-import { shuffleArray } from '../helpers/Functions.js';
+import React from 'react';
+import { Container, Grid, Typography } from '@mui/material';
+import DestinationCard from './DestinationCard';
 
-const DestinationAlbum = () => {
-    const destinations = shuffleArray(Destinations).slice(0, 8);
+const DestinationAlbum = ({ destinations }) => {
     return (
         <Container sx={{ py: 6 }} maxWidth='lg'>
             <Typography
@@ -16,35 +14,16 @@ const DestinationAlbum = () => {
                     letterSpacing: '.1rem',
                 }}
             >
-                Popular destinations
+                Popular Destinations
             </Typography>
 
             <Grid container spacing={4}>
                 {destinations.map((destination) => (
-                    <Grid item key={destination.id} xs={12} sm={6} md={3}>
-                        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                            <CardMedia
-                                component='div'
-                                sx={{
-                                    pt: '56.25%',
-                                }}
-                                image={destination.imgPath}
-                            />
-                            <CardContent sx={{ flexGrow: 1 }}>
-                                <Typography gutterBottom variant='h5' component='h2'>
-                                    {destination.name}
-                                </Typography>
-                                <Typography>{destination.description}</Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Button size='small'>Interested</Button>
-                                <Button size='small'>Hide</Button>
-                            </CardActions>
-                        </Card>
-                    </Grid>
+                    <DestinationCard key={destination.id} destination={destination} />
                 ))}
             </Grid>
         </Container>
     );
 };
+
 export default DestinationAlbum;

@@ -1,7 +1,15 @@
 export const Colors = {
     green: '#0b590b',
+    lightGreen: '#33cc33',
     white: '#ffffff',
     black: '#000000',
     gray: '#f5f5f5',
     blue: '#2196F3',
+    darkBlue: '00008B',
+    lightBlue: '#add8e6',
+    mutedBlue: '#b0c4de',
+    yellow: '#ff9900',
+    sunnyYellow: '#ffcc00',
+    red: '#cc0000',
+    brown: 'b7410e',
 };

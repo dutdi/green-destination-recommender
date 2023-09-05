@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { TextField, Slider, Button, Grid, Typography } from '@mui/material';
+import { TextField, Slider, Button, Grid, Typography, Autocomplete } from '@mui/material';
 import { Colors } from '../helpers/Colors.js';
+import { Destinations } from '../data/Destinations.js';
 
 const UserInput = () => {
     const minBudget = 0;
-    const maxBudget = 20000;
-    const defaultValue = 6000;
+    const maxBudget = 1000;
+    const defaultValue = 200;
     const currentDate = new Date().toISOString().split('T')[0];
     const budgetValueText = (value) => `€${value}`;
 
@@ -15,17 +16,22 @@ const UserInput = () => {
             label: '0',
         },
         {
-            value: 6000,
-            label: '6000',
+            value: 200,
+            label: '200',
         },
         {
-            value: 20000,
-            label: '20000',
+            value: 1000,
+            label: '1000',
         },
     ];
 
     const [fromDate, setFromDate] = useState(currentDate);
     const [toDate, setToDate] = useState(currentDate);
+
+    const defaultProps = {
+        options: Destinations,
+        getOptionLabel: (option) => option.name,
+    };
 
     const handleFromDateChange = (event) => {
         const selectedDate = event.target.value;
@@ -48,7 +54,7 @@ const UserInput = () => {
             spacing={{ xs: 0, sm: 2, md: 3 }}
             justifyContent='center'
             alignItems='center'
-            style={{
+            sx={{
                 backgroundColor: Colors.gray,
                 padding: '24px',
                 borderRadius: '8px',
@@ -57,17 +63,25 @@ const UserInput = () => {
             }}
         >
             <Grid item xs={12} sm={12} md={3}>
-                <TextField
-                    label='Destination'
-                    variant='outlined'
-                    fullWidth
-                    style={{ backgroundColor: Colors.white, borderRadius: '4px' }}
+                <Autocomplete
+                    {...defaultProps}
+                    id='destination'
+                    clearOnEscape
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            label='Destination'
+                            variant='outlined'
+                            fullWidth
+                            sx={{ backgroundColor: Colors.white, borderRadius: '4px' }}
+                        />
+                    )}
                 />
             </Grid>
 
             <Grid item xs={12} sm={6} md={2}>
                 <TextField
-                    label='From Date'
+                    label='Departure'
                     type='date'
                     variant='outlined'
                     fullWidth
@@ -79,13 +93,13 @@ const UserInput = () => {
                     }}
                     value={fromDate}
                     onChange={handleFromDateChange}
-                    style={{ backgroundColor: Colors.white, borderRadius: '4px' }}
+                    sx={{ backgroundColor: Colors.white, borderRadius: '4px' }}
                 />
             </Grid>
 
             <Grid item xs={12} sm={6} md={2}>
                 <TextField
-                    label='To Date'
+                    label='Return'
                     type='date'
                     variant='outlined'
                     fullWidth
@@ -97,13 +111,13 @@ const UserInput = () => {
                     }}
                     value={toDate}
                     onChange={handleToDateChange}
-                    style={{ backgroundColor: Colors.white, borderRadius: '4px' }}
+                    sx={{ backgroundColor: Colors.white, borderRadius: '4px' }}
                 />
             </Grid>
 
             <Grid item xs={12} sm={12} md={2}>
                 <Typography variant='body2' gutterBottom>
-                    Budget
+                    Budget (€ per day)
                 </Typography>
                 <Slider
                     defaultValue={defaultValue}
@@ -121,7 +135,7 @@ const UserInput = () => {
                     variant='contained'
                     color='primary'
                     fullWidth
-                    style={{
+                    sx={{
                         backgroundColor: Colors.blue,
                         color: Colors.white,
                         borderRadius: '4px',
