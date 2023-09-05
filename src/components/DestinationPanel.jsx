@@ -24,17 +24,38 @@ const DestinationPanel = ({ destination, onClose }) => {
         setUserRating(newValue);
     };
 
+    const closeDialog = () => {
+        setOpen(false);
+        onClose();
+    };
+
     const handleClose = () => {
         if (userRating !== 0) {
             destination.avgRating = (destination.avgRating * destination.numOfRatings + userRating) / (destination.numOfRatings + 1);
             destination.numOfRatings += 1;
         }
-        setOpen(false);
-        onClose();
+        closeDialog();
     };
 
     return (
         <Dialog open={open} maxWidth={false}>
+            <Box
+                sx={{
+                    position: 'absolute',
+                    top: 0,
+                    right: 0,
+                    padding: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                }}
+                onClick={closeDialog}
+            >
+                <Typography variant='body1' sx={{ fontSize: '18px', color: Colors.red, fontWeight: 'bold' }}>
+                    x
+                </Typography>
+            </Box>
             <Box p={3} sx={{ textAlign: 'center' }}>
                 <img
                     src={destination.imgPath}
@@ -56,7 +77,7 @@ const DestinationPanel = ({ destination, onClose }) => {
 
                 <TableContainer component={Paper}>
                     <Table>
-                        <TableHead>
+                        <TableHead sx={{ backgroundColor: Colors.mutedBlue }}>
                             <TableRow>
                                 <TableCell align='center'>Climate</TableCell>
                                 <TableCell align='center'>Biodiversity</TableCell>
@@ -138,7 +159,7 @@ const DestinationPanel = ({ destination, onClose }) => {
 
                 <Box mt={3}>
                     <Typography variant='body1' gutterBottom>
-                        How is the recommendation?
+                        How is this recommendation?
                     </Typography>
                     <Rating
                         name='user-rating'
@@ -146,7 +167,7 @@ const DestinationPanel = ({ destination, onClose }) => {
                         precision={0.5}
                         onChange={handleRatingChange}
                         size='large'
-                        emptyIcon={<StarBorderIcon fontSize='inherit' sx={{ color: Colors.green }} />}
+                        emptyIcon={<StarBorderIcon fontSize='inherit' sx={{ color: Colors.red }} />}
                     />
                 </Box>
 
@@ -154,7 +175,7 @@ const DestinationPanel = ({ destination, onClose }) => {
                     variant='contained'
                     color='primary'
                     onClick={handleClose}
-                    style={{
+                    sx={{
                         marginTop: '16px',
                     }}
                 >

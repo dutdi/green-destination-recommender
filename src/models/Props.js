@@ -28,23 +28,23 @@ import { Colors } from '../helpers/Colors.js';
 
 export const WeatherPattern = {
     Arctic: {
-        icon: <AcUnitIcon style={{ color: Colors.lightBlue }} />,
+        icon: <AcUnitIcon sx={{ color: Colors.lightBlue }} />,
         text: 'Arctic',
     },
     Tropical: {
-        icon: <WbSunnyIcon style={{ color: Colors.sunnyYellow }} />,
+        icon: <WbSunnyIcon sx={{ color: Colors.sunnyYellow }} />,
         text: 'Tropical',
     },
     Continental: {
-        icon: <ThermostatIcon style={{ color: Colors.brown }} />,
+        icon: <ThermostatIcon sx={{ color: Colors.brown }} />,
         text: 'Continental',
     },
     Oceanic: {
-        icon: <TsunamiIcon style={{ color: Colors.darkBlue }} />,
+        icon: <TsunamiIcon sx={{ color: Colors.darkBlue }} />,
         text: 'Oceanic',
     },
     Temperate: {
-        icon: <CloudIcon style={{ color: Colors.mutedBlue }} />,
+        icon: <CloudIcon sx={{ color: Colors.mutedBlue }} />,
         text: 'Temperate',
     },
 };
@@ -66,79 +66,79 @@ export const Biodiversity = {
 
 export const Geography = {
     Urban: {
-        icon: <LocationCityIcon style={{ color: Colors.red }} />,
+        icon: <LocationCityIcon sx={{ color: Colors.red }} />,
         text: 'Urban',
     },
     Beach: {
-        icon: <BeachAccessIcon style={{ color: Colors.yellow }} />,
+        icon: <BeachAccessIcon sx={{ color: Colors.yellow }} />,
         text: 'Beach',
     },
 
     Mountainous: {
-        icon: <LandscapeIcon style={{ color: Colors.green }} />,
+        icon: <LandscapeIcon sx={{ color: Colors.green }} />,
         text: 'Mountainous',
     },
     Farmland: {
-        icon: <AgricultureIcon style={{ color: Colors.green }} />,
+        icon: <AgricultureIcon sx={{ color: Colors.green }} />,
         text: 'Farmland',
     },
     Forest: {
-        icon: <ForestIcon style={{ color: Colors.green }} />,
+        icon: <ForestIcon sx={{ color: Colors.green }} />,
         text: 'Forest',
     },
 
     Desert: {
-        icon: <WavesIcon style={{ color: Colors.yellow }} />,
+        icon: <WavesIcon sx={{ color: Colors.yellow }} />,
         text: 'Desert',
     },
 };
 
 export const Transport = {
     Airplane: {
-        icon: <AirplanemodeActiveIcon style={{ color: Colors.black }} />,
+        icon: <AirplanemodeActiveIcon sx={{ color: Colors.black }} />,
         text: 'Airplane',
     },
     Train: {
-        icon: <TrainIcon style={{ color: Colors.red }} />,
+        icon: <TrainIcon sx={{ color: Colors.red }} />,
         text: 'Train',
     },
     Tram: {
-        icon: <TramIcon style={{ color: Colors.brown }} />,
+        icon: <TramIcon sx={{ color: Colors.brown }} />,
         text: 'Tram',
     },
     Underground: {
-        icon: <SubwayIcon style={{ color: Colors.blue }} />,
+        icon: <SubwayIcon sx={{ color: Colors.blue }} />,
         text: 'Underground',
     },
     Bus: {
-        icon: <DirectionsBusIcon style={{ color: Colors.green }} />,
+        icon: <DirectionsBusIcon sx={{ color: Colors.green }} />,
         text: 'Bus',
     },
     Taxi: {
-        icon: <LocalTaxiIcon style={{ color: Colors.yellow }} />,
+        icon: <LocalTaxiIcon sx={{ color: Colors.yellow }} />,
         text: 'Taxi',
     },
     Ferry: {
-        icon: <DirectionsBoatIcon style={{ color: Colors.mutedBlue }} />,
+        icon: <DirectionsBoatIcon sx={{ color: Colors.mutedBlue }} />,
         text: 'Ferry',
     },
 };
 
 export const Amenity = {
     Villas: {
-        icon: <VillaIcon style={{ color: Colors.sunnyYellow }} />,
-        text: '',
+        icon: <VillaIcon sx={{ color: Colors.sunnyYellow }} />,
+        text: 'Villas',
     },
     Hotels: {
-        icon: <BedroomParentIcon style={{ color: Colors.blue }} />,
+        icon: <BedroomParentIcon sx={{ color: Colors.blue }} />,
         text: 'Hotels',
     },
     Apartments: {
-        icon: <ApartmentIcon style={{ color: Colors.red }} />,
+        icon: <ApartmentIcon sx={{ color: Colors.red }} />,
         text: 'Apartments',
     },
     Campsites: {
-        icon: <GrassIcon style={{ color: Colors.green }} />,
+        icon: <GrassIcon sx={{ color: Colors.green }} />,
         text: 'Campsites',
     },
 };

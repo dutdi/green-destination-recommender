@@ -55,8 +55,8 @@ export const GreenDestinations = [
         [WeatherPattern.Temperate],
         Biodiversity.Medium,
         [Geography.Urban],
-        [Transport.Airplane, Transport.Train],
-        [Amenity.Hotels, Amenity.Apartments],
+        [Transport.Airplane, Transport.Train, Transport.Taxi, Transport.Bus, Transport.Underground],
+        [Amenity.Villas, Amenity.Hotels, Amenity.Apartments],
         ljubljanaImg
     ),
     new GreenDestination(
@@ -68,8 +68,8 @@ export const GreenDestinations = [
         [WeatherPattern.Temperate],
         Biodiversity.Medium,
         [Geography.Urban],
-        [Transport.Train],
-        [Amenity.Hotels],
+        [Transport.Airplane, Transport.Train, Transport.Taxi, Transport.Bus, Transport.Underground],
+        [Amenity.Villas, Amenity.Hotels, Amenity.Apartments],
         ghentImg
     ),
     new GreenDestination(
@@ -81,7 +81,7 @@ export const GreenDestinations = [
         [WeatherPattern.Tropical],
         Biodiversity.High,
         [Geography.Beach, Geography.Forest],
-        [Transport.Airplane],
+        [Transport.Airplane, Transport.Taxi],
         [Amenity.Hotels, Amenity.Apartments],
         lombokImg
     ),
