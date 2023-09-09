@@ -9,7 +9,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import ApprovalIcon from '@mui/icons-material/Approval';
 import { Colors } from '../helpers/Colors.js';
 
 const pages = ['Contact', 'About', 'Imprint'];
@@ -29,7 +28,6 @@ const Navbar = () => {
         <AppBar position='static' sx={{ background: Colors.green }}>
             <Container maxWidth='xl'>
                 <Toolbar disableGutters>
-                    <ApprovalIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Typography
                         variant='h6'
                         noWrap
@@ -45,7 +43,7 @@ const Navbar = () => {
                             textDecoration: 'none',
                         }}
                     >
-                        Green Destination Recommender
+                        🌴🏔️ Green Destination Recommender
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: { xs: 'none', md: 'flex-end' } }}>
                         {pages.map((page) => (
@@ -54,9 +52,8 @@ const Navbar = () => {
                             </Button>
                         ))}
                     </Box>
-                    <ApprovalIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     <Typography
-                        variant='h6'
+                        variant='body1'
                         noWrap
                         component='a'
                         href=''
@@ -64,14 +61,14 @@ const Navbar = () => {
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
                             flexGrow: 1,
-                            fontFamily: 'monospace',
+                            fontFamily: 'Open Sans',
                             fontWeight: 700,
                             letterSpacing: '.1rem',
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
                     >
-                        Green Destination
+                        🌴🏔️ Green Destination
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, justifyContent: { xs: 'flex-end', md: 'none' } }}>
                         <IconButton

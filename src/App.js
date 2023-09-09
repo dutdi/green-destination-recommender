@@ -3,6 +3,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Box } from '@mui/material';
 import Navbar from './components/Navbar.jsx';
 import Landing from './components/Landing.jsx';
+import Overview from './components/Overview.jsx';
 import DestinationAlbum from './components/DestinationAlbum.jsx';
 import Footer from './components/Footer.jsx';
 import { GreenDestinations } from './data/Destinations';
@@ -16,6 +17,7 @@ const App = () => {
             <Box>
                 <Navbar />
                 <Landing />
+                <Overview />
                 <DestinationAlbum destinations={destinations} />
                 <Footer />
                 <Routes></Routes>

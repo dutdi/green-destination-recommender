@@ -51,7 +51,7 @@ const UserInput = () => {
         <Grid
             container
             item
-            spacing={{ xs: 0, sm: 2, md: 3 }}
+            spacing={{ xs: 1, sm: 2, md: 3 }}
             justifyContent='center'
             alignItems='center'
             sx={{
@@ -115,9 +115,9 @@ const UserInput = () => {
                 />
             </Grid>
 
-            <Grid item xs={12} sm={12} md={2}>
+            <Grid item xs={12} sm={12} md={3}>
                 <Typography variant='body2' gutterBottom>
-                    Budget (€ per day)
+                    Budget (€ / day)
                 </Typography>
                 <Slider
                     defaultValue={defaultValue}
@@ -130,7 +130,7 @@ const UserInput = () => {
                 />
             </Grid>
 
-            <Grid item xs={12} sm={12} md={3}>
+            <Grid item xs={12} sm={12} md={2}>
                 <Button
                     variant='contained'
                     color='primary'
