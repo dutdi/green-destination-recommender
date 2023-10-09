@@ -11,7 +11,7 @@ const Overview = () => {
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={12} md={4}>
                     <Paper
-                        style={{
+                        sx={{
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
@@ -22,8 +22,8 @@ const Overview = () => {
                             boxShadow: 'none',
                         }}
                     >
-                        <TravelExploreTwoToneIcon style={{ fontSize: '40px', marginBottom: '16px', color: Colors.blue }} />
-                        <Typography variant='h6' style={{ marginBottom: '8px' }}>
+                        <TravelExploreTwoToneIcon sx={{ fontSize: '40px', marginBottom: '16px', color: Colors.blue }} />
+                        <Typography variant='h6' sx={{ marginBottom: '8px' }}>
                             Responsible Tourism
                         </Typography>
                         <Typography variant='body2'>
@@ -34,7 +34,7 @@ const Overview = () => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={4}>
                     <Paper
-                        style={{
+                        sx={{
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
@@ -45,8 +45,8 @@ const Overview = () => {
                             boxShadow: 'none',
                         }}
                     >
-                        <RecyclingIcon style={{ fontSize: '40px', marginBottom: '16px', color: Colors.lightGreen }} />
-                        <Typography variant='h6' style={{ marginBottom: '8px' }}>
+                        <RecyclingIcon sx={{ fontSize: '40px', marginBottom: '16px', color: Colors.lightGreen }} />
+                        <Typography variant='h6' sx={{ marginBottom: '8px' }}>
                             Sustainability and Conservation
                         </Typography>
                         <Typography variant='body2'>
@@ -57,7 +57,7 @@ const Overview = () => {
                 </Grid>
                 <Grid item xs={12} sm={12} md={4}>
                     <Paper
-                        style={{
+                        sx={{
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
@@ -68,8 +68,8 @@ const Overview = () => {
                             boxShadow: 'none',
                         }}
                     >
-                        <RecommendIcon style={{ fontSize: '40px', marginBottom: '16px', color: Colors.red }} />
-                        <Typography variant='h6' style={{ marginBottom: '8px' }}>
+                        <RecommendIcon sx={{ fontSize: '40px', marginBottom: '16px', color: Colors.red }} />
+                        <Typography variant='h6' sx={{ marginBottom: '8px' }}>
                             Personalized Recommendations
                         </Typography>
                         <Typography variant='body2'>

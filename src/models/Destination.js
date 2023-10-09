@@ -19,6 +19,7 @@ export class GreenDestination extends Destination {
         biodiversity,
         geographies,
         transports,
+        accommodations,
         amenities,
         imgPath
     ) {
@@ -27,6 +28,7 @@ export class GreenDestination extends Destination {
         this.biodiversity = biodiversity;
         this.geographies = geographies;
         this.transports = transports;
+        this.accommodations = accommodations;
         this.amenities = amenities;
         this.imgPath = imgPath;
     }

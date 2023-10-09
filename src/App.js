@@ -1,28 +1,32 @@
 import React from 'react';
-import { HashRouter, Route, Routes } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Box, CssBaseline } from '@mui/material';
 import Navbar from './components/Navbar.jsx';
 import Landing from './components/Landing.jsx';
-import Overview from './components/Overview.jsx';
-import DestinationAlbum from './components/DestinationAlbum.jsx';
+import ContactUs from './components/ContactUs';
 import Footer from './components/Footer.jsx';
-import { GreenDestinations } from './data/Destinations';
-import { shuffleArray } from './helpers/Functions.js';
+import Parse from 'parse/dist/parse.min.js';
+
+const PARSE_HOST_URL = 'https://parseapi.back4app.com/';
+const PARSE_JAVASCRIPT_KEY = 'ieoAfk71LlfrAlXl6MzPb1xw1ilLKP636wcAoY1v';
+const PARSE_APPLICATION_ID = 'uNmChSgdPHBiFJwXB6gmR6rD3EONMMnnv0cHhQgu';
+
+Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
+Parse.serverURL = PARSE_HOST_URL;
 
 const App = () => {
-    const destinations = shuffleArray(GreenDestinations).slice(0, 8);
-
     return (
-        <HashRouter>
+        <BrowserRouter>
             <Box>
                 <Navbar />
-                <Landing />
-                <Overview />
-                <DestinationAlbum destinations={destinations} />
+                <CssBaseline />
+                <Routes>
+                    <Route path='/' element={<Landing></Landing>}></Route>
+                    <Route path='/contact' element={<ContactUs></ContactUs>}></Route>
+                </Routes>
                 <Footer />
-                <Routes></Routes>
             </Box>
-        </HashRouter>
+        </BrowserRouter>
     );
 };
 

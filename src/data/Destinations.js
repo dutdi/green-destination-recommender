@@ -1,36 +1,5 @@
 import { GreenDestination, RedDestination } from '../models/Destination';
-import { WeatherPattern, Biodiversity, Geography, Transport, Amenity } from '../models/Props';
-
-import materaImg from '../media/matera.jpg';
-import ljubljanaImg from '../media/ljubljana.jpg';
-import ghentImg from '../media/ghent.jpg';
-import lombokImg from '../media/lombok.jpg';
-import floresImg from '../media/flores.jpg';
-import komodoImg from '../media/komodo.jpg';
-import tulumImg from '../media/tulum.jpg';
-import mahahualImg from '../media/mahahual.jpg';
-import holboxImg from '../media/holbox.jpg';
-import kohlantaImg from '../media/kohlanta.jpg';
-import kohtaoImg from '../media/kohtao.jpg';
-import khaosokImg from '../media/khaosok.jpg';
-import rovinjImg from '../media/rovinj.jpg';
-import zadarImg from '../media/zadar.jpg';
-import pulaImg from '../media/pula.jpg';
-import choquequiraoImg from '../media/choquequirao.jpg';
-import huarazImg from '../media/huaraz.jpg';
-import ollantaytamboImg from '../media/ollantaytambo.jpg';
-import muscatImg from '../media/muscat.jpg';
-import dohaImg from '../media/doha.jpg';
-import abudhabiImg from '../media/abudhabi.jpg';
-import formenteraImg from '../media/formentera.jpg';
-import menorcaImg from '../media/menorca.jpg';
-import lagomeraImg from '../media/lagomera.jpg';
-import santafeImg from '../media/santafe.jpg';
-import portlandImg from '../media/portland.jpg';
-import ashevilleImg from '../media/asheville.jpg';
-import milosImg from '../media/milos.jpg';
-import naxosImg from '../media/naxos.jpg';
-import creteImg from '../media/crete.jpg';
+import { WeatherPattern, Biodiversity, Geography, Transport, Accommodation, Amenities, Images } from '../models/Props';
 
 export const GreenDestinations = [
     new GreenDestination(
@@ -40,11 +9,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Urban, Geography.Farmland],
         [Transport.Airplane, Transport.Train],
-        [Amenity.Hotels],
-        materaImg
+        [Accommodation.Hotels, Accommodation.Campsites, Accommodation.Rooms],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[0]
     ),
     new GreenDestination(
         `02`,
@@ -53,11 +23,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Urban],
         [Transport.Airplane, Transport.Train, Transport.Taxi, Transport.Bus, Transport.Underground],
-        [Amenity.Villas, Amenity.Hotels, Amenity.Apartments],
-        ljubljanaImg
+        [Accommodation.Villas, Accommodation.Hotels, Accommodation.Apartments],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[1]
     ),
     new GreenDestination(
         `03`,
@@ -66,11 +37,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Urban],
         [Transport.Airplane, Transport.Train, Transport.Taxi, Transport.Bus, Transport.Underground],
-        [Amenity.Villas, Amenity.Hotels, Amenity.Apartments],
-        ghentImg
+        [Accommodation.Villas, Accommodation.Hotels, Accommodation.Apartments],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[2]
     ),
     new GreenDestination(
         `04`,
@@ -79,11 +51,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Tropical],
-        Biodiversity.High,
+        Biodiversity.HIGH,
         [Geography.Beach, Geography.Forest],
         [Transport.Airplane, Transport.Taxi],
-        [Amenity.Hotels, Amenity.Apartments],
-        lombokImg
+        [Accommodation.Hotels, Accommodation.Apartments],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.Clubs, Amenities.Internet],
+        Images[3]
     ),
     new GreenDestination(
         `05`,
@@ -92,11 +65,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Tropical],
-        Biodiversity.High,
+        Biodiversity.HIGH,
         [Geography.Beach, Geography.Forest],
         [Transport.Airplane],
-        [Amenity.Hotels, Amenity.Apartments],
-        floresImg
+        [Accommodation.Hotels, Accommodation.Apartments],
+        [Amenities.Honeymoon, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[4]
     ),
     new GreenDestination(
         `06`,
@@ -105,11 +79,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Tropical],
-        Biodiversity.High,
+        Biodiversity.HIGH,
         [Geography.Beach],
         [Transport.Airplane],
-        [Amenity.Hotels, Amenity.Campsites],
-        komodoImg
+        [Accommodation.Hotels, Accommodation.Campsites],
+        [Amenities.Honeymoon, Amenities.Clubs, Amenities.Internet],
+        Images[5]
     ),
     new GreenDestination(
         `07`,
@@ -118,11 +93,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Tropical],
-        Biodiversity.High,
+        Biodiversity.HIGH,
         [Geography.Beach],
         [Transport.Airplane],
-        [Amenity.Hotels],
-        tulumImg
+        [Accommodation.Hotels, Accommodation.Rooms],
+        [Amenities.Clubs, Amenities.Internet],
+        Images[6]
     ),
     new GreenDestination(
         `08`,
@@ -131,11 +107,13 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Tropical],
-        Biodiversity.High,
+        Biodiversity.HIGH,
         [Geography.Beach],
         [Transport.Airplane],
-        [Amenity.Hotels, Amenity.Campsites],
-        mahahualImg
+        [Accommodation.Hotels, Accommodation.Campsites],
+        [Amenities.Internet],
+
+        Images[7]
     ),
     new GreenDestination(
         `09`,
@@ -144,11 +122,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Tropical],
-        Biodiversity.High,
+        Biodiversity.HIGH,
         [Geography.Beach],
         [Transport.Airplane, Transport.Ferry],
-        [Amenity.Hotels, Amenity.Campsites],
-        holboxImg
+        [Accommodation.Hotels, Accommodation.Campsites],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[8]
     ),
     new GreenDestination(
         `010`,
@@ -157,11 +136,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Tropical],
-        Biodiversity.High,
+        Biodiversity.HIGH,
         [Geography.Beach],
         [Transport.Airplane, Transport.Ferry],
-        [Amenity.Hotels, Amenity.Campsites],
-        kohlantaImg
+        [Accommodation.Hotels, Accommodation.Campsites],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.Clubs, Amenities.Internet],
+        Images[9]
     ),
     new GreenDestination(
         `011`,
@@ -170,11 +150,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Tropical],
-        Biodiversity.High,
+        Biodiversity.HIGH,
         [Geography.Beach],
         [Transport.Airplane, Transport.Ferry],
-        [Amenity.Hotels, Amenity.Campsites],
-        kohtaoImg
+        [Accommodation.Hotels, Accommodation.Campsites],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[10]
     ),
     new GreenDestination(
         `012`,
@@ -183,11 +164,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Tropical],
-        Biodiversity.High,
+        Biodiversity.HIGH,
         [Geography.Forest],
         [Transport.Airplane, Transport.Bus],
-        [Amenity.Campsites],
-        khaosokImg
+        [Accommodation.Campsites, Accommodation.Hotels],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[11]
     ),
     new GreenDestination(
         `013`,
@@ -196,11 +178,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Beach, Geography.Urban],
         [Transport.Airplane],
-        [Amenity.Hotels],
-        rovinjImg
+        [Accommodation.Hotels],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[12]
     ),
     new GreenDestination(
         `014`,
@@ -209,11 +192,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Beach, Geography.Urban],
         [Transport.Airplane],
-        [Amenity.Hotels, Amenity.Apartments],
-        zadarImg
+        [Accommodation.Hotels, Accommodation.Apartments],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[13]
     ),
     new GreenDestination(
         `015`,
@@ -222,11 +206,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Beach, Geography.Urban],
         [Transport.Airplane],
-        [Amenity.Hotels, Amenity.Apartments],
-        pulaImg
+        [Accommodation.Hotels, Accommodation.Apartments, Accommodation.Rooms],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[14]
     ),
     new GreenDestination(
         `016`,
@@ -235,11 +220,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Mountainous],
         [Transport.Train, Transport.Taxi],
-        [Amenity.Campsites],
-        choquequiraoImg
+        [Accommodation.Campsites, Accommodation.Rooms],
+        [Amenities.Shopping, Amenities.Internet],
+        Images[15]
     ),
     new GreenDestination(
         `017`,
@@ -248,11 +234,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Mountainous],
         [Transport.Train, Transport.Taxi],
-        [Amenity.Campsites],
-        huarazImg
+        [Accommodation.Campsites],
+        [Amenities.Shopping, Amenities.CarRentals, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[16]
     ),
     new GreenDestination(
         `018`,
@@ -261,11 +248,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Urban],
         [Transport.Train],
-        [Amenity.Hotels],
-        ollantaytamboImg
+        [Accommodation.Hotels],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[17]
     ),
     new GreenDestination(
         `019`,
@@ -274,11 +262,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Urban],
         [Transport.Airplane],
-        [Amenity.Hotels],
-        muscatImg
+        [Accommodation.Hotels, Accommodation.Rooms],
+        [Amenities.Shopping, Amenities.CarRentals, Amenities.Internet],
+        Images[18]
     ),
     new GreenDestination(
         `020`,
@@ -287,11 +276,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Urban],
         [Transport.Train],
-        [Amenity.Hotels, Amenity.Apartments],
-        dohaImg
+        [Accommodation.Hotels, Accommodation.Apartments, Accommodation.Rooms],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Internet],
+        Images[19]
     ),
     new GreenDestination(
         `021`,
@@ -300,11 +290,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Urban],
         [Transport.Train, Transport.Taxi],
-        [Amenity.Hotels],
-        abudhabiImg
+        [Accommodation.Hotels, Accommodation.Villas],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Internet],
+        Images[20]
     ),
     new GreenDestination(
         `022`,
@@ -313,11 +304,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Beach],
         [Transport.Ferry],
-        [Amenity.Hotels, Amenity.Apartments],
-        formenteraImg
+        [Accommodation.Hotels, Accommodation.Apartments, Accommodation.Campsites],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.Internet],
+        Images[21]
     ),
     new GreenDestination(
         `023`,
@@ -326,11 +318,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Beach],
         [Transport.Ferry],
-        [Amenity.Hotels, Amenity.Apartments],
-        menorcaImg
+        [Accommodation.Hotels, Accommodation.Apartments, Accommodation.Rooms],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[22]
     ),
     new GreenDestination(
         `024`,
@@ -339,11 +332,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Beach],
         [Transport.Ferry],
-        [Amenity.Hotels, Amenity.Apartments],
-        lagomeraImg
+        [Accommodation.Hotels, Accommodation.Apartments, Accommodation.Campsites],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[23]
     ),
     new GreenDestination(
         `025`,
@@ -352,11 +346,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Urban],
         [Transport.Train, Transport.Bus],
-        [Amenity.Hotels],
-        santafeImg
+        [Accommodation.Hotels, Accommodation.Rooms],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[24]
     ),
     new GreenDestination(
         `026`,
@@ -365,11 +360,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Urban],
         [Transport.Train, Transport.Tram],
-        [Amenity.Hotels, Amenity.Apartments],
-        portlandImg
+        [Accommodation.Hotels, Accommodation.Apartments, Accommodation.Rooms],
+        [Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[25]
     ),
     new GreenDestination(
         `027`,
@@ -378,11 +374,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Urban, Geography.Forest],
         [Transport.Train, Transport.Bus],
-        [Amenity.Hotels, Amenity.Apartments],
-        ashevilleImg
+        [Accommodation.Hotels, Accommodation.Apartments, Accommodation.Rooms],
+        [Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[26]
     ),
     new GreenDestination(
         `028`,
@@ -391,11 +388,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Beach],
         [Transport.Airplane, Transport.Ferry],
-        [Amenity.Hotels],
-        milosImg
+        [Accommodation.Hotels, Accommodation.Rooms],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[27]
     ),
     new GreenDestination(
         `029`,
@@ -404,11 +402,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Beach, Geography.Urban],
         [Transport.Airplane, Transport.Bus],
-        [Amenity.Hotels, Amenity.Apartments],
-        naxosImg
+        [Accommodation.Hotels, Accommodation.Apartments, Accommodation.Rooms],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[28]
     ),
     new GreenDestination(
         `030`,
@@ -417,11 +416,12 @@ export const GreenDestinations = [
         0,
         0,
         [WeatherPattern.Temperate],
-        Biodiversity.Medium,
+        Biodiversity.MEDIUM,
         [Geography.Beach, Geography.Urban],
         [Transport.Airplane, Transport.Bus],
-        [Amenity.Hotels, Amenity.Apartments],
-        creteImg
+        [Accommodation.Hotels, Accommodation.Apartments, Accommodation.Rooms],
+        [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
+        Images[29]
     ),
 ];
 

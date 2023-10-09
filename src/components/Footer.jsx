@@ -1,15 +1,29 @@
-import { Link, Typography } from '@mui/material';
+import { Paper, Typography, Box, Container } from '@mui/material';
+import { Colors } from '../helpers/Colors.js';
 
 const Footer = () => {
     return (
-        <Typography variant='body2' color='text.secondary' align='center'>
-            {'Copyright © '}
-            <Link color='inherit' href='https://www.ce.cit.tum.de/cm/home/'>
-                Chair of Connected Mobility, CIT, TUM{' '}
-            </Link>
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
+        <Paper
+            sx={{ width: '100%', position: 'fixed', bottom: 0, backgroundColor: Colors.gray }}
+            component='footer'
+            square
+            variant='outlined'
+        >
+            <Container maxWidth='lg'>
+                <Box
+                    sx={{
+                        flexGrow: 1,
+                        justifyContent: 'center',
+                        display: 'flex',
+                        p: 2,
+                    }}
+                >
+                    <Typography variant='caption' color='initial'>
+                        Copyright ©2024. Chair of Connected Mobility, TUM
+                    </Typography>
+                </Box>
+            </Container>
+        </Paper>
     );
 };
 

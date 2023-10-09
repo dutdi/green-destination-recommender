@@ -4,7 +4,7 @@ import DestinationCard from './DestinationCard';
 
 const DestinationAlbum = ({ destinations }) => {
     return (
-        <Container sx={{ py: 6 }} maxWidth='lg'>
+        <Container sx={{ py: 6, mb: 6 }} maxWidth='lg'>
             <Typography
                 gutterBottom
                 variant='h4'
@@ -19,7 +19,7 @@ const DestinationAlbum = ({ destinations }) => {
 
             <Grid container spacing={4}>
                 {destinations.map((destination) => (
-                    <DestinationCard key={destination.id} destination={destination} />
+                    <DestinationCard key={destination.City} destination={destination} />
                 ))}
             </Grid>
         </Container>

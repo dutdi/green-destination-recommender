@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,7 +12,11 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { Colors } from '../helpers/Colors.js';
 
-const pages = ['Contact', 'About', 'Imprint'];
+const pages = [
+    { title: 'Contact', link: '/contact' },
+    { title: 'About', link: '/about' },
+    { title: 'Imprint', link: '/imprint' },
+];
 
 const Navbar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -47,8 +52,8 @@ const Navbar = () => {
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: { xs: 'none', md: 'flex-end' } }}>
                         {pages.map((page) => (
-                            <Button key={page} onClick={handleCloseNavMenu} sx={{ my: 2, color: 'white', display: 'block' }}>
-                                {page}
+                            <Button component={Link} to={page.link} key={page.title} sx={{ my: 2, color: 'white', display: 'block' }}>
+                                {page.title}
                             </Button>
                         ))}
                     </Box>
@@ -56,7 +61,7 @@ const Navbar = () => {
                         variant='body1'
                         noWrap
                         component='a'
-                        href=''
+                        href='/'
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
@@ -73,7 +78,6 @@ const Navbar = () => {
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, justifyContent: { xs: 'flex-end', md: 'none' } }}>
                         <IconButton
                             size='large'
-                            aria-label='account of current user'
                             aria-controls='menu-appbar'
                             aria-haspopup='true'
                             onClick={handleOpenNavMenu}
@@ -100,8 +104,10 @@ const Navbar = () => {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign='center'>{page}</Typography>
+                                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                                    <Typography component={Link} to={page.link} textAlign='center'>
+                                        {page.title}
+                                    </Typography>
                                 </MenuItem>
                             ))}
                         </Menu>

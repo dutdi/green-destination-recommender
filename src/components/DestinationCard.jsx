@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Grid, Card, CardContent, CardMedia, Typography, Rating, Box } from '@mui/material';
 import DestinationPanel from './DestinationPanel';
+import { Images } from '../models/Props.js';
 import { Colors } from '../helpers/Colors.js';
 
 const DestinationCard = ({ destination }) => {
@@ -18,6 +19,7 @@ const DestinationCard = ({ destination }) => {
                     display: 'flex',
                     flexDirection: 'column',
                     position: 'relative',
+                    cursor: 'pointer',
                 }}
                 onClick={toggleDetail}
             >
@@ -26,7 +28,7 @@ const DestinationCard = ({ destination }) => {
                     sx={{
                         pt: '56.25%',
                     }}
-                    image={destination.imgPath}
+                    image={Images[destination.imgPath]}
                 />
                 <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant='h5' component='h2'>

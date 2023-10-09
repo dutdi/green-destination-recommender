@@ -13,6 +13,7 @@ import {
     Paper,
     Rating,
 } from '@mui/material';
+import { Images } from '../models/Props.js';
 import { Colors } from '../helpers/Colors.js';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 
@@ -58,13 +59,13 @@ const DestinationPanel = ({ destination, onClose }) => {
             </Box>
             <Box p={3} sx={{ textAlign: 'center' }}>
                 <img
-                    src={destination.imgPath}
+                    src={Images[destination.imgPath]}
                     alt={destination.name}
                     style={{
                         width: '100%',
                         maxHeight: '300px',
                         objectFit: 'cover',
-                        marginBottom: '16px',
+                        marginBottom: '10px',
                         borderRadius: '8px',
                     }}
                 />
@@ -83,7 +84,8 @@ const DestinationPanel = ({ destination, onClose }) => {
                                 <TableCell align='center'>Biodiversity</TableCell>
                                 <TableCell align='center'>Geography</TableCell>
                                 <TableCell align='center'>Transport</TableCell>
-                                <TableCell align='center'>Amenity</TableCell>
+                                <TableCell align='center'>Accommodation</TableCell>
+                                <TableCell align='center'>Amenities</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -135,6 +137,20 @@ const DestinationPanel = ({ destination, onClose }) => {
                                         >
                                             {transport.icon}
                                             {transport.text}
+                                        </div>
+                                    ))}
+                                </TableCell>
+                                <TableCell align='center'>
+                                    {destination.accommodations.map((accommodation) => (
+                                        <div
+                                            key={accommodation.text}
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                            }}
+                                        >
+                                            {accommodation.icon}
+                                            {accommodation.text}
                                         </div>
                                     ))}
                                 </TableCell>

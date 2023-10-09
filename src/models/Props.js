@@ -23,6 +23,45 @@ import VillaIcon from '@mui/icons-material/Villa';
 import BedroomParentIcon from '@mui/icons-material/BedroomParent';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import GrassIcon from '@mui/icons-material/Grass';
+import BedroomChildIcon from '@mui/icons-material/BedroomChild';
+
+import HiveIcon from '@mui/icons-material/Hive';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import CarRentalIcon from '@mui/icons-material/CarRental';
+import NightlifeIcon from '@mui/icons-material/Nightlife';
+import TheaterComedyIcon from '@mui/icons-material/TheaterComedy';
+import WifiIcon from '@mui/icons-material/Wifi';
+
+import materaImg from '../media/matera.jpg';
+import ljubljanaImg from '../media/ljubljana.jpg';
+import ghentImg from '../media/ghent.jpg';
+import lombokImg from '../media/lombok.jpg';
+import floresImg from '../media/flores.jpg';
+import komodoImg from '../media/komodo.jpg';
+import tulumImg from '../media/tulum.jpg';
+import mahahualImg from '../media/mahahual.jpg';
+import holboxImg from '../media/holbox.jpg';
+import kohlantaImg from '../media/kohlanta.jpg';
+import kohtaoImg from '../media/kohtao.jpg';
+import khaosokImg from '../media/khaosok.jpg';
+import rovinjImg from '../media/rovinj.jpg';
+import zadarImg from '../media/zadar.jpg';
+import pulaImg from '../media/pula.jpg';
+import choquequiraoImg from '../media/choquequirao.jpg';
+import huarazImg from '../media/huaraz.jpg';
+import ollantaytamboImg from '../media/ollantaytambo.jpg';
+import muscatImg from '../media/muscat.jpg';
+import dohaImg from '../media/doha.jpg';
+import abudhabiImg from '../media/abudhabi.jpg';
+import formenteraImg from '../media/formentera.jpg';
+import menorcaImg from '../media/menorca.jpg';
+import lagomeraImg from '../media/lagomera.jpg';
+import santafeImg from '../media/santafe.jpg';
+import portlandImg from '../media/portland.jpg';
+import ashevilleImg from '../media/asheville.jpg';
+import milosImg from '../media/milos.jpg';
+import naxosImg from '../media/naxos.jpg';
+import creteImg from '../media/crete.jpg';
 
 import { Colors } from '../helpers/Colors.js';
 
@@ -50,17 +89,17 @@ export const WeatherPattern = {
 };
 
 export const Biodiversity = {
-    Low: {
+    LOW: {
         color: Colors.red,
-        text: 'Low',
+        text: 'LOW',
     },
-    Medium: {
+    MEDIUM: {
         color: Colors.yellow,
-        text: 'Medium',
+        text: 'MEDIUM',
     },
-    High: {
+    HIGH: {
         color: Colors.lightGreen,
-        text: 'High',
+        text: 'HIGH',
     },
 };
 
@@ -73,7 +112,6 @@ export const Geography = {
         icon: <BeachAccessIcon sx={{ color: Colors.yellow }} />,
         text: 'Beach',
     },
-
     Mountainous: {
         icon: <LandscapeIcon sx={{ color: Colors.green }} />,
         text: 'Mountainous',
@@ -86,7 +124,6 @@ export const Geography = {
         icon: <ForestIcon sx={{ color: Colors.green }} />,
         text: 'Forest',
     },
-
     Desert: {
         icon: <WavesIcon sx={{ color: Colors.yellow }} />,
         text: 'Desert',
@@ -124,7 +161,7 @@ export const Transport = {
     },
 };
 
-export const Amenity = {
+export const Accommodation = {
     Villas: {
         icon: <VillaIcon sx={{ color: Colors.sunnyYellow }} />,
         text: 'Villas',
@@ -141,4 +178,68 @@ export const Amenity = {
         icon: <GrassIcon sx={{ color: Colors.green }} />,
         text: 'Campsites',
     },
+    Rooms: {
+        icon: <BedroomChildIcon sx={{ color: Colors.brown }} />,
+        text: 'Rooms',
+    },
 };
+
+export const Amenities = {
+    Honeymoon: {
+        icon: <HiveIcon sx={{ color: Colors.yellow }} />,
+        text: 'Honeymoon',
+    },
+    Shopping: {
+        icon: <ShoppingCartIcon sx={{ color: Colors.green }} />,
+        text: 'Shopping',
+    },
+    CarRentals: {
+        icon: <CarRentalIcon sx={{ color: Colors.mutedBlue }} />,
+        text: 'Car rentals',
+    },
+    Clubs: {
+        icon: <NightlifeIcon sx={{ color: Colors.red }} />,
+        text: 'Clubs',
+    },
+    TheaterMuseums: {
+        icon: <TheaterComedyIcon sx={{ color: Colors.brown }} />,
+        text: 'Theater, Museums',
+    },
+    Internet: {
+        icon: <WifiIcon sx={{ color: Colors.blue }} />,
+        text: 'Internet',
+    },
+};
+
+export const Images = [
+    materaImg,
+    ljubljanaImg,
+    ghentImg,
+    lombokImg,
+    floresImg,
+    komodoImg,
+    tulumImg,
+    mahahualImg,
+    holboxImg,
+    kohlantaImg,
+    kohtaoImg,
+    khaosokImg,
+    rovinjImg,
+    zadarImg,
+    pulaImg,
+    choquequiraoImg,
+    huarazImg,
+    ollantaytamboImg,
+    muscatImg,
+    dohaImg,
+    abudhabiImg,
+    formenteraImg,
+    menorcaImg,
+    lagomeraImg,
+    santafeImg,
+    portlandImg,
+    ashevilleImg,
+    milosImg,
+    naxosImg,
+    creteImg,
+];
