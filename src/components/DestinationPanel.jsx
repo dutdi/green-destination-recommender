@@ -27,6 +27,7 @@ const DestinationPanel = ({ destination, onClose }) => {
 
     const closeDialog = () => {
         setOpen(false);
+        console.log('destination', destination);
         onClose();
     };
 

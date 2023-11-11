@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Typography, Grid, Box } from '@mui/material';
 import BackgroundImage from '../media/background-image.jpg';
 import UserInput from './UserInput.jsx';
@@ -7,17 +7,13 @@ import DestinationAlbum from './DestinationAlbum';
 import Demographics from './Demographics';
 import { shuffleArray } from '../helpers/Functions.js';
 import { Colors } from '../helpers/Colors.js';
-import { getAllDestinations } from '../server/db.js';
+import { useData } from './DataContext';
 
 const Landing = () => {
-    const [destinations, setDestinations] = useState(null);
-
-    useEffect(() => {
-        getAllDestinations().then((destinations) => setDestinations(destinations));
-    }, []);
+    const { destinations, dataFetched } = useData();
 
     return (
-        destinations && (
+        dataFetched && (
             <Box>
                 <Grid
                     container
@@ -70,7 +66,10 @@ const Landing = () => {
                 </Grid>
                 <Demographics></Demographics>
                 <Overview></Overview>
-                <DestinationAlbum destinations={shuffleArray(destinations).slice(0, 8)}></DestinationAlbum>
+                <DestinationAlbum
+                    title='Popular Destinations'
+                    destinations={shuffleArray(destinations.greenDestinations).slice(0, 6)}
+                ></DestinationAlbum>
             </Box>
         )
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Grid, Paper, Typography, TextField, Button } from '@mui/material';
 
-const ContactUs = () => {
+const Contact = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
     };
@@ -64,4 +64,4 @@ const ContactUs = () => {
     );
 };
 
-export default ContactUs;
+export default Contact;

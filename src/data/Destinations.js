@@ -1,5 +1,5 @@
 import { GreenDestination, RedDestination } from '../models/Destination';
-import { WeatherPattern, Biodiversity, Geography, Transport, Accommodation, Amenities, Images } from '../models/Props';
+import { WeatherPattern, Biodiversity, Geography, Transport, Accommodation, Amenities } from '../models/Props';
 
 export const GreenDestinations = [
     new GreenDestination(
@@ -14,7 +14,7 @@ export const GreenDestinations = [
         [Transport.Airplane, Transport.Train],
         [Accommodation.Hotels, Accommodation.Campsites, Accommodation.Rooms],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[0]
+        0
     ),
     new GreenDestination(
         `02`,
@@ -28,7 +28,7 @@ export const GreenDestinations = [
         [Transport.Airplane, Transport.Train, Transport.Taxi, Transport.Bus, Transport.Underground],
         [Accommodation.Villas, Accommodation.Hotels, Accommodation.Apartments],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[1]
+        1
     ),
     new GreenDestination(
         `03`,
@@ -42,7 +42,7 @@ export const GreenDestinations = [
         [Transport.Airplane, Transport.Train, Transport.Taxi, Transport.Bus, Transport.Underground],
         [Accommodation.Villas, Accommodation.Hotels, Accommodation.Apartments],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[2]
+        2
     ),
     new GreenDestination(
         `04`,
@@ -56,7 +56,7 @@ export const GreenDestinations = [
         [Transport.Airplane, Transport.Taxi],
         [Accommodation.Hotels, Accommodation.Apartments],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.Clubs, Amenities.Internet],
-        Images[3]
+        3
     ),
     new GreenDestination(
         `05`,
@@ -70,7 +70,7 @@ export const GreenDestinations = [
         [Transport.Airplane],
         [Accommodation.Hotels, Accommodation.Apartments],
         [Amenities.Honeymoon, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[4]
+        4
     ),
     new GreenDestination(
         `06`,
@@ -84,7 +84,7 @@ export const GreenDestinations = [
         [Transport.Airplane],
         [Accommodation.Hotels, Accommodation.Campsites],
         [Amenities.Honeymoon, Amenities.Clubs, Amenities.Internet],
-        Images[5]
+        5
     ),
     new GreenDestination(
         `07`,
@@ -98,7 +98,7 @@ export const GreenDestinations = [
         [Transport.Airplane],
         [Accommodation.Hotels, Accommodation.Rooms],
         [Amenities.Clubs, Amenities.Internet],
-        Images[6]
+        6
     ),
     new GreenDestination(
         `08`,
@@ -112,8 +112,7 @@ export const GreenDestinations = [
         [Transport.Airplane],
         [Accommodation.Hotels, Accommodation.Campsites],
         [Amenities.Internet],
-
-        Images[7]
+        7
     ),
     new GreenDestination(
         `09`,
@@ -127,7 +126,7 @@ export const GreenDestinations = [
         [Transport.Airplane, Transport.Ferry],
         [Accommodation.Hotels, Accommodation.Campsites],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[8]
+        8
     ),
     new GreenDestination(
         `010`,
@@ -141,7 +140,7 @@ export const GreenDestinations = [
         [Transport.Airplane, Transport.Ferry],
         [Accommodation.Hotels, Accommodation.Campsites],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.Clubs, Amenities.Internet],
-        Images[9]
+        9
     ),
     new GreenDestination(
         `011`,
@@ -155,7 +154,7 @@ export const GreenDestinations = [
         [Transport.Airplane, Transport.Ferry],
         [Accommodation.Hotels, Accommodation.Campsites],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[10]
+        10
     ),
     new GreenDestination(
         `012`,
@@ -169,7 +168,7 @@ export const GreenDestinations = [
         [Transport.Airplane, Transport.Bus],
         [Accommodation.Campsites, Accommodation.Hotels],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[11]
+        11
     ),
     new GreenDestination(
         `013`,
@@ -183,7 +182,7 @@ export const GreenDestinations = [
         [Transport.Airplane],
         [Accommodation.Hotels],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[12]
+        12
     ),
     new GreenDestination(
         `014`,
@@ -197,7 +196,7 @@ export const GreenDestinations = [
         [Transport.Airplane],
         [Accommodation.Hotels, Accommodation.Apartments],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[13]
+        13
     ),
     new GreenDestination(
         `015`,
@@ -211,7 +210,7 @@ export const GreenDestinations = [
         [Transport.Airplane],
         [Accommodation.Hotels, Accommodation.Apartments, Accommodation.Rooms],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[14]
+        14
     ),
     new GreenDestination(
         `016`,
@@ -225,7 +224,7 @@ export const GreenDestinations = [
         [Transport.Train, Transport.Taxi],
         [Accommodation.Campsites, Accommodation.Rooms],
         [Amenities.Shopping, Amenities.Internet],
-        Images[15]
+        15
     ),
     new GreenDestination(
         `017`,
@@ -239,7 +238,7 @@ export const GreenDestinations = [
         [Transport.Train, Transport.Taxi],
         [Accommodation.Campsites],
         [Amenities.Shopping, Amenities.CarRentals, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[16]
+        16
     ),
     new GreenDestination(
         `018`,
@@ -253,7 +252,7 @@ export const GreenDestinations = [
         [Transport.Train],
         [Accommodation.Hotels],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[17]
+        17
     ),
     new GreenDestination(
         `019`,
@@ -267,7 +266,7 @@ export const GreenDestinations = [
         [Transport.Airplane],
         [Accommodation.Hotels, Accommodation.Rooms],
         [Amenities.Shopping, Amenities.CarRentals, Amenities.Internet],
-        Images[18]
+        18
     ),
     new GreenDestination(
         `020`,
@@ -281,7 +280,7 @@ export const GreenDestinations = [
         [Transport.Train],
         [Accommodation.Hotels, Accommodation.Apartments, Accommodation.Rooms],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Internet],
-        Images[19]
+        19
     ),
     new GreenDestination(
         `021`,
@@ -295,7 +294,7 @@ export const GreenDestinations = [
         [Transport.Train, Transport.Taxi],
         [Accommodation.Hotels, Accommodation.Villas],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Internet],
-        Images[20]
+        20
     ),
     new GreenDestination(
         `022`,
@@ -309,7 +308,7 @@ export const GreenDestinations = [
         [Transport.Ferry],
         [Accommodation.Hotels, Accommodation.Apartments, Accommodation.Campsites],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.Internet],
-        Images[21]
+        21
     ),
     new GreenDestination(
         `023`,
@@ -323,7 +322,7 @@ export const GreenDestinations = [
         [Transport.Ferry],
         [Accommodation.Hotels, Accommodation.Apartments, Accommodation.Rooms],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[22]
+        22
     ),
     new GreenDestination(
         `024`,
@@ -337,7 +336,7 @@ export const GreenDestinations = [
         [Transport.Ferry],
         [Accommodation.Hotels, Accommodation.Apartments, Accommodation.Campsites],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[23]
+        23
     ),
     new GreenDestination(
         `025`,
@@ -351,7 +350,7 @@ export const GreenDestinations = [
         [Transport.Train, Transport.Bus],
         [Accommodation.Hotels, Accommodation.Rooms],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[24]
+        24
     ),
     new GreenDestination(
         `026`,
@@ -365,7 +364,7 @@ export const GreenDestinations = [
         [Transport.Train, Transport.Tram],
         [Accommodation.Hotels, Accommodation.Apartments, Accommodation.Rooms],
         [Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[25]
+        25
     ),
     new GreenDestination(
         `027`,
@@ -379,7 +378,7 @@ export const GreenDestinations = [
         [Transport.Train, Transport.Bus],
         [Accommodation.Hotels, Accommodation.Apartments, Accommodation.Rooms],
         [Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[26]
+        26
     ),
     new GreenDestination(
         `028`,
@@ -393,7 +392,7 @@ export const GreenDestinations = [
         [Transport.Airplane, Transport.Ferry],
         [Accommodation.Hotels, Accommodation.Rooms],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[27]
+        27
     ),
     new GreenDestination(
         `029`,
@@ -407,7 +406,7 @@ export const GreenDestinations = [
         [Transport.Airplane, Transport.Bus],
         [Accommodation.Hotels, Accommodation.Apartments, Accommodation.Rooms],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[28]
+        28
     ),
     new GreenDestination(
         `030`,
@@ -421,7 +420,7 @@ export const GreenDestinations = [
         [Transport.Airplane, Transport.Bus],
         [Accommodation.Hotels, Accommodation.Apartments, Accommodation.Rooms],
         [Amenities.Honeymoon, Amenities.Shopping, Amenities.CarRentals, Amenities.Clubs, Amenities.TheaterMuseums, Amenities.Internet],
-        Images[29]
+        29
     ),
 ];
 

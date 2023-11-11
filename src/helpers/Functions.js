@@ -13,3 +13,7 @@ export function shuffleArray(array) {
 
     return array;
 }
+
+export function getRandomXElementsFromArray(array, x) {
+    return array.sort(() => Math.random() - Math.random()).slice(0, x);
+}

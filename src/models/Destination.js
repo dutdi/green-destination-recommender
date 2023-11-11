@@ -1,10 +1,8 @@
 class Destination {
-    constructor(id, name, description, avgRating, numOfRatings) {
+    constructor(id, name, description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.avgRating = avgRating;
-        this.numOfRatings = numOfRatings;
     }
 }
 
@@ -23,7 +21,9 @@ export class GreenDestination extends Destination {
         amenities,
         imgPath
     ) {
-        super(id, name, description, avgRating, numOfRatings);
+        super(id, name, description);
+        this.avgRating = avgRating;
+        this.numOfRatings = numOfRatings;
         this.weatherPatterns = weatherPatterns;
         this.biodiversity = biodiversity;
         this.geographies = geographies;
@@ -35,8 +35,11 @@ export class GreenDestination extends Destination {
 }
 
 export class RedDestination extends Destination {
-    constructor(id, name, description, avgRating, numOfRatings, alternativeIds) {
-        super(id, name, description, avgRating, numOfRatings);
-        this.alternativeIds = alternativeIds;
+    constructor(id, name, description, nudge1, nudge2, nudge3, nudge4) {
+        super(id, name, description);
+        this.nudge1 = nudge1;
+        this.nudge2 = nudge2;
+        this.nudge3 = nudge3;
+        this.nudge4 = nudge4;
     }
 }

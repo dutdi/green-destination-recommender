@@ -61,6 +61,7 @@ const Demographics = () => {
         localStorage.setItem('demographics', JSON.stringify(userFields));
         setOpen(false);
     };
+
     return (
         <Dialog
             open={open}

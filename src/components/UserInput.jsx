@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { TextField, Slider, Button, Grid, Typography, Autocomplete } from '@mui/material';
 import { Colors } from '../helpers/Colors.js';
 import { Destinations } from '../data/Destinations.js';
 
 const UserInput = () => {
-    const minBudget = 0;
+    const minBudget = 10;
     const maxBudget = 1000;
     const defaultValue = 200;
     const currentDate = new Date().toISOString().split('T')[0];
@@ -12,8 +13,8 @@ const UserInput = () => {
 
     const marks = [
         {
-            value: 0,
-            label: '0',
+            value: 10,
+            label: '10',
         },
         {
             value: 200,
@@ -21,7 +22,7 @@ const UserInput = () => {
         },
         {
             value: 1000,
-            label: '1000',
+            label: '> 999',
         },
     ];
 
@@ -79,7 +80,7 @@ const UserInput = () => {
                 />
             </Grid>
 
-            <Grid item xs={12} sm={6} md={2}>
+            <Grid item xs={12} sm={6} md={3}>
                 <TextField
                     label='Departure'
                     type='date'
@@ -97,7 +98,7 @@ const UserInput = () => {
                 />
             </Grid>
 
-            <Grid item xs={12} sm={6} md={2}>
+            <Grid item xs={12} sm={6} md={3}>
                 <TextField
                     label='Return'
                     type='date'
@@ -123,7 +124,7 @@ const UserInput = () => {
                     defaultValue={defaultValue}
                     min={minBudget}
                     max={maxBudget}
-                    step={100}
+                    step={10}
                     valueLabelDisplay='auto'
                     valueLabelFormat={budgetValueText}
                     marks={marks}
@@ -133,6 +134,8 @@ const UserInput = () => {
             <Grid item xs={12} sm={12} md={2}>
                 <Button
                     variant='contained'
+                    component={Link}
+                    to={'/recommendations/1'}
                     color='primary'
                     fullWidth
                     sx={{
