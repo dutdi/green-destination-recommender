@@ -33,8 +33,7 @@ const DestinationCard = ({ destination }) => {
                     <Typography gutterBottom variant='h5' component='h2'>
                         {destination.name}, {destination.country}
                     </Typography>
-                    {/* TODO - change description to something else*/}
-                    {/* <Typography>{destination.description}</Typography> */}
+                    <Typography>{destination.description}</Typography>
                 </CardContent>
                 {/* TODO - set the value of avg rating and number of rating*/}
                 <Box display='flex' justifyContent='space-between' alignItems='center' p={2} bgcolor={Colors.gray}>

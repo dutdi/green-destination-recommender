@@ -2,10 +2,11 @@ import React from 'react';
 import { Paper, TableContainer, Table, TableHead, TableBody, TableRow, TableCell, tableCellClasses } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import DrivingTableRow from './DrivingTableRow.jsx';
+import { Colors } from '../helpers/Colors.js';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: Colors.red,
         color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
@@ -20,10 +21,10 @@ const DrivingTable = ({ connections }) => {
                 <Table aria-label='collapsible table' sx={{ borderCollapse: 'separate' }}>
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell>CO2 (kg)</StyledTableCell>
-                            <StyledTableCell align='right'>CO2 OSRM (kg)</StyledTableCell>
-                            <StyledTableCell align='right'>Distance (km)</StyledTableCell>
-                            <StyledTableCell align='right'>Duration</StyledTableCell>
+                            <StyledTableCell>CO2 (kg) 🍀</StyledTableCell>
+                            <StyledTableCell align='right'>CO2 OSRM (kg) 🍀</StyledTableCell>
+                            <StyledTableCell align='right'>Distance (km) 🛣️</StyledTableCell>
+                            <StyledTableCell align='right'>Duration ⏱️</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

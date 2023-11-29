@@ -1,10 +1,10 @@
 import React from 'react';
-import { Container, Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import DestinationCard from './DestinationCard';
 
 const DestinationAlbum = ({ title, text, destinations }) => {
     return (
-        <Container sx={{ py: 6, mb: 6 }} maxWidth='lg'>
+        <Box sx={{ mb: 10, p: 10 }}>
             <Typography
                 gutterBottom
                 variant='h4'
@@ -31,7 +31,7 @@ const DestinationAlbum = ({ title, text, destinations }) => {
                     <DestinationCard key={destination.id} destination={destination} />
                 ))}
             </Grid>
-        </Container>
+        </Box>
     );
 };
 

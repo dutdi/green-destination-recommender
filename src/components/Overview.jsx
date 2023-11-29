@@ -7,7 +7,7 @@ import { Colors } from '../helpers/Colors.js';
 
 const Overview = () => {
     return (
-        <Container sx={{ py: 4 }} maxWidth='lg'>
+        <Container sx={{ py: 2 }} maxWidth='lg'>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={12} md={4}>
                     <Paper

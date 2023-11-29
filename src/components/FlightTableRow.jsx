@@ -31,10 +31,10 @@ const FlightTableRow = ({ row }) => {
                             <Table size='small' aria-label='details'>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Departure airport</TableCell>
-                                        <TableCell>Destination airport</TableCell>
-                                        <TableCell align='right'>Departure time</TableCell>
-                                        <TableCell align='right'>Arrival time</TableCell>
+                                        <TableCell>Departure airport 🛫</TableCell>
+                                        <TableCell>Destination airport 🛬</TableCell>
+                                        <TableCell align='right'>Departure time ⏰</TableCell>
+                                        <TableCell align='right'>Arrival time ⏰</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
