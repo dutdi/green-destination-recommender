@@ -28,7 +28,7 @@ const DestinationAlbum = ({ title, text, destinations }) => {
             </Typography>
             <Grid container spacing={4}>
                 {destinations.map((destination) => (
-                    <DestinationCard key={destination.City} destination={destination} />
+                    <DestinationCard key={destination.id} destination={destination} />
                 ))}
             </Grid>
         </Container>

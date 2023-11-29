@@ -36,7 +36,7 @@ const Landing = () => {
                     <Grid item xs={8} sm={8} md={8}>
                         <Typography
                             sx={{
-                                typography: { xs: 'caption', sm: 'h5', md: 'h4' },
+                                typography: { xs: 'body1', sm: 'h5', md: 'h4' },
                                 textAlign: 'center',
                                 color: Colors.white,
                                 display: 'flex',
@@ -49,7 +49,7 @@ const Landing = () => {
                         </Typography>
                         <Typography
                             sx={{
-                                typography: { xs: 'caption', sm: 'h6', md: 'h5' },
+                                typography: { xs: 'body2', sm: 'h6', md: 'h5' },
                                 textAlign: 'center',
                                 color: Colors.white,
                                 display: 'flex',
@@ -66,9 +66,10 @@ const Landing = () => {
                 </Grid>
                 <Demographics></Demographics>
                 <Overview></Overview>
+                {/* TODO - it should be sustainableDestinations*/}
                 <DestinationAlbum
                     title='Popular Destinations'
-                    destinations={shuffleArray(destinations.greenDestinations).slice(0, 6)}
+                    destinations={shuffleArray(destinations.miscDestinations).slice(0, 6)}
                 ></DestinationAlbum>
             </Box>
         )

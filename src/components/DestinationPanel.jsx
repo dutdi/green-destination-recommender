@@ -13,7 +13,6 @@ import {
     Paper,
     Rating,
 } from '@mui/material';
-import { Images } from '../models/Props.js';
 import { Colors } from '../helpers/Colors.js';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 
@@ -27,15 +26,15 @@ const DestinationPanel = ({ destination, onClose }) => {
 
     const closeDialog = () => {
         setOpen(false);
-        console.log('destination', destination);
         onClose();
     };
 
     const handleClose = () => {
-        if (userRating !== 0) {
-            destination.avgRating = (destination.avgRating * destination.numOfRatings + userRating) / (destination.numOfRatings + 1);
-            destination.numOfRatings += 1;
-        }
+        /* TODO - implement rating functionality*/
+        // if (userRating !== 0) {
+        //     destination.avgRating = (destination.avgRating * destination.numOfRatings + userRating) / (destination.numOfRatings + 1);
+        //     destination.numOfRatings += 1;
+        // }
         closeDialog();
     };
 
@@ -60,7 +59,7 @@ const DestinationPanel = ({ destination, onClose }) => {
             </Box>
             <Box p={3} sx={{ textAlign: 'center' }}>
                 <img
-                    src={Images[destination.imgPath]}
+                    src={require(`../media/misc/${destination.id}.jpg`)}
                     alt={destination.name}
                     style={{
                         width: '100%',
@@ -72,11 +71,13 @@ const DestinationPanel = ({ destination, onClose }) => {
                 />
                 <Typography variant='h6' sx={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '16px' }}>
                     {destination.name}
+                    {', '}
+                    {destination.country}
                 </Typography>
-                <Typography variant='body1' sx={{ fontSize: '14px', marginBottom: '12px' }} gutterBottom>
+                {/* TODO - add something else here */}
+                {/* <Typography variant='body1' sx={{ fontSize: '14px', marginBottom: '12px' }} gutterBottom>
                     {destination.description}
-                </Typography>
-
+                </Typography> */}
                 <TableContainer component={Paper}>
                     <Table>
                         <TableHead sx={{ backgroundColor: Colors.mutedBlue }}>

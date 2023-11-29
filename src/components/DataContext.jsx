@@ -1,22 +1,21 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { getAllGreenDestinations, getAllRedDestinations } from '../server/db.js';
-
+import data from '../data/real_data.json';
 const DataContext = React.createContext();
 
 const DataProvider = ({ children }) => {
     const [dataFetched, setDataFetched] = useState(false);
     const [destinations, setDestinations] = useState({
-        greenDestinations: [],
-        redDestinations: [],
+        sustainableDestinations: [],
+        miscDestinations: [],
     });
 
     const getData = async () => {
-        const greenDestinations = await getAllGreenDestinations();
-        const redDestinations = await getAllRedDestinations();
+        const sustainableDestinations = data.sustainable;
+        const miscDestinations = data.misc;
 
         setDestinations({
-            greenDestinations,
-            redDestinations,
+            sustainableDestinations,
+            miscDestinations,
         });
         setDataFetched(true);
     };

@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Box, CssBaseline } from '@mui/material';
-import Navbar from './components/Navbar';
-import Landing from './components/Landing';
-import Recommendations from './components/Recommendations';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import Navbar from './components/Navbar.jsx';
+import Landing from './components/Landing.jsx';
+import Recommendations from './components/Recommendations.jsx';
+import SearchResults from './components/SearchResults.jsx';
+import Contact from './components/Contact.jsx';
+import Footer from './components/Footer.jsx';
 import Parse from 'parse/dist/parse.min.js';
 import { DataProvider } from './components/DataContext';
 
@@ -24,12 +25,12 @@ const App = () => {
                 <CssBaseline />
                 <DataProvider>
                     <Routes>
-                        <Route path='/' element={<Landing></Landing>}></Route>
-                        <Route path='/recommendations/:redDestinationId' element={<Recommendations></Recommendations>}></Route>
-                        <Route path='/contact' element={<Contact></Contact>}></Route>
+                        <Route exact path='/' element={<Landing></Landing>}></Route>
+                        <Route exact path='/recommendations/:redDestinationId' element={<Recommendations></Recommendations>}></Route>
+                        <Route exact path='/search' element={<SearchResults></SearchResults>}></Route>
+                        <Route exact path='/contact' element={<Contact></Contact>}></Route>
                     </Routes>
                 </DataProvider>
-
                 <Footer />
             </Box>
         </BrowserRouter>

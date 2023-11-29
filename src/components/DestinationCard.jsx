@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Grid, Card, CardContent, CardMedia, Typography, Rating, Box } from '@mui/material';
 import DestinationPanel from './DestinationPanel';
-import { Images } from '../models/Props.js';
 import { Colors } from '../helpers/Colors.js';
 
 const DestinationCard = ({ destination }) => {
@@ -28,21 +27,23 @@ const DestinationCard = ({ destination }) => {
                     sx={{
                         pt: '56.25%',
                     }}
-                    image={Images[destination.imgPath]}
+                    image={require(`../media/misc/${destination.id}.jpg`)}
                 />
                 <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant='h5' component='h2'>
-                        {destination.name}
+                        {destination.name}, {destination.country}
                     </Typography>
-                    <Typography>{destination.description}</Typography>
+                    {/* TODO - change description to something else*/}
+                    {/* <Typography>{destination.description}</Typography> */}
                 </CardContent>
+                {/* TODO - set the value of avg rating and number of rating*/}
                 <Box display='flex' justifyContent='space-between' alignItems='center' p={2} bgcolor={Colors.gray}>
                     <div>
-                        <Rating name={`rating-${destination.id}`} value={destination.avgRating} precision={0.5} readOnly />
+                        <Rating name={`rating-${destination.id}`} value={4.5} precision={0.5} readOnly />
                     </div>
                     <div>
                         <Typography variant='body2' color='textSecondary'>
-                            ({destination.numOfRatings} ratings)
+                            ({213} ratings)
                         </Typography>
                     </div>
                 </Box>

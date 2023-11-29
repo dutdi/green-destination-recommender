@@ -1,154 +1,187 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { TextField, Slider, Button, Grid, Typography, Autocomplete } from '@mui/material';
+import { Box, TextField, Button, Grid, Autocomplete, Select, Chip, FormControl, MenuItem, InputLabel, OutlinedInput } from '@mui/material';
 import { Colors } from '../helpers/Colors.js';
-import { Destinations } from '../data/Destinations.js';
+import { useData } from './DataContext';
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        },
+    },
+};
+
+const transportArr = [
+    { id: 'flight', value: 'Flight ✈️' },
+    { id: 'driving', value: 'Driving 🚗' },
+];
 
 const UserInput = () => {
-    const minBudget = 10;
-    const maxBudget = 1000;
-    const defaultValue = 200;
-    const currentDate = new Date().toISOString().split('T')[0];
-    const budgetValueText = (value) => `€${value}`;
+    const { destinations, dataFetched } = useData();
 
-    const marks = [
-        {
-            value: 10,
-            label: '10',
-        },
-        {
-            value: 200,
-            label: '200',
-        },
-        {
-            value: 1000,
-            label: '> 999',
-        },
-    ];
+    const [fromDestination, setFromDestination] = useState('');
+    const [fromDestinationInputValue, setFromDestinationInputValue] = useState('');
+    const [toDestination, setToDestination] = useState('');
+    const [toDestinationInputValue, setToDestinationInputValue] = useState('');
+    const [filteredToDestinations, setFilteredToDestinations] = useState([]);
+    const [transports, setTransports] = useState([]);
 
-    const [fromDate, setFromDate] = useState(currentDate);
-    const [toDate, setToDate] = useState(currentDate);
+    useEffect(() => {
+        if (fromDestination && destinations.miscDestinations) {
+            const drivingToIds = fromDestination.connections_driving.map((connection) => connection.to_id);
+            const flightToIds = fromDestination.connections_flight.map((connection) => connection.to_id);
+            const toIds = [...new Set([...drivingToIds, ...flightToIds])];
+            const filteredDestinations = destinations.miscDestinations.filter((destination) => toIds.includes(destination.id));
+            setFilteredToDestinations(filteredDestinations);
+        }
+    }, [fromDestination, destinations.miscDestinations]);
 
     const defaultProps = {
-        options: Destinations,
-        getOptionLabel: (option) => option.name,
+        options: destinations.miscDestinations,
+        getOptionLabel: (option) => option.name + ', ' + option.country,
     };
 
-    const handleFromDateChange = (event) => {
-        const selectedDate = event.target.value;
-        if (selectedDate <= toDate) {
-            setFromDate(selectedDate);
-        }
+    const toDestinationProps = {
+        options: filteredToDestinations,
     };
 
-    const handleToDateChange = (event) => {
-        const selectedDate = event.target.value;
-        if (selectedDate >= fromDate) {
-            setToDate(selectedDate);
-        }
+    const handleFromDestinationChange = (newValue) => {
+        setFromDestination(newValue);
+    };
+
+    const handleToDestinationChange = (newValue) => {
+        setToDestination(newValue);
+    };
+
+    const handleTransportChange = (event) => {
+        const {
+            target: { value },
+        } = event;
+        setTransports(value);
     };
 
     return (
-        <Grid
-            container
-            item
-            spacing={{ xs: 1, sm: 2, md: 3 }}
-            justifyContent='center'
-            alignItems='center'
-            sx={{
-                backgroundColor: Colors.gray,
-                padding: '24px',
-                borderRadius: '8px',
-                boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-                marginBottom: '16px',
-            }}
-        >
-            <Grid item xs={12} sm={12} md={3}>
-                <Autocomplete
-                    {...defaultProps}
-                    id='destination'
-                    clearOnEscape
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            label='Destination'
-                            variant='outlined'
-                            fullWidth
-                            sx={{ backgroundColor: Colors.white, borderRadius: '4px' }}
-                        />
-                    )}
-                />
-            </Grid>
+        dataFetched && (
+            <Grid
+                container
+                item
+                spacing={{ xs: 1, sm: 2, md: 3 }}
+                justifyContent='center'
+                alignItems='center'
+                sx={{
+                    backgroundColor: Colors.gray,
+                    padding: '24px',
+                    borderRadius: '8px',
+                    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+                    marginBottom: '16px',
+                }}
+            >
+                <Grid item xs={12} sm={12} md={4}>
+                    <Autocomplete
+                        {...defaultProps}
+                        id='from-destination'
+                        clearOnEscape
+                        onChange={(event, newValue) => {
+                            handleFromDestinationChange(newValue);
+                        }}
+                        inputValue={fromDestinationInputValue}
+                        onInputChange={(event, newInputValue) => {
+                            setFromDestinationInputValue(newInputValue);
+                        }}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label='From'
+                                required
+                                variant='outlined'
+                                fullWidth
+                                sx={{ backgroundColor: Colors.white, borderRadius: '4px' }}
+                            />
+                        )}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={12} md={4}>
+                    <Autocomplete
+                        {...defaultProps}
+                        id='to-destination'
+                        {...toDestinationProps}
+                        disabled={!fromDestination || transports.length > 0}
+                        clearOnEscape
+                        onChange={(event, newValue) => {
+                            handleToDestinationChange(newValue);
+                        }}
+                        inputValue={toDestinationInputValue}
+                        onInputChange={(event, newInputValue) => {
+                            setToDestinationInputValue(newInputValue);
+                        }}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label='To'
+                                variant='outlined'
+                                fullWidth
+                                sx={{ backgroundColor: Colors.white, borderRadius: '4px' }}
+                            />
+                        )}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={12} md={4}>
+                    <FormControl sx={{ width: '100%' }}>
+                        <InputLabel id='multiple-chip-label'>Transport</InputLabel>
+                        <Select
+                            labelId='multiple-chip-label'
+                            id='multiple-chip'
+                            multiple
+                            disabled={!fromDestination || (toDestination && transports.length === 0)}
+                            value={transports}
+                            onChange={handleTransportChange}
+                            input={<OutlinedInput id='select-multiple-chip' label='Transport' />}
+                            renderValue={(selected) => (
+                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                    {selected.map((value) => (
+                                        <Chip key={value} label={value} />
+                                    ))}
+                                </Box>
+                            )}
+                            MenuProps={MenuProps}
+                        >
+                            {transportArr.map((tp) => (
+                                <MenuItem key={tp.id} value={tp.value}>
+                                    {tp.value}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                </Grid>
 
-            <Grid item xs={12} sm={6} md={3}>
-                <TextField
-                    label='Departure'
-                    type='date'
-                    variant='outlined'
-                    fullWidth
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    inputProps={{
-                        min: currentDate,
-                    }}
-                    value={fromDate}
-                    onChange={handleFromDateChange}
-                    sx={{ backgroundColor: Colors.white, borderRadius: '4px' }}
-                />
+                <Grid item xs={12} sm={12} md={2}>
+                    <Button
+                        variant='contained'
+                        color='primary'
+                        disabled={!fromDestination || (!toDestination && transports.length === 0)}
+                        component={Link}
+                        to='/search'
+                        state={{
+                            fromDestination: JSON.stringify(fromDestination),
+                            toDestination: JSON.stringify(toDestination),
+                            transports: JSON.stringify(transports),
+                        }}
+                        fullWidth
+                        sx={{
+                            backgroundColor: Colors.blue,
+                            color: Colors.white,
+                            borderRadius: '4px',
+                            padding: '12px 24px',
+                        }}
+                    >
+                        Search
+                    </Button>
+                </Grid>
             </Grid>
-
-            <Grid item xs={12} sm={6} md={3}>
-                <TextField
-                    label='Return'
-                    type='date'
-                    variant='outlined'
-                    fullWidth
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    inputProps={{
-                        min: fromDate,
-                    }}
-                    value={toDate}
-                    onChange={handleToDateChange}
-                    sx={{ backgroundColor: Colors.white, borderRadius: '4px' }}
-                />
-            </Grid>
-
-            <Grid item xs={12} sm={12} md={3}>
-                <Typography variant='body2' gutterBottom>
-                    Budget (€ / day)
-                </Typography>
-                <Slider
-                    defaultValue={defaultValue}
-                    min={minBudget}
-                    max={maxBudget}
-                    step={10}
-                    valueLabelDisplay='auto'
-                    valueLabelFormat={budgetValueText}
-                    marks={marks}
-                />
-            </Grid>
-
-            <Grid item xs={12} sm={12} md={2}>
-                <Button
-                    variant='contained'
-                    component={Link}
-                    to={'/recommendations/1'}
-                    color='primary'
-                    fullWidth
-                    sx={{
-                        backgroundColor: Colors.blue,
-                        color: Colors.white,
-                        borderRadius: '4px',
-                        padding: '12px 24px',
-                    }}
-                >
-                    Search
-                </Button>
-            </Grid>
-        </Grid>
+        )
     );
 };
 
