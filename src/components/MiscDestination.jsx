@@ -86,13 +86,13 @@ const MiscDestination = ({ fromDestination, toDestination }) => {
                         </Typography>
                         <Typography
                             gutterBottom
-                            variant='body1'
+                            variant='body2'
                             sx={{
                                 letterSpacing: '.1rem',
                                 fontWeight: 'bold',
                             }}
                         >
-                            This is a description for a city. I will add one description for each city later.
+                            {toDestination.description}
                         </Typography>
                     </Grid>
                     <Grid item xs={12} md={2}>

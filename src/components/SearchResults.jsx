@@ -75,8 +75,7 @@ const SearchResults = () => {
     const toDestinations = getToDestinations();
 
     return (
-        fromDestination &&
-        toDestinations.length > 0 && (
+        fromDestination && (
             <Box sx={{ mb: 10 }}>
                 <Grid container spacing={2} sx={{ p: 5 }}>
                     <Grid item xs={12} md={10}>
@@ -92,43 +91,55 @@ const SearchResults = () => {
                             Recommendations based on: {fromDestination.name}, {fromDestination.country}
                         </Typography>
                     </Grid>
-                    <Grid item xs={12} md={2}>
-                        <FormControl sx={{ minWidth: 200 }}>
-                            <InputLabel id='sort-by-label'>Sort By</InputLabel>
-                            <Select labelId='sort-by-label' id='sort-by-select' value={sortBy} label='Sort By' onChange={handleSortChange}>
-                                <MenuItem value='co2'>CO2</MenuItem>
-                                <MenuItem value='popularity'>Popularity</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </Grid>
+                    {toDestinations.length > 0 && (
+                        <Grid item xs={12} md={2}>
+                            <FormControl sx={{ minWidth: 200 }}>
+                                <InputLabel id='sort-by-label'>Sort By</InputLabel>
+                                <Select
+                                    labelId='sort-by-label'
+                                    id='sort-by-select'
+                                    value={sortBy}
+                                    label='Sort By'
+                                    onChange={handleSortChange}
+                                >
+                                    <MenuItem value='co2'>CO2</MenuItem>
+                                    <MenuItem value='popularity'>Popularity</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Grid>
+                    )}
                 </Grid>
-                <Box sx={{ p: 2 }}>
-                    <Divider></Divider>
-                    {toDestinations.slice(startIndex, endIndex).map((toDest, index) => (
-                        <Box key={index}>
-                            <MiscDestination fromDestination={fromDestination} toDestination={toDest}></MiscDestination>
-                        </Box>
-                    ))}
-                </Box>
+                {toDestinations.length > 0 && (
+                    <Box sx={{ p: 2 }}>
+                        <Divider></Divider>
+                        {toDestinations.slice(startIndex, endIndex).map((toDest, index) => (
+                            <Box key={index}>
+                                <MiscDestination fromDestination={fromDestination} toDestination={toDest}></MiscDestination>
+                            </Box>
+                        ))}
+                    </Box>
+                )}
                 <Divider></Divider>
-                <Box
-                    sx={{
-                        position: 'sticky',
-                        bottom: 0,
-                        backgroundColor: Colors.white,
-                        padding: '10px',
-                        display: 'flex',
-                        justifyContent: 'flex-end',
-                    }}
-                >
-                    <Pagination
-                        count={Math.ceil(toDestinations.length / itemsPerPage)}
-                        page={page}
-                        onChange={handlePageChange}
-                        shape='rounded'
-                        color='primary'
-                    />
-                </Box>
+                {toDestinations.length > 0 && (
+                    <Box
+                        sx={{
+                            position: 'sticky',
+                            bottom: 0,
+                            backgroundColor: Colors.white,
+                            padding: '10px',
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                        }}
+                    >
+                        <Pagination
+                            count={Math.ceil(toDestinations.length / itemsPerPage)}
+                            page={page}
+                            onChange={handlePageChange}
+                            shape='rounded'
+                            color='primary'
+                        />
+                    </Box>
+                )}
             </Box>
         )
     );
