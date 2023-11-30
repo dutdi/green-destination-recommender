@@ -156,51 +156,47 @@ const MiscDestination = ({ fromDestination, toDestination, transports }) => {
                         ></Box>
                     </Grid>
 
-                    <Grid container item xs={12} sm={12} md={7} lg={7} xl={8}>
-                        <Grid container item direction='column' justifyContent='space-between'>
-                            <Grid item>
-                                <Box sx={{ borderColor: 'divider', mb: 3 }}>
-                                    <Tabs value={value} onChange={handleChange} aria-label='tabs'>
-                                        <Tab label='Flight ✈️' />
-                                        <Tab label='Driving 🚗' />
-                                        <Tab label='Train 🚆' />
-                                    </Tabs>
-                                    {value === 0 && transports.includes('Flight ✈️') && (
-                                        <FlightTable
-                                            connections={fromDestination.connections_flight.filter((c) => c.to_id === toDestination.id)}
-                                        ></FlightTable>
-                                    )}
-                                    {value === 1 && transports.includes('Driving 🚗') && (
-                                        <DrivingTable
-                                            connections={fromDestination.connections_driving.filter((c) => c.to_id === toDestination.id)}
-                                        ></DrivingTable>
-                                    )}
-                                    {value === 2 && transports.includes('Train 🚆') && <div></div>}
-                                </Box>
-                            </Grid>
-                            <Grid item>
-                                <Box>
-                                    <Divider></Divider>
-                                    <Typography
-                                        variant='body1'
-                                        sx={{
-                                            letterSpacing: '.1rem',
-                                            fontWeight: 'bold',
-                                            mt: 2,
-                                        }}
-                                    >
-                                        How would you rate this recommendation?
-                                    </Typography>
-                                    <StyledRating
-                                        name='highlight-selected-only'
-                                        defaultValue={4}
-                                        IconContainerComponent={IconContainer}
-                                        getLabelText={(value) => customIcons[value].label}
-                                        highlightSelectedOnly
-                                    ></StyledRating>
-                                </Box>
-                            </Grid>
-                        </Grid>
+                    <Grid item xs={12} sm={12} md={7} lg={7} xl={8}>
+                        <Box>
+                            <Box sx={{ borderColor: 'divider', mb: 3, overflowX: 'auto' }}>
+                                <Tabs value={value} onChange={handleChange} aria-label='tabs'>
+                                    <Tab label='Flight ✈️' />
+                                    <Tab label='Driving 🚗' />
+                                    <Tab label='Train 🚆' />
+                                </Tabs>
+                                {value === 0 && transports.includes('Flight ✈️') && (
+                                    <FlightTable
+                                        connections={fromDestination.connections_flight.filter((c) => c.to_id === toDestination.id)}
+                                    ></FlightTable>
+                                )}
+                                {value === 1 && transports.includes('Driving 🚗') && (
+                                    <DrivingTable
+                                        connections={fromDestination.connections_driving.filter((c) => c.to_id === toDestination.id)}
+                                    ></DrivingTable>
+                                )}
+                                {value === 2 && transports.includes('Train 🚆') && <div></div>}
+                            </Box>
+                            <Box>
+                                <Divider></Divider>
+                                <Typography
+                                    variant='body1'
+                                    sx={{
+                                        letterSpacing: '.1rem',
+                                        fontWeight: 'bold',
+                                        mt: 2,
+                                    }}
+                                >
+                                    How would you rate this recommendation?
+                                </Typography>
+                                <StyledRating
+                                    name='highlight-selected-only'
+                                    defaultValue={5}
+                                    IconContainerComponent={IconContainer}
+                                    getLabelText={(value) => customIcons[value].label}
+                                    highlightSelectedOnly
+                                ></StyledRating>
+                            </Box>
+                        </Box>
                     </Grid>
                 </Grid>
             </Box>

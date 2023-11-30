@@ -64,6 +64,7 @@ const SearchResults = () => {
                                 const bDuration = b.details ? convertToSec(b.details.duration_str) : b.duration_sec;
                                 return aDuration - bDuration;
                             }
+                            return 0;
                         })
                         .map((connection) => connection.to_id)
                 ),
@@ -100,7 +101,7 @@ const SearchResults = () => {
                 </Grid>
                 {toDestinations.length > 0 && (
                     <Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
-                        <FormControl sx={{ float: { md: 'right', lg: 'right', xl: 'right' } }}>
+                        <FormControl sx={{ float: { md: 'right', lg: 'right', xl: 'right' }, width: '100%' }}>
                             <InputLabel id='sort-by-label'>Sort By</InputLabel>
                             <Select labelId='sort-by-label' id='sort-by-select' value={sortBy} label='Sort By' onChange={handleSortChange}>
                                 <MenuItem value='co2'>CO2 Emission 🍀</MenuItem>
