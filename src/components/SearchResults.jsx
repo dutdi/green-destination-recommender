@@ -87,7 +87,7 @@ const SearchResults = () => {
                 <Grid item xs={12} sm={10} md={10} lg={10} xl={10}>
                     <Typography
                         gutterBottom
-                        variant='h4'
+                        variant='h5'
                         sx={{
                             mb: 4,
                             letterSpacing: '.2rem',

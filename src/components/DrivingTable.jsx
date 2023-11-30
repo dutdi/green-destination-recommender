@@ -17,7 +17,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const DrivingTable = ({ connections }) => {
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden', mt: 1 }}>
-            <TableContainer sx={{ maxHeight: 300 }}>
+            <TableContainer sx={{ height: 395 }}>
                 <Table aria-label='collapsible table' sx={{ borderCollapse: 'separate' }}>
                     <TableHead>
                         <TableRow>
