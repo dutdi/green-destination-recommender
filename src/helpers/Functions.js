@@ -106,3 +106,29 @@ export function formatPopulation(population) {
 
     return population.toString();
 }
+
+export function calculateMinCo2Value(fromDestination, toDestination) {
+    const minCo2ValueFlight = parseInt(
+        fromDestination.connections_flight
+            .filter((connection) => connection.to_id === toDestination.id)
+            .map((connection) => connection.details.co2_kg)
+            .sort((a, b) => a - b)[0] || -1
+    );
+
+    const minCo2ValueCar = parseInt(
+        fromDestination.connections_driving
+            .filter((connection) => connection.to_id === toDestination.id)
+            .map((connection) => connection.estd_emissions_osrm_gm)
+            .sort((a, b) => a - b)[0] || -1
+    );
+
+    if (minCo2ValueFlight === -1 && minCo2ValueCar === -1) {
+        return -1;
+    } else if (minCo2ValueFlight === -1) {
+        return minCo2ValueCar;
+    } else if (minCo2ValueCar === -1) {
+        return minCo2ValueFlight;
+    } else {
+        return Math.min(minCo2ValueFlight, minCo2ValueCar);
+    }
+}

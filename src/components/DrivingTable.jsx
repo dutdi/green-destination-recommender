@@ -21,10 +21,9 @@ const DrivingTable = ({ connections }) => {
                 <Table aria-label='collapsible table' sx={{ borderCollapse: 'separate' }}>
                     <TableHead>
                         <TableRow>
-                            <StyledTableCell>CO2 (kg) 🍀</StyledTableCell>
-                            <StyledTableCell align='right'>CO2 OSRM (kg) 🍀</StyledTableCell>
-                            <StyledTableCell align='right'>Distance (km) 🛣️</StyledTableCell>
-                            <StyledTableCell align='right'>Duration ⏱️</StyledTableCell>
+                            <StyledTableCell align='center'>CO2 OSRM (kg) 🍀</StyledTableCell>
+                            <StyledTableCell align='center'>Distance (km) 🛣️</StyledTableCell>
+                            <StyledTableCell align='center'>Duration ⏱️</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

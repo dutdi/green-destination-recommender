@@ -110,53 +110,23 @@ const MiscDestination = ({ fromDestination, toDestination, transports }) => {
     return (
         fromDestination &&
         toDestination && (
-            <Box sx={{ p: 5, boxShadow: 5 }}>
+            <Box sx={{ p: 3, boxShadow: 5, height: '70vh' }}>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={10} md={10} lg={10} xl={10}>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                         <Typography
                             gutterBottom
                             variant='h5'
                             sx={{
-                                mt: 2,
-                                mb: 2,
-                                letterSpacing: '.2rem',
+                                letterSpacing: '.1rem',
                                 fontWeight: 'bold',
-                                color: Colors.darkBlue,
+                                color: Colors.black,
                             }}
                         >
                             {toDestination.name}, {toDestination.country}
                         </Typography>
-                        <Typography
-                            gutterBottom
-                            variant='body2'
-                            sx={{
-                                letterSpacing: '.1rem',
-                                fontWeight: 'bold',
-                            }}
-                        >
-                            {toDestination.description}
-                        </Typography>
                     </Grid>
 
-                    <Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
-                        {destinationDetails}
-                    </Grid>
-
-                    <Grid item xs={12} sm={12} md={5} lg={5} xl={4} sx={{ mt: 3 }}>
-                        <Box
-                            component='img'
-                            src={require(`../media/misc/${toDestination.id}.jpg`)}
-                            loading='lazy'
-                            sx={{
-                                width: '100%',
-                                height: { xs: '100%', md: '500px' },
-                                objectFit: 'cover',
-                                borderRadius: '8px',
-                            }}
-                        ></Box>
-                    </Grid>
-
-                    <Grid item xs={12} sm={12} md={7} lg={7} xl={8}>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                         <Box>
                             <Box sx={{ borderColor: 'divider', mb: 3, overflowX: 'auto' }}>
                                 <Tabs value={value} onChange={handleChange} aria-label='tabs'>
@@ -176,7 +146,7 @@ const MiscDestination = ({ fromDestination, toDestination, transports }) => {
                                 )}
                                 {value === 2 && transports.includes('Train 🚆') && <div></div>}
                             </Box>
-                            <Box>
+                            {/* <Box>
                                 <Divider></Divider>
                                 <Typography
                                     variant='body1'
@@ -195,7 +165,7 @@ const MiscDestination = ({ fromDestination, toDestination, transports }) => {
                                     getLabelText={(value) => customIcons[value].label}
                                     highlightSelectedOnly
                                 ></StyledRating>
-                            </Box>
+                            </Box> */}
                         </Box>
                     </Grid>
                 </Grid>
