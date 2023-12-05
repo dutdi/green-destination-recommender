@@ -17,8 +17,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const DrivingTable = ({ connections }) => {
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden', mt: 1 }}>
-            <TableContainer sx={{ height: 395 }}>
-                <Table aria-label='collapsible table' sx={{ borderCollapse: 'separate' }}>
+            <TableContainer sx={{ maxHeight: '35vh' }}>
+                <Table stickyHeader aria-label='collapsible table' sx={{ borderCollapse: 'separate' }}>
                     <TableHead>
                         <TableRow>
                             <StyledTableCell align='center'>CO2 OSRM (kg) 🍀</StyledTableCell>

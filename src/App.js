@@ -3,9 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Box, CssBaseline } from '@mui/material';
 import Navbar from './components/Navbar.jsx';
 import Landing from './components/Landing.jsx';
-import Test from './components/Test.jsx';
-import Recommendations from './components/Recommendations.jsx';
-import SearchResults from './components/SearchResults.jsx';
+import Explore from './components/Explore.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
 import Parse from 'parse/dist/parse.min.js';
@@ -27,10 +25,8 @@ const App = () => {
                 <DataProvider>
                     <Routes>
                         <Route exact path='/' element={<Landing></Landing>}></Route>
-                        <Route exact path='/recommendations/:redDestinationId' element={<Recommendations></Recommendations>}></Route>
-                        <Route exact path='/search' element={<SearchResults></SearchResults>}></Route>
+                        <Route exact path='/explore' element={<Explore></Explore>}></Route>
                         <Route exact path='/contact' element={<Contact></Contact>}></Route>
-                        <Route exact path='/test' element={<Test></Test>}></Route>
                     </Routes>
                 </DataProvider>
                 <Footer />

@@ -132,3 +132,15 @@ export function calculateMinCo2Value(fromDestination, toDestination) {
         return Math.min(minCo2ValueFlight, minCo2ValueCar);
     }
 }
+
+export function findFlightConnectionWithMinCo2(fromDestination, toDestination) {
+    return fromDestination.connections_flight
+        .filter((connection) => connection.to_id === toDestination.id)
+        .sort((a, b) => a.details.co2_kg - b.details.co2_kg)[0];
+}
+
+export function findDrivingConnectionWithMinCo2(fromDestination, toDestination) {
+    return fromDestination.connections_driving
+        .filter((connection) => connection.to_id === toDestination.id)
+        .sort((a, b) => a.estd_emissions_osrm_gm - b.estd_emissions_osrm_gm)[0];
+}

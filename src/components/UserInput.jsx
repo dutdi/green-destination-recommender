@@ -108,7 +108,7 @@ const UserInput = () => {
                         {...defaultProps}
                         id='to-destination'
                         {...toDestinationProps}
-                        disabled={!fromDestination || transports.length > 0}
+                        disabled={fromDestination === null || fromDestination === ''}
                         clearOnEscape
                         onChange={(event, newValue) => {
                             handleToDestinationChange(newValue);
@@ -135,7 +135,7 @@ const UserInput = () => {
                             labelId='multiple-chip-label'
                             id='multiple-chip'
                             multiple
-                            disabled={!fromDestination || (toDestination && transports.length === 0)}
+                            disabled={fromDestination === null || fromDestination === ''}
                             value={transports}
                             onChange={handleTransportChange}
                             input={<OutlinedInput id='select-multiple-chip' label='Transport' />}
@@ -161,9 +161,9 @@ const UserInput = () => {
                     <Button
                         variant='contained'
                         color='primary'
-                        disabled={!fromDestination || (!toDestination && transports.length === 0)}
+                        disabled={fromDestination === null || fromDestination === ''}
                         component={Link}
-                        to='/search'
+                        to='/explore'
                         state={{
                             fromDestination: JSON.stringify(fromDestination),
                             toDestination: JSON.stringify(toDestination),
@@ -177,7 +177,7 @@ const UserInput = () => {
                             padding: '12px 24px',
                         }}
                     >
-                        Search
+                        Explore
                     </Button>
                 </Grid>
             </Grid>
