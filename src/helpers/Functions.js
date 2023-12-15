@@ -91,7 +91,7 @@ function degreesToRadians(degrees) {
     return degrees * (Math.PI / 180);
 }
 
-export function formatPopulation(population) {
+export function formatNumber(number) {
     const abbreviations = {
         B: 1000000000,
         M: 1000000,
@@ -99,48 +99,121 @@ export function formatPopulation(population) {
     };
 
     for (const key in abbreviations) {
-        if (population >= abbreviations[key]) {
-            return (population / abbreviations[key]).toFixed(2) + key;
+        if (number >= abbreviations[key]) {
+            return (number / abbreviations[key]).toFixed(2) + key;
         }
     }
 
-    return population.toString();
+    return number.toString();
 }
 
 export function calculateMinCo2Value(fromDestination, toDestination) {
-    const minCo2ValueFlight = parseInt(
+    const minCo2ValueFlight =
         fromDestination.connections_flight
             .filter((connection) => connection.to_id === toDestination.id)
-            .map((connection) => connection.details.co2_kg)
-            .sort((a, b) => a - b)[0] || -1
-    );
+            .map((connection) => connection.co2_kg)
+            .sort((a, b) => a - b)[0] || Number.MAX_VALUE;
 
-    const minCo2ValueCar = parseInt(
+    const minCo2ValueDriving =
         fromDestination.connections_driving
             .filter((connection) => connection.to_id === toDestination.id)
-            .map((connection) => connection.estd_emissions_osrm_gm)
-            .sort((a, b) => a - b)[0] || -1
-    );
+            .map((connection) => connection.co2_kg)
+            .sort((a, b) => a - b)[0] || Number.MAX_VALUE;
 
-    if (minCo2ValueFlight === -1 && minCo2ValueCar === -1) {
-        return -1;
-    } else if (minCo2ValueFlight === -1) {
-        return minCo2ValueCar;
-    } else if (minCo2ValueCar === -1) {
-        return minCo2ValueFlight;
-    } else {
-        return Math.min(minCo2ValueFlight, minCo2ValueCar);
-    }
+    const minCo2ValueTrain =
+        fromDestination.connections_train
+            .filter((connection) => connection.to_id === toDestination.id)
+            .map((connection) => connection.co2_kg)
+            .sort((a, b) => a - b)[0] || Number.MAX_VALUE;
+
+    return Math.min(minCo2ValueFlight, minCo2ValueDriving, minCo2ValueTrain);
+}
+
+export function calculateMinDuration(fromDestination, toDestination) {
+    const minDurationFlight =
+        fromDestination.connections_flight
+            .filter((connection) => connection.to_id === toDestination.id)
+            .map((connection) => convertToSec(connection.duration_str))
+            .sort((a, b) => a - b)[0] || Number.MAX_VALUE;
+
+    const minDurationDriving =
+        fromDestination.connections_driving
+            .filter((connection) => connection.to_id === toDestination.id)
+            .map((connection) => connection.duration_sec)
+            .sort((a, b) => a - b)[0] || Number.MAX_VALUE;
+
+    const minDurationTrain =
+        fromDestination.connections_train
+            .filter((connection) => connection.to_id === toDestination.id)
+            .map((connection) => convertToSec(connection.duration_sec))
+            .sort((a, b) => a - b)[0] || Number.MAX_VALUE;
+
+    return Math.min(minDurationFlight, minDurationDriving, minDurationTrain);
 }
 
 export function findFlightConnectionWithMinCo2(fromDestination, toDestination) {
     return fromDestination.connections_flight
         .filter((connection) => connection.to_id === toDestination.id)
-        .sort((a, b) => a.details.co2_kg - b.details.co2_kg)[0];
+        .sort((a, b) => a.co2_kg - b.co2_kg)[0];
 }
 
 export function findDrivingConnectionWithMinCo2(fromDestination, toDestination) {
     return fromDestination.connections_driving
         .filter((connection) => connection.to_id === toDestination.id)
-        .sort((a, b) => a.estd_emissions_osrm_gm - b.estd_emissions_osrm_gm)[0];
+        .sort((a, b) => a.co2_kg - b.co2_kg)[0];
+}
+
+export function findTrainConnectionWithMinCo2(fromDestination, toDestination) {
+    return fromDestination.connections_train
+        .filter((connection) => connection.to_id === toDestination.id)
+        .sort((a, b) => a.co2_kg - b.co2_kg)[0];
+}
+
+export function calculateAvgCo2AllConnections(allConnections) {
+    return (
+        allConnections.reduce((acc, connection) => {
+            return acc + connection.co2_kg;
+        }, 0) / allConnections.length
+    );
+}
+
+export function getSortedToDestinations(fromDestination, destinations, sortBy, month) {
+    var allConnections = [
+        ...fromDestination.connections_train,
+        ...fromDestination.connections_driving,
+        ...fromDestination.connections_flight,
+    ];
+
+    const sortedToIds = [
+        ...new Set(
+            allConnections
+                .sort((a, b) => {
+                    if (sortBy === 'emission') {
+                        return a.co2_kg - b.co2_kg;
+                    } else if (sortBy === 'seasonality') {
+                        const aSeasonality = destinations.find((destination) => destination.id === a.to_id).seasonality[month];
+                        const bSeasonality = destinations.find((destination) => destination.id === b.to_id).seasonality[month];
+                        return bSeasonality - aSeasonality;
+                    } else if (sortBy === 'popularity') {
+                        const aPopularity = destinations.find((destination) => destination.id === a.to_id).popularity.review_count;
+                        const bPopularity = destinations.find((destination) => destination.id === b.to_id).popularity.review_count;
+                        return bPopularity - aPopularity;
+                    } else if (sortBy === 'duration') {
+                        console.log(a);
+                        const aDuration = a.type === 'flight' ? convertToSec(a.duration_str) : a.duration_sec;
+                        const bDuration = b.type === 'flight' ? convertToSec(b.duration_str) : b.duration_sec;
+                        return aDuration - bDuration;
+                    }
+                    return 0;
+                })
+                .map((connection) => connection.to_id)
+        ),
+    ];
+
+    const filteredToDestinations = destinations.filter((destination) => sortedToIds.includes(destination.id));
+    const sortedToDestinations = sortedToIds.map((id) => {
+        return filteredToDestinations.find((obj) => obj.id === id);
+    });
+
+    return sortedToDestinations;
 }

@@ -253,3 +253,16 @@ export const countries = [
     'Zimbabwe',
     'Åland Islands',
 ];
+
+export const interests = [
+    { name: 'urban', label: 'Urban' },
+    { name: 'culinary', label: 'Culinary' },
+    { name: 'entertainment', label: 'Live Music & Entertainment' },
+    { name: 'outdoor', label: 'Outdoor' },
+    { name: 'art', label: 'Art & Museums' },
+    { name: 'community', label: 'Community' },
+    { name: 'night', label: 'Nightlife & Social Scene' },
+    { name: 'cultural', label: 'Cultural' },
+    { name: 'sports', label: 'Sports Events' },
+    { name: 'tech', label: 'Tech & Innovation' },
+];
