@@ -19,7 +19,7 @@ Parse.serverURL = PARSE_HOST_URL;
 
 const App = () => {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename='/green-destination-recommender'>
             <Box>
                 <Navbar />
                 <CssBaseline />

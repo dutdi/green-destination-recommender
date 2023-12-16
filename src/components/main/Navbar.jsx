@@ -27,8 +27,8 @@ const Navbar = () => {
                 <Typography
                     variant='h6'
                     noWrap
-                    component='a'
-                    href='/'
+                    component={Link}
+                    to='/'
                     sx={{
                         ml: 2,
                         display: { xs: 'none', md: 'flex' },
@@ -52,8 +52,8 @@ const Navbar = () => {
                 <Typography
                     variant='body1'
                     noWrap
-                    component='a'
-                    href='/'
+                    component={Link}
+                    to='/'
                     sx={{
                         ml: 2,
                         display: { xs: 'flex', md: 'none' },
