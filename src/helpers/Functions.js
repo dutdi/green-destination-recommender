@@ -199,7 +199,6 @@ export function getSortedToDestinations(fromDestination, destinations, sortBy, m
                         const bPopularity = destinations.find((destination) => destination.id === b.to_id).popularity.review_count;
                         return bPopularity - aPopularity;
                     } else if (sortBy === 'duration') {
-                        console.log(a);
                         const aDuration = a.type === 'flight' ? convertToSec(a.duration_str) : a.duration_sec;
                         const bDuration = b.type === 'flight' ? convertToSec(b.duration_str) : b.duration_sec;
                         return aDuration - bDuration;

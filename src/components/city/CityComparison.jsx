@@ -5,9 +5,6 @@ import { Colors } from '../../helpers/Colors.js';
 import { calculateMinCo2Value, calculateMinDuration } from '../../helpers/Functions.js';
 
 const CityComparison = ({ fromDestination, selectedDestination, recommendedDestinations }) => {
-    console.log('CityComparison.jsx: fromDestination', fromDestination);
-    console.log('CityComparison.jsx: selectedDestination', selectedDestination);
-    console.log('CityComparison.jsx: recommendedDestinations', recommendedDestinations);
     const selectedCo2 = calculateMinCo2Value(fromDestination, selectedDestination);
     const recommendedCo2 = calculateMinCo2Value(fromDestination, recommendedDestinations[0]);
     const co2Offset = parseInt((selectedCo2 * 100) / recommendedCo2 - 100);

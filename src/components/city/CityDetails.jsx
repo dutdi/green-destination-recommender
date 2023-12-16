@@ -5,7 +5,7 @@ import Typography from '@mui/joy/Typography';
 import CircularProgress from '@mui/joy/CircularProgress';
 import SvgIcon from '@mui/joy/SvgIcon';
 import CityHeader from './CityHeader.jsx';
-import CityRecommendationCard from './CityRecommendationCard.jsx';
+import CityRecommendationItem from './CityRecommendationItem.jsx';
 import CustomBox from '../custom/CustomBox.jsx';
 import Route from '../route/Route.jsx';
 import { Colors } from '../../helpers/Colors.js';
@@ -62,9 +62,10 @@ const CityDetails = () => {
     const { state } = useLocation();
     const fromDestination = state && JSON.parse(state.fromDestination);
     const toDestination = state && JSON.parse(state.toDestination);
+    const interests = state && JSON.parse(state.interests);
+    const month = state && state.month;
     const sortedToDestinations = state && JSON.parse(state.sortedToDestinations);
 
-    console.log('first');
     return (
         <Paper sx={{ m: 4 }}>
             <CityHeader toDestination={toDestination} />
@@ -131,7 +132,7 @@ const CityDetails = () => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                    <Route fromDestination={fromDestination} toDestination={toDestination}></Route>
+                    <Route fromDestination={fromDestination} toDestination={toDestination} height='55vh'></Route>
                 </Grid>
             </Grid>
             <Paper sx={{ mt: 6, mb: 6 }}>
@@ -143,12 +144,15 @@ const CityDetails = () => {
                 <Grid container spacing={2} sx={{ p: 3 }}>
                     {sortedToDestinations.slice(0, 4).map((toDest) => (
                         <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
-                            <CityRecommendationCard
+                            <CityRecommendationItem
+                                view='card'
                                 fromDestination={fromDestination}
                                 toDestination={toDest}
+                                interests={interests}
+                                month={month}
                                 sortedToDestinations={sortedToDestinations}
                                 avgCo2AllConnections={43}
-                            ></CityRecommendationCard>
+                            ></CityRecommendationItem>
                         </Grid>
                     ))}
                 </Grid>

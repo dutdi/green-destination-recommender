@@ -4,21 +4,26 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 export default function MonthPicker({ handleMonthChange }) {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState(null);
 
     const handleMonthItemClick = (month) => {
         setValue(month);
-        handleMonthChange(new Date(month).toLocaleString('default', { month: 'long' }));
+        handleMonthChange(month.format('MMMM'));
     };
 
     return (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <LocalizationProvider dateAdapter={AdapterDayjs} dateFormats={{ monthAndYear: 'MMMM' }}>
             <DatePicker
-                label='Date'
+                label='Month'
                 openTo='month'
-                views={['year', 'month']}
+                views={['month']}
                 value={value}
                 onAccept={(newValue) => handleMonthItemClick(newValue)}
+                renderInput={(params) => (
+                    <div>
+                        <input {...params.inputProps} value={value ? value.format('MMMM') : ''} readOnly />
+                    </div>
+                )}
             />
         </LocalizationProvider>
     );

@@ -115,7 +115,7 @@ const UserInput = () => {
                         to='/explore'
                         state={{
                             fromDestination: JSON.stringify(fromDestination),
-                            interests: selectedInterests,
+                            interests: selectedInterests.length > 0 ? JSON.stringify(selectedInterests) : JSON.stringify(interests),
                             month: month,
                         }}
                         fullWidth
@@ -126,7 +126,7 @@ const UserInput = () => {
                             padding: '12px 24px',
                         }}
                     >
-                        Explore
+                        🔍 Explore
                     </Button>
                 </Grid>
             </Grid>

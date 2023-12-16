@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useLocation, Navigate } from 'react-router-dom';
 import { Grid, Box, Paper, Pagination, Typography, Divider } from '@mui/material';
 import Stack from '@mui/joy/Stack';
-import CityRecommendationCard from '../city/CityRecommendationCard.jsx';
+import CityRecommendationItem from '../city/CityRecommendationItem.jsx';
+import Route from '../route/Route.jsx';
 import Filters from '../custom/Filters.jsx';
 import { useData } from '../main/DataContext.jsx';
 import { getSortedToDestinations, calculateAvgCo2AllConnections } from '../../helpers/Functions.js';
@@ -11,12 +12,13 @@ const Explore = () => {
     const { state } = useLocation();
     const { destinations, dataFetched } = useData();
     const fromDestination = state && JSON.parse(state.fromDestination);
-    const interests = state && state.interests;
+    const interests = state && JSON.parse(state.interests);
     const month = state && state.month;
+    const [view, setView] = useState('card');
     const [page, setPage] = useState(1);
     const [sortBy, setSortBy] = useState('emission');
 
-    const itemsPerPage = 8;
+    const itemsPerPage = view === 'card' ? 8 : 4;
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = page * itemsPerPage;
 
@@ -26,6 +28,11 @@ const Explore = () => {
 
     const handleSortChange = (value) => {
         setSortBy(value);
+        setPage(1);
+    };
+
+    const handleViewChange = (value) => {
+        setView(value);
         setPage(1);
     };
 
@@ -47,21 +54,45 @@ const Explore = () => {
             </Typography>
             <Divider />
             <Stack spacing={2} sx={{ pt: 2, minHeight: 0 }}>
-                <Filters handleSortChange={handleSortChange} />
+                <Filters handleSortChange={handleSortChange} handleViewChange={handleViewChange} />
                 <Paper>
                     <Grid container spacing={2} sx={{ p: 3 }}>
-                        {filteredDestinations.slice(startIndex, endIndex).map((toDest) => (
-                            <Grid item xs={12} sm={6} md={3} lg={3} xl={3} key={toDest.id}>
-                                <CityRecommendationCard
-                                    fromDestination={fromDestination}
-                                    toDestination={toDest}
-                                    interests={interests}
-                                    month={month}
-                                    sortedToDestinations={filteredDestinations}
-                                    avgCo2AllConnections={avgCo2AllConnections}
-                                ></CityRecommendationCard>
-                            </Grid>
-                        ))}
+                        {view === 'card' ? (
+                            filteredDestinations.slice(startIndex, endIndex).map((toDest) => (
+                                <Grid item xs={12} sm={6} md={3} lg={3} xl={3} key={toDest.id}>
+                                    <CityRecommendationItem
+                                        view='card'
+                                        fromDestination={fromDestination}
+                                        toDestination={toDest}
+                                        interests={interests}
+                                        month={month}
+                                        sortedToDestinations={filteredDestinations}
+                                        avgCo2AllConnections={avgCo2AllConnections}
+                                    ></CityRecommendationItem>
+                                </Grid>
+                            ))
+                        ) : (
+                            <>
+                                <Grid container item xs={12} sm={12} md={7} lg={7} xl={7} spacing={2}>
+                                    {filteredDestinations.slice(startIndex, endIndex).map((toDest) => (
+                                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} key={toDest.id}>
+                                            <CityRecommendationItem
+                                                view='map'
+                                                fromDestination={fromDestination}
+                                                toDestination={toDest}
+                                                interests={interests}
+                                                month={month}
+                                                sortedToDestinations={filteredDestinations}
+                                                avgCo2AllConnections={avgCo2AllConnections}
+                                            ></CityRecommendationItem>
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                                <Grid item xs={12} sm={12} md={5} lg={5} xl={5} spacing={2}>
+                                    <Route fromDestination={fromDestination} toDestination={filteredDestinations[0]} height='85vh'></Route>
+                                </Grid>
+                            </>
+                        )}
                     </Grid>
                 </Paper>
             </Stack>
