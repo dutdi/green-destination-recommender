@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/green-destination-recommender/static/js/main.36d3b618.js",
+    "main.js": "/green-destination-recommender/static/js/main.64ee0b68.js",
     "static/media/m158.jpg": "/green-destination-recommender/static/media/m158.05f660edcfa2f98f0363.jpg",
     "static/media/m179.jpg": "/green-destination-recommender/static/media/m179.c67307e548d8cae60b52.jpg",
     "static/media/m78.jpg": "/green-destination-recommender/static/media/m78.874221f1a6a3b12a617b.jpg",
@@ -203,9 +203,9 @@
     "static/media/m12.jpg": "/green-destination-recommender/static/media/m12.8efeb4a270f4b1164e8c.jpg",
     "static/media/m136.jpg": "/green-destination-recommender/static/media/m136.f59bb3a6eba605a5e5ce.jpg",
     "index.html": "/green-destination-recommender/index.html",
-    "main.36d3b618.js.map": "/green-destination-recommender/static/js/main.36d3b618.js.map"
+    "main.64ee0b68.js.map": "/green-destination-recommender/static/js/main.64ee0b68.js.map"
   },
   "entrypoints": [
-    "static/js/main.36d3b618.js"
+    "static/js/main.64ee0b68.js"
   ]
 }
