@@ -48,7 +48,7 @@ const Explore = () => {
     );
 
     return dataFetched && fromDestination && filteredDestinations && avgCo2AllConnections ? (
-        <Box sx={{ m: 5, mb: 10 }}>
+        <Box sx={{ m: 3, mb: 10 }}>
             <Typography gutterBottom variant='h4' sx={{ p: 2 }}>
                 Discover Your Ideal Destinations: Top Travel Picks for <b>{month}</b> from <b>{fromDestination.name}</b>!
             </Typography>

@@ -4,7 +4,7 @@ import CityCard from './CityCard';
 
 const CityAlbum = ({ title, text, destinations }) => {
     return (
-        <Box sx={{ mb: 10, p: 10 }}>
+        <Box sx={{ mb: 10, p: 3 }}>
             <Typography
                 gutterBottom
                 variant='h4'

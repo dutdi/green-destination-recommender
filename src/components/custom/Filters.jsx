@@ -5,10 +5,10 @@ import OrderBy from './OrderBy.jsx';
 import { Colors } from '../../helpers/Colors.js';
 
 export default function Filters({ handleSortChange, handleViewChange }) {
-    const [value, setValue] = React.useState('card');
+    const [value, setValue] = React.useState(0);
 
     const handleTabClicked = (event, newValue) => {
-        setValue(newValue === 0 ? 'card' : 'map');
+        setValue(newValue);
         handleViewChange(newValue === 0 ? 'card' : 'map');
     };
     return (
@@ -22,7 +22,7 @@ export default function Filters({ handleSortChange, handleViewChange }) {
         >
             <OrderBy handleSortChange={handleSortChange} />
             <Box sx={{ mt: 2, mb: 2, backgroundColor: Colors.gray }}>
-                <Tabs aria-label='tabs' value={value} onChange={handleTabClicked}>
+                <Tabs value={value} onChange={handleTabClicked}>
                     <Tab label='Card 🎴' />
                     <Tab label='Map 🗺️' />
                 </Tabs>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Grid, Card, CardContent, CardMedia, Typography, Rating, Box } from '@mui/material';
-import CityPanel from './CityPanel';
 import { Colors } from '../../helpers/Colors.js';
 
 const CityCard = ({ destination }) => {
@@ -47,7 +46,7 @@ const CityCard = ({ destination }) => {
                     </div>
                 </Box>
             </Card>
-            {isDetailOpen && <CityPanel destination={destination} onClose={toggleDetail} />}
+            {/* {isDetailOpen && <CityPanel destination={destination} onClose={toggleDetail} />} */}
         </Grid>
     );
 };
