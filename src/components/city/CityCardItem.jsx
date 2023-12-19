@@ -178,7 +178,7 @@ const CityCardItem = ({ view, fromDestination, toDestination, month, sortedToDes
             <Card
                 sx={{
                     width: 320,
-                    minHeight: 400,
+                    minHeight: 420,
                     maxWidth: '100%',
                     boxShadow: 'lg',
                 }}
@@ -248,19 +248,15 @@ const CityCardItem = ({ view, fromDestination, toDestination, month, sortedToDes
                             <b>{minCo2.co2} kg CO₂</b>
                         </Typography>{' '}
                     </Typography>
-                    <AccordionGroup sx={{ maxWidth: 400 }}>
-                        <Accordion>
-                            <AccordionSummary>Interests</AccordionSummary>
-                            <AccordionDetails>
-                                <InterestChips
-                                    clickable={false}
-                                    interests={interests.filter((i) => {
-                                        return toDestination.interests.some((j) => Object.keys(j)[0] === i.name);
-                                    })}
-                                ></InterestChips>
-                            </AccordionDetails>
-                        </Accordion>
-                    </AccordionGroup>
+                    <InterestChips
+                        interests={interests
+                            .filter((i) => {
+                                console.log('toDestination.interests', toDestination.interests);
+                                console.log('interests', interests);
+                                return toDestination.interests.some((j) => Object.keys(j)[0] === i.name);
+                            })
+                            .slice(0, 3)}
+                    ></InterestChips>
                 </CardContent>
                 <CardOverflow>
                     <Button

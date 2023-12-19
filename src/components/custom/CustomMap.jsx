@@ -17,7 +17,7 @@ let icon = L.icon({
 
 const CustomMap = ({ fromDestination, toDestinations, activeTooltip, clickHandler, height }) => {
     return (
-        <MapContainer center={[fromDestination.latitude, fromDestination.longitude]} zoom={5} style={{ height: height, width: '100%' }}>
+        <MapContainer center={[fromDestination.latitude, fromDestination.longitude]} zoom={7} style={{ height: height, width: '100%' }}>
             <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
             <Marker key={fromDestination.id} position={[fromDestination.latitude, fromDestination.longitude]} icon={icon}></Marker>
             {toDestinations.map((toDestination, index) => (

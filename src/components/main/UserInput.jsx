@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Box, TextField, Button, Grid, Autocomplete } from '@mui/material';
-import { Typography, Divider } from '@mui/joy';
+import { Stack, TextField, Button, Grid, Autocomplete } from '@mui/material';
 import { useData } from './DataContext';
 import MonthPicker from '../custom/MonthPicker.jsx';
-import InterestChips from '../custom/InterestChips.jsx';
 import { Colors } from '../../helpers/Colors.js';
 import { interests } from '../../helpers/Lists.js';
 
@@ -14,6 +12,7 @@ const UserInput = () => {
     const [fromDestinationInputValue, setFromDestinationInputValue] = useState('');
     const [month, setMonth] = useState(new Date().toLocaleString('default', { month: 'long' }));
     const [selectedInterests, setSelectedInterests] = useState([]);
+    const [inputInterest, setInputInterest] = useState('');
 
     const defaultProps = {
         options: destinations,
@@ -28,16 +27,15 @@ const UserInput = () => {
         setMonth(newValue);
     };
 
-    const handleInterestsChange = (selected) => {
-        setSelectedInterests(selected);
+    const handleInterestChange = (newValue) => {
+        setSelectedInterests(newValue);
     };
 
     return (
         dataFetched && (
             <Grid
                 container
-                item
-                spacing={{ xs: 1, sm: 2, md: 3 }}
+                spacing={3}
                 justifyContent='center'
                 alignItems='center'
                 sx={{
@@ -48,7 +46,7 @@ const UserInput = () => {
                     marginBottom: '16px',
                 }}
             >
-                <Grid item xs={12} sm={12} md={3}>
+                <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
                     <Autocomplete
                         {...defaultProps}
                         id='from-destination'
@@ -72,41 +70,31 @@ const UserInput = () => {
                         )}
                     />
                 </Grid>
-                <Grid item xs={12} sm={12} md={2}>
-                    <Box>
-                        <MonthPicker handleMonthChange={handleMonthChange}></MonthPicker>
-                    </Box>
+
+                <Grid item xs={12} sm={12} md={2} lg={2} xl={2}>
+                    <MonthPicker handleMonthChange={handleMonthChange}></MonthPicker>
                 </Grid>
-                <Grid item xs={12} sm={12} md={4}>
-                    <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-                        <Divider orientation='vertical' />
-                        <Typography level='title-lg' id='fav-interest' mr={2} ml={2}>
-                            Interests
-                        </Typography>
-                        <Box
-                            role='group'
-                            aria-labelledby='fav-interest'
-                            title='Interests'
-                            sx={{
-                                display: 'flex',
-                                flexWrap: 'wrap',
-                                gap: 1,
-                                overflow: 'auto',
-                                maxWidth: '100%',
-                                height: '8vh',
-                                borderRadius: 'sm',
-                                borderStyle: 'inset',
+
+                <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+                    <Stack spacing={3} sx={{ width: '100%' }}>
+                        <Autocomplete
+                            multiple
+                            id='tags-standard'
+                            options={interests}
+                            getOptionLabel={(option) => option.label}
+                            onInputChange={(event, newInputValue) => {
+                                setInputInterest(newInputValue);
                             }}
-                        >
-                            <InterestChips
-                                interests={interests}
-                                clickable={true}
-                                handleInterestsChange={handleInterestsChange}
-                            ></InterestChips>
-                        </Box>
-                    </Box>
+                            inputValue={inputInterest}
+                            onChange={(event, newValue) => {
+                                handleInterestChange(newValue);
+                            }}
+                            renderInput={(params) => <TextField {...params} variant='outlined' label='Interests' placeholder='Add' />}
+                        />
+                    </Stack>
                 </Grid>
-                <Grid item xs={12} sm={12} md={3}>
+
+                <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
                     <Button
                         variant='contained'
                         color='primary'

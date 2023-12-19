@@ -14,6 +14,7 @@ export default function MonthPicker({ handleMonthChange }) {
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs} dateFormats={{ monthAndYear: 'MMMM' }}>
             <DatePicker
+                sx={{ width: '100%' }}
                 label='Month'
                 openTo='month'
                 views={['month']}
