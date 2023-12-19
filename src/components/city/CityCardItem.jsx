@@ -28,7 +28,7 @@ import {
     formatDuration,
 } from '../../helpers/Functions.js';
 
-const CityRecommendationItem = ({ view, fromDestination, toDestination, month, sortedToDestinations, avgCo2AllConnections }) => {
+const CityCardItem = ({ view, fromDestination, toDestination, month, sortedToDestinations, avgCo2AllConnections }) => {
     const [minCo2, setMinCo2] = useState(null);
     const [co2Offset, setCo2Offset] = useState(0);
 
@@ -178,6 +178,7 @@ const CityRecommendationItem = ({ view, fromDestination, toDestination, month, s
             <Card
                 sx={{
                     width: 320,
+                    minHeight: 400,
                     maxWidth: '100%',
                     boxShadow: 'lg',
                 }}
@@ -284,4 +285,4 @@ const CityRecommendationItem = ({ view, fromDestination, toDestination, month, s
     );
 };
 
-export default CityRecommendationItem;
+export default CityCardItem;

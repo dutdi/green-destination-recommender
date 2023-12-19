@@ -18,9 +18,9 @@ export default function Filters({ handleSortChange, handleViewChange }) {
             spacing={{ xs: 0, sm: 2 }}
             justifyContent={{ xs: 'space-between' }}
             flexWrap='wrap'
-            sx={{ minWidth: 0 }}
+            sx={{ minWidth: 0, border: '1px solid' }}
         >
-            <OrderBy handleSortChange={handleSortChange} />
+            <OrderBy disabled={value === 1} handleSortChange={handleSortChange} />
             <Box sx={{ mt: 2, mb: 2, backgroundColor: Colors.gray }}>
                 <Tabs value={value} onChange={handleTabClicked}>
                     <Tab label='Card 🎴' />

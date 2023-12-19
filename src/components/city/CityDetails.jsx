@@ -5,9 +5,9 @@ import Typography from '@mui/joy/Typography';
 import CircularProgress from '@mui/joy/CircularProgress';
 import SvgIcon from '@mui/joy/SvgIcon';
 import CityHeader from './CityHeader.jsx';
-import CityRecommendationItem from './CityRecommendationItem.jsx';
+import CityCardItem from './CityCardItem.jsx';
 import CustomBox from '../custom/CustomBox.jsx';
-import Route from '../route/Route.jsx';
+import CustomMap from '../custom/CustomMap.jsx';
 import { Colors } from '../../helpers/Colors.js';
 
 const CircularProgressIcon = ({ score }) => (
@@ -132,7 +132,7 @@ const CityDetails = () => {
                     </Grid>
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-                    <Route fromDestination={fromDestination} toDestination={toDestination} height='55vh'></Route>
+                    <CustomMap fromDestination={fromDestination} toDestinations={[toDestination]} height='55vh' />
                 </Grid>
             </Grid>
             <Paper sx={{ mt: 6, mb: 6 }}>
@@ -144,7 +144,7 @@ const CityDetails = () => {
                 <Grid container spacing={2} sx={{ p: 3 }}>
                     {sortedToDestinations.slice(0, 4).map((toDest) => (
                         <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
-                            <CityRecommendationItem
+                            <CityCardItem
                                 view='card'
                                 fromDestination={fromDestination}
                                 toDestination={toDest}
@@ -152,7 +152,7 @@ const CityDetails = () => {
                                 month={month}
                                 sortedToDestinations={sortedToDestinations}
                                 avgCo2AllConnections={43}
-                            ></CityRecommendationItem>
+                            ></CityCardItem>
                         </Grid>
                     ))}
                 </Grid>
