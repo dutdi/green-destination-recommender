@@ -109,7 +109,7 @@ const UserInput = () => {
                 </Grid>
 
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                    <FormControl sx={{ width: 300 }}>
+                    <FormControl sx={{ width: '100%' }}>
                         <InputLabel>Interests</InputLabel>
                         <Select
                             multiple
