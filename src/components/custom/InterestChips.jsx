@@ -6,8 +6,8 @@ export default function InterestChips({ interests }) {
         <Box p={1}>
             {interests.map((interest) => {
                 return (
-                    <Chip key={interest.name} size='sm' variant='plain' color='primary' sx={{ fontWeight: 'bold' }}>
-                        {interest.label}
+                    <Chip key={interest} size='sm' variant='plain' color='primary' sx={{ fontWeight: 'bold' }}>
+                        {interest}
                     </Chip>
                 );
             })}

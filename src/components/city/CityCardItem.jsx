@@ -248,15 +248,7 @@ const CityCardItem = ({ view, fromDestination, toDestination, month, sortedToDes
                             <b>{minCo2.co2} kg CO₂</b>
                         </Typography>{' '}
                     </Typography>
-                    <InterestChips
-                        interests={interests
-                            .filter((i) => {
-                                console.log('toDestination.interests', toDestination.interests);
-                                console.log('interests', interests);
-                                return toDestination.interests.some((j) => Object.keys(j)[0] === i.name);
-                            })
-                            .slice(0, 3)}
-                    ></InterestChips>
+                    <InterestChips interests={interests.filter((i) => toDestination.interests.includes(i)).slice(0, 5)}></InterestChips>
                 </CardContent>
                 <CardOverflow>
                     <Button

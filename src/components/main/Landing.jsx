@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Grid, Box } from '@mui/material';
+import { Typography, Grid, Paper } from '@mui/material';
 import BackgroundImage from '../../media/background-image.jpg';
 import UserInput from './UserInput.jsx';
 import Overview from './Overview.jsx';
@@ -14,11 +14,11 @@ const Landing = () => {
 
     return (
         dataFetched && (
-            <Box>
+            <Paper>
                 <Grid
                     container
-                    direction='row'
-                    justifyContent='flex-start'
+                    direction='column'
+                    justifyContent='space-around'
                     alignItems='center'
                     sx={{
                         backgroundImage: `url(${BackgroundImage})`,
@@ -27,13 +27,9 @@ const Landing = () => {
                         backgroundSize: 'cover',
                         height: '70vh',
                         mt: 1,
-                        position: 'relative',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
                     }}
                 >
-                    <Grid item xs={8} sm={8} md={8}>
+                    <Grid item>
                         <Typography
                             sx={{
                                 typography: { xs: 'body1', sm: 'h5', md: 'h4' },
@@ -60,15 +56,14 @@ const Landing = () => {
                             Where Conservation Meets Adventure
                         </Typography>
                     </Grid>
-                    <Grid item xs={10} sm={10} md={10}>
+                    <Grid container item>
                         <UserInput />
                     </Grid>
                 </Grid>
                 <Demographics></Demographics>
                 <Overview></Overview>
-                {/* TODO - it should be sustainableDestinations*/}
                 <CityAlbum title='Popular Destinations' destinations={shuffleArray(destinations).slice(0, 6)}></CityAlbum>
-            </Box>
+            </Paper>
         )
     );
 };

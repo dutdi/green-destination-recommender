@@ -37,11 +37,9 @@ const Explore = () => {
     };
 
     const sortedToDestinations = getSortedToDestinations(fromDestination, destinations, sortBy, month);
-    const filteredDestinations =
-        sortedToDestinations &&
-        sortedToDestinations.filter((toDest) => {
-            return toDest.interests.some((i) => interests.some((j) => Object.keys(i)[0] === j.name));
-        });
+    const filteredDestinations = sortedToDestinations.filter((toDest) => {
+        return interests.some((interest) => toDest.interests.includes(interest));
+    });
 
     const avgCo2AllConnections = calculateAvgCo2AllConnections(
         fromDestination.connections_flight.concat(fromDestination.connections_driving).concat(fromDestination.connections_train)
@@ -71,7 +69,7 @@ const Explore = () => {
                                 </Grid>
                             ))
                         ) : (
-                            <Grid item xs={12} sm={12} md={5} lg={12} xl={12} spacing={2}>
+                            <Grid item xs={12} sm={12} md={5} lg={12} xl={12}>
                                 <CustomMapContainer
                                     fromDestination={fromDestination}
                                     toDestinations={filteredDestinations}

@@ -82,7 +82,7 @@ const CityDrawerItem = ({ view, fromDestination, toDestination, month, sortedToD
                         image={require(`../../media/misc/${toDestination.id}.jpg`)}
                     />
                     <CardContent sx={{ flexGrow: 1 }}>
-                        <Box sx={{ display: 'flex', gap: 2, alignItems: 'center', mt: 2, mb: 2 }}>
+                        <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', mt: 2, mb: 2 }}>
                             <Chip
                                 variant='solid'
                                 color='success'
@@ -150,9 +150,7 @@ const CityDrawerItem = ({ view, fromDestination, toDestination, month, sortedToD
                                 <AccordionDetails>
                                     <InterestChips
                                         clickable={false}
-                                        interests={interests.filter((i) => {
-                                            return toDestination.interests.some((j) => Object.keys(j)[0] === i.name);
-                                        })}
+                                        interests={interests.filter((i) => toDestination.interests.includes(i))}
                                     ></InterestChips>
                                 </AccordionDetails>
                             </Accordion>

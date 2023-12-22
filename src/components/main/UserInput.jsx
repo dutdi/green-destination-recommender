@@ -1,18 +1,45 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Stack, TextField, Button, Grid, Autocomplete } from '@mui/material';
+import {
+    FormControl,
+    InputLabel,
+    MenuItem,
+    ListItemText,
+    Checkbox,
+    Select,
+    TextField,
+    Button,
+    Grid,
+    Autocomplete,
+    OutlinedInput,
+} from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { useData } from './DataContext';
 import MonthPicker from '../custom/MonthPicker.jsx';
 import { Colors } from '../../helpers/Colors.js';
 import { interests } from '../../helpers/Lists.js';
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
+    },
+};
+
 const UserInput = () => {
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+
     const { destinations, dataFetched } = useData();
     const [fromDestination, setFromDestination] = useState('');
     const [fromDestinationInputValue, setFromDestinationInputValue] = useState('');
     const [month, setMonth] = useState(new Date().toLocaleString('default', { month: 'long' }));
     const [selectedInterests, setSelectedInterests] = useState([]);
-    const [inputInterest, setInputInterest] = useState('');
 
     const defaultProps = {
         options: destinations,
@@ -27,23 +54,29 @@ const UserInput = () => {
         setMonth(newValue);
     };
 
-    const handleInterestChange = (newValue) => {
-        setSelectedInterests(newValue);
+    const handleInterestChange = (event) => {
+        const {
+            target: { value },
+        } = event;
+        setSelectedInterests(typeof value === 'string' ? value.split(',') : value);
     };
 
     return (
         dataFetched && (
             <Grid
                 container
-                spacing={3}
-                justifyContent='center'
+                spacing={2}
+                justifyContent='space-between'
                 alignItems='center'
+                item
                 sx={{
                     backgroundColor: Colors.gray,
-                    padding: '24px',
-                    borderRadius: '8px',
+                    marginBottom: 3,
+                    borderRadius: 2,
                     boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-                    marginBottom: '16px',
+                    padding: isSmallScreen ? 2 : 4,
+                    margin: 'auto',
+                    maxWidth: '80%',
                 }}
             >
                 <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
@@ -76,22 +109,24 @@ const UserInput = () => {
                 </Grid>
 
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                    <Stack spacing={3} sx={{ width: '100%' }}>
-                        <Autocomplete
+                    <FormControl sx={{ width: 300 }}>
+                        <InputLabel>Interests</InputLabel>
+                        <Select
                             multiple
-                            id='tags-standard'
-                            options={interests}
-                            getOptionLabel={(option) => option.label}
-                            onInputChange={(event, newInputValue) => {
-                                setInputInterest(newInputValue);
-                            }}
-                            inputValue={inputInterest}
-                            onChange={(event, newValue) => {
-                                handleInterestChange(newValue);
-                            }}
-                            renderInput={(params) => <TextField {...params} variant='outlined' label='Interests' placeholder='Add' />}
-                        />
-                    </Stack>
+                            value={selectedInterests}
+                            onChange={handleInterestChange}
+                            input={<OutlinedInput label='Interests' />}
+                            renderValue={(selected) => selected.join(', ')}
+                            MenuProps={MenuProps}
+                        >
+                            {interests.map((i) => (
+                                <MenuItem key={i} value={i}>
+                                    <Checkbox checked={selectedInterests.indexOf(i) > -1} />
+                                    <ListItemText primary={i} />
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
                 </Grid>
 
                 <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
@@ -111,7 +146,7 @@ const UserInput = () => {
                             backgroundColor: Colors.blue,
                             color: Colors.white,
                             borderRadius: '4px',
-                            padding: '12px 24px',
+                            p: 2,
                         }}
                     >
                         🔍 Explore
