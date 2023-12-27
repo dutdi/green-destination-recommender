@@ -19,6 +19,7 @@
         "dayjs": "^1.11.10",
         "fs": "^0.0.1-security",
         "leaflet": "^1.9.4",
+        "leaflet.heat": "^0.2.0",
         "papaparse": "^5.4.1",
         "parse": "^4.2.0",
         "prop-types": "^15.8.1",

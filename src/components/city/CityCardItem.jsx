@@ -1,30 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import {
-    AspectRatio,
-    Stack,
-    Box,
-    Button,
-    Card,
-    CardContent,
-    CardOverflow,
-    Chip,
-    Link,
-    Typography,
-    AccordionGroup,
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-} from '@mui/joy';
-import LandslideIcon from '@mui/icons-material/Landslide';
-import Visibility from '@mui/icons-material/Visibility';
+import { AspectRatio, Box, Button, Card, CardContent, CardOverflow, Chip, Table, Sheet, Typography } from '@mui/joy';
 import InterestChips from '../custom/InterestChips.jsx';
 import { interests } from '../../helpers/Lists.js';
 import {
     findTrainConnectionWithMinCo2,
     findDrivingConnectionWithMinCo2,
     findFlightConnectionWithMinCo2,
-    formatNumber,
     formatDuration,
 } from '../../helpers/Functions.js';
 
@@ -64,137 +46,28 @@ const CityCardItem = ({ view, fromDestination, toDestination, month, sortedToDes
     return (
         fromDestination &&
         toDestination &&
-        minCo2 &&
-        (view === 'map' ? (
-            <Card
-                variant='outlined'
-                orientation='horizontal'
-                sx={{
-                    bgcolor: 'neutral.softBg',
-                    display: 'flex',
-                    flexDirection: { xs: 'column', sm: 'row' },
-                    '&:hover': {
-                        boxShadow: 'lg',
-                        borderColor: 'var(--joy-palette-neutral-outlinedDisabledBorder)',
-                    },
-                }}
-            >
-                <CardOverflow
-                    sx={{
-                        mr: { xs: 'var(--CardOverflow-offset)', sm: 0 },
-                        mb: { xs: 0, sm: 'var(--CardOverflow-offset)' },
-                        '--AspectRatio-radius': {
-                            xs: 'calc(var(--CardOverflow-radius) - var(--variant-borderWidth, 0px)) calc(var(--CardOverflow-radius) - var(--variant-borderWidth, 0px)) 0 0',
-                            sm: 'calc(var(--CardOverflow-radius) - var(--variant-borderWidth, 0px)) 0 0 calc(var(--CardOverflow-radius) - var(--variant-borderWidth, 0px))',
-                        },
-                    }}
-                >
-                    <AspectRatio
-                        ratio='1'
-                        flex
-                        sx={{
-                            minWidth: { sm: 120, md: 160 },
-                            '--AspectRatio-maxHeight': { xs: '160px', sm: '9999px' },
-                        }}
-                    >
-                        <img alt='' src={require(`../../media/misc/${toDestination.id}.jpg`)} />
-                        <Stack alignItems='center' direction='row' sx={{ position: 'absolute', top: 0, width: '100%', p: 1 }}>
-                            <Chip variant='soft' color='success' size='sm'>
-                                Green Recommended
-                            </Chip>
-                        </Stack>
-                    </AspectRatio>
-                </CardOverflow>
-                <CardContent>
-                    <Stack spacing={1} direction='row' justifyContent='space-between' alignItems='flex-start'>
-                        <div>
-                            <Typography
-                                level='title-md'
-                                sx={{ mt: 1, fontWeight: 'xl' }}
-                                endDecorator={
-                                    <Chip component='span' size='sm' variant='soft' color={co2Offset < 0 ? 'success' : 'danger'}>
-                                        {co2Offset > 0 && '+'}
-                                        {co2Offset}% emission
-                                    </Chip>
-                                }
-                            >
-                                {toDestination.name}, {toDestination.country} {toDestination.flag}
-                            </Typography>
-                        </div>
-                    </Stack>
-                    <Stack spacing='0.25rem 1rem' direction='row' useFlexGap flexWrap='wrap' sx={{ my: 0.25 }}>
-                        <AccordionGroup sx={{ maxWidth: 300 }}>
-                            <Accordion>
-                                <AccordionSummary>Interests</AccordionSummary>
-                                <AccordionDetails>
-                                    <InterestChips
-                                        clickable={false}
-                                        interests={interests.filter((i) => {
-                                            return toDestination.interests.some((j) => Object.keys(j)[0] === i.name);
-                                        })}
-                                    ></InterestChips>
-                                </AccordionDetails>
-                            </Accordion>
-                        </AccordionGroup>
-                        <Link
-                            level='body-xs'
-                            underline='none'
-                            startDecorator={<LandslideIcon />}
-                            title='Seasonality'
-                            sx={{
-                                fontWeight: 'md',
-                                ml: 'auto',
-                                color: 'text.secondary',
-                                '&:hover': { color: 'success.plainColor' },
-                            }}
-                        >
-                            {parseInt(toDestination.seasonality[month])}
-                        </Link>
-                        <Link
-                            level='body-xs'
-                            underline='none'
-                            startDecorator={<Visibility />}
-                            title='Popularity'
-                            sx={{
-                                fontWeight: 'md',
-                                color: 'text.secondary',
-                                '&:hover': { color: 'danger.plainColor' },
-                            }}
-                        >
-                            {formatNumber(toDestination.popularity.review_count)}
-                        </Link>
-                    </Stack>
-                    <Stack direction='row' sx={{ mt: 'auto' }}>
-                        <Typography level='body-sm'>
-                            {minCo2.mode} - {minCo2.duration}
-                        </Typography>
-                        <Typography level='title-lg' color='success' sx={{ flexGrow: 1, textAlign: 'right' }}>
-                            <b>{minCo2.co2} kg CO₂</b>
-                        </Typography>
-                    </Stack>
-                </CardContent>
-            </Card>
-        ) : (
+        minCo2 && (
             <Card
                 sx={{
                     width: 320,
-                    minHeight: 420,
+                    minHeight: 470,
                     maxWidth: '100%',
                     boxShadow: 'lg',
                 }}
             >
                 <CardOverflow>
-                    <AspectRatio sx={{ minWidth: 200 }}>
-                        <img src={require(`../../media/misc/${toDestination.id}.jpg`)} loading='lazy' alt='city' />
-                    </AspectRatio>
-                </CardOverflow>
-                <CardContent>
-                    <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+                    <Box sx={{ position: 'relative' }}>
+                        <AspectRatio sx={{ minWidth: 200 }}>
+                            <img src={require(`../../media/misc/${toDestination.id}.jpg`)} loading='lazy' alt='city' />
+                        </AspectRatio>
                         <Chip
                             variant='solid'
                             color='success'
                             size='sm'
                             sx={{
+                                position: 'absolute',
+                                top: 8,
+                                left: -8,
                                 borderRadius: 'sm',
                                 py: 0.25,
                                 px: 0.5,
@@ -202,34 +75,24 @@ const CityCardItem = ({ view, fromDestination, toDestination, month, sortedToDes
                         >
                             Green Recommended
                         </Chip>
-                        <Link
-                            level='body-xs'
-                            underline='none'
-                            startDecorator={<LandslideIcon />}
-                            title='Seasonality'
+                        <Chip
+                            variant='solid'
+                            color='success'
+                            size='md'
                             sx={{
-                                fontWeight: 'md',
-                                ml: 'auto',
-                                color: 'text.secondary',
-                                '&:hover': { color: 'success.plainColor' },
+                                position: 'absolute',
+                                top: 8,
+                                right: -8,
+                                borderRadius: 'sm',
+                                py: 0.25,
+                                px: 0.5,
                             }}
                         >
-                            {parseInt(toDestination.seasonality[month])}
-                        </Link>
-                        <Link
-                            level='body-xs'
-                            underline='none'
-                            startDecorator={<Visibility />}
-                            title='Popularity'
-                            sx={{
-                                fontWeight: 'md',
-                                color: 'text.secondary',
-                                '&:hover': { color: 'danger.plainColor' },
-                            }}
-                        >
-                            {formatNumber(toDestination.popularity.review_count)}
-                        </Link>
+                            7.8
+                        </Chip>
                     </Box>
+                </CardOverflow>
+                <CardContent>
                     <Typography
                         level='title-md'
                         sx={{ mt: 1, fontWeight: 'xl' }}
@@ -248,6 +111,24 @@ const CityCardItem = ({ view, fromDestination, toDestination, month, sortedToDes
                             <b>{minCo2.co2} kg CO₂</b>
                         </Typography>{' '}
                     </Typography>
+                    <Sheet variant='soft' sx={{ pt: 1 }}>
+                        <Table borderAxis='none' variant='plain' color='neutral' size='sm' stickyHeader sx={{ textAlign: 'center' }}>
+                            <thead>
+                                <tr>
+                                    <th style={{ textAlign: 'center' }}>Emission</th>
+                                    <th style={{ textAlign: 'center' }}>Popularity</th>
+                                    <th style={{ textAlign: 'center' }}>Seasonality</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{minCo2.co2} kg CO₂</td>
+                                    <td>82 / 100</td>
+                                    <td> {parseInt(toDestination.seasonality[month])} / 100</td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                    </Sheet>
                     <InterestChips interests={interests.filter((i) => toDestination.interests.includes(i)).slice(0, 5)}></InterestChips>
                 </CardContent>
                 <CardOverflow>
@@ -269,7 +150,7 @@ const CityCardItem = ({ view, fromDestination, toDestination, month, sortedToDes
                     </Button>
                 </CardOverflow>
             </Card>
-        ))
+        )
     );
 };
 
