@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { Menu, MenuButton, MenuItem, Dropdown } from '@mui/joy';
 import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
 
-export default function OrderBy({ disabled, handleSortChange }) {
+export default function OrderBy({ handleSortChange }) {
     const items = [
         { id: 'emission', name: 'Emission 🌿' },
-        { id: 'seasonality', name: 'Seasonality 📅' },
         { id: 'popularity', name: 'Popularity 💹' },
-        { id: 'duration', name: 'Duration ⏱️' },
+        { id: 'seasonality', name: 'Seasonality 📅' },
     ];
     const [selectedItem, setSelectedItem] = useState(null);
 
@@ -16,16 +15,14 @@ export default function OrderBy({ disabled, handleSortChange }) {
         handleSortChange(item.id);
     };
 
-    const menuButtonStyle = disabled ? { color: 'gray', pointerEvents: 'none' } : {};
-
     return (
         <Dropdown>
-            <MenuButton variant='plain' color='primary' endDecorator={<ArrowDropDown />} sx={{ whiteSpace: 'nowrap', ...menuButtonStyle }}>
+            <MenuButton variant='plain' color='primary' endDecorator={<ArrowDropDown />} sx={{ whiteSpace: 'nowrap' }}>
                 {selectedItem ? selectedItem.name : 'Order by'}
             </MenuButton>
             <Menu sx={{ minWidth: 150 }}>
                 {items.map((item) => (
-                    <MenuItem key={item.id} selected={item === selectedItem} onClick={() => handleMenuItemClick(item)} disabled={disabled}>
+                    <MenuItem key={item.id} selected={item === selectedItem} onClick={() => handleMenuItemClick(item)}>
                         {item.name}
                     </MenuItem>
                 ))}

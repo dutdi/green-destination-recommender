@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CustomMap from './CustomMap';
 import CityDrawer from '../city/CityDrawer';
 
-const CustomMapContainer = ({ fromDestination, toDestinations, month, avgCo2AllConnections }) => {
+const CustomMapContainer = ({ fromDestination, toDestinations, month, averages, sortBy }) => {
     const [activeTooltip, setActiveTooltip] = useState(null);
     const [cityDrawerOpen, setCityDrawerOpen] = useState(false);
     const [selectedToDestination, setSelectedToDestination] = useState(null);
@@ -28,18 +28,18 @@ const CustomMapContainer = ({ fromDestination, toDestinations, month, avgCo2AllC
             <CustomMap
                 fromDestination={fromDestination}
                 toDestinations={toDestinations}
-                activeTooltip={activeTooltip}
-                setActiveTooltip={setActiveTooltip}
-                clickHandler={clickHandler}
+                sortBy={sortBy}
+                month={month}
                 height='85vh'
+                clickHandler={clickHandler}
             />
             {cityDrawerOpen && (
                 <CityDrawer
                     fromDestination={fromDestination}
-                    toDestinations={toDestinations}
-                    selectedToDestination={selectedToDestination}
+                    toDestination={selectedToDestination}
                     month={month}
-                    avgCo2AllConnections={avgCo2AllConnections}
+                    averages={averages}
+                    sortBy={sortBy}
                     open={cityDrawerOpen}
                     onClose={closeCityDrawer}
                 />

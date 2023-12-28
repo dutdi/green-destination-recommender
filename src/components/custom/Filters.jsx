@@ -20,7 +20,7 @@ export default function Filters({ handleSortChange, handleViewChange }) {
             flexWrap='wrap'
             sx={{ minWidth: 0, border: '2px solid', borderShadow: 'md', borderColor: Colors.gray }}
         >
-            <OrderBy disabled={value === 1} handleSortChange={handleSortChange} />
+            <OrderBy handleSortChange={handleSortChange} />
             <Box sx={{ mt: 2, mb: 2, backgroundColor: Colors.gray }}>
                 <Tabs value={value} onChange={handleTabClicked}>
                     <Tab label='Card 🎴' />

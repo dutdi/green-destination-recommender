@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { MapContainer, TileLayer, Circle, Marker, useMap } from 'react-leaflet';
-import { calculateMinCo2Value } from '../../helpers/Functions.js';
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
+import { getAllMapValues } from '../../helpers/Functions.js';
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
@@ -11,7 +11,7 @@ L.Icon.Default.mergeOptions({
     shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
 
-const Legend = ({ maxCo2Value, getColorForCo2Value }) => {
+const Legend = ({ sortBy, maxValue, getColorForValue }) => {
     const map = useMap();
     useEffect(() => {
         const legend = new L.Control({ position: 'bottomleft' });
@@ -26,10 +26,30 @@ const Legend = ({ maxCo2Value, getColorForCo2Value }) => {
             div.style.border = '1px solid #ccc';
             div.style.borderRadius = '5px';
 
-            labels.push('<strong>Emissions</strong><br>');
-            for (let i = 1; i <= gradientSteps; i++) {
-                let value = (maxCo2Value / gradientSteps) * i;
-                labels.push('<i style="background:' + getColorForCo2Value(value) + ';">&nbsp;</i> ' + Math.round(value) + ' kg CO₂');
+            if (sortBy === 'emission') {
+                labels.push('<strong>Emissions</strong><br>');
+                for (let i = 1; i <= gradientSteps; i++) {
+                    let value = (maxValue / gradientSteps) * i;
+                    labels.push(
+                        '<i style="background:' + getColorForValue(value, maxValue) + ';">&nbsp;</i> ' + Math.round(value) + ' kg CO₂'
+                    );
+                }
+            } else if (sortBy === 'popularity') {
+                labels.push('<strong>Popularity</strong><br>');
+                for (let i = 1; i <= gradientSteps; i++) {
+                    let value = (maxValue / gradientSteps) * i;
+                    labels.push(
+                        '<i style="background:' + getColorForValue(value, maxValue) + ';">&nbsp;</i> ' + Math.round(value) + ' score'
+                    );
+                }
+            } else if (sortBy === 'seasonality') {
+                labels.push('<strong>Seasonality</strong><br>');
+                for (let i = 1; i <= gradientSteps; i++) {
+                    let value = (maxValue / gradientSteps) * i;
+                    labels.push(
+                        '<i style="background:' + getColorForValue(value, maxValue) + ';">&nbsp;</i> ' + Math.round(value) + ' score'
+                    );
+                }
             }
 
             div.innerHTML = labels.join('<br>');
@@ -41,7 +61,7 @@ const Legend = ({ maxCo2Value, getColorForCo2Value }) => {
         return () => {
             map.removeControl(legend);
         };
-    }, [map, maxCo2Value, getColorForCo2Value]);
+    }, [sortBy, map, maxValue, getColorForValue]);
 
     return null;
 };
@@ -65,20 +85,41 @@ const PolylineComponent = ({ fromDestination, selectedDestination }) => {
         return () => {
             map.removeLayer(line);
         };
-    }, [selectedDestination, map]);
+    }, [map, selectedDestination, fromDestination]);
 
     return null;
 };
 
-const CustomMap = ({ fromDestination, toDestinations, clickHandler, height }) => {
-    const [selectedDestination, setSelectedDestination] = useState(null);
-    const co2Values = toDestinations.map((destination) => calculateMinCo2Value(fromDestination, destination));
-    const maxCo2Value = Math.max(...co2Values);
+const Circles = ({ toDestinations, values, maxValue, getColorForValue, handleDestinationClick, sortBy }) => {
+    const map = useMap();
 
-    const getColorForCo2Value = (value) => {
-        const normalizedValue = value / maxCo2Value;
-        const red = normalizedValue < 0.5 ? Math.round(2 * normalizedValue * 255) : 255;
-        const green = normalizedValue > 0.5 ? Math.round(2 * (1 - normalizedValue) * 255) : 255;
+    useEffect(() => {
+        toDestinations.forEach((destination, index) => {
+            const circle = L.circle([destination.latitude, destination.longitude], {
+                fillColor: getColorForValue(values[index], maxValue),
+                color: getColorForValue(values[index], maxValue),
+                radius: 25000,
+                fillOpacity: 0.8,
+            });
+
+            circle.addTo(map).on('click', () => handleDestinationClick(destination));
+        });
+    }, [map, toDestinations, values, maxValue, getColorForValue, handleDestinationClick, sortBy]);
+
+    return null;
+};
+
+const CustomMap = ({ fromDestination, toDestinations, sortBy, month, height, clickHandler }) => {
+    const [selectedDestination, setSelectedDestination] = useState(null);
+    const values = getAllMapValues(fromDestination, toDestinations, sortBy, month);
+    const maxValue = Math.max(...values);
+
+    const getColorForValue = (value, maxValue) => {
+        const normalizedValue = value / maxValue;
+        const highest = normalizedValue < 0.5 ? Math.round(2 * normalizedValue * 255) : 255;
+        const lowest = normalizedValue > 0.5 ? Math.round(2 * (1 - normalizedValue) * 255) : 255;
+        const red = sortBy === 'emission' ? highest : lowest;
+        const green = sortBy === 'emission' ? lowest : highest;
         const blue = 0;
         return `rgb(${red}, ${green}, ${blue})`;
     };
@@ -92,20 +133,15 @@ const CustomMap = ({ fromDestination, toDestinations, clickHandler, height }) =>
         <MapContainer center={[fromDestination.latitude, fromDestination.longitude]} zoom={7} style={{ height: height, width: '100%' }}>
             <TileLayer url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
             <Marker position={[fromDestination.latitude, fromDestination.longitude]} icon={new L.Icon.Default()} />
-            {toDestinations.map((destination, index) => (
-                <Circle
-                    key={destination.id}
-                    center={[destination.latitude, destination.longitude]}
-                    fillColor={getColorForCo2Value(co2Values[index])}
-                    color={getColorForCo2Value(co2Values[index])}
-                    radius={25000}
-                    fillOpacity={0.8}
-                    eventHandlers={{
-                        click: () => handleDestinationClick(destination),
-                    }}
-                />
-            ))}
-            <Legend maxCo2Value={maxCo2Value} getColorForCo2Value={getColorForCo2Value} />
+            <Circles
+                sortBy={sortBy}
+                toDestinations={toDestinations}
+                values={values}
+                maxValue={maxValue}
+                getColorForValue={getColorForValue}
+                handleDestinationClick={handleDestinationClick}
+            />
+            <Legend sortBy={sortBy} maxValue={maxValue} getColorForValue={getColorForValue} />
             {selectedDestination && <PolylineComponent fromDestination={fromDestination} selectedDestination={selectedDestination} />}
         </MapContainer>
     );

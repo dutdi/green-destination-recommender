@@ -170,11 +170,58 @@ export function findTrainConnectionWithMinCo2(fromDestination, toDestination) {
 }
 
 export function calculateAvgCo2AllConnections(allConnections) {
-    return (
-        allConnections.reduce((acc, connection) => {
-            return acc + connection.co2_kg;
-        }, 0) / allConnections.length
-    );
+    return allConnections.length > 0
+        ? allConnections.reduce((acc, connection) => {
+              return acc + connection.co2_kg;
+          }, 0) / allConnections.length
+        : 0;
+}
+
+export function calculateAvgValues(fromDestination, toDestinations, month) {
+    const avgValues = {
+        co2: calculateAvgCo2AllConnections(
+            fromDestination.connections_flight.concat(fromDestination.connections_driving).concat(fromDestination.connections_train)
+        ),
+        popularity:
+            toDestinations.length > 0
+                ? toDestinations.reduce((acc, dest) => acc + dest.popularity.popularity_score, 0) / toDestinations.length
+                : 0,
+        seasonality:
+            toDestinations.length > 0 ? toDestinations.reduce((acc, dest) => acc + dest.seasonality[month], 0) / toDestinations.length : 0,
+    };
+
+    return avgValues;
+}
+
+export function calculateMinCo2Mode(fromDestination, toDestination) {
+    const trainConnectionWithMinCo2 = findTrainConnectionWithMinCo2(fromDestination, toDestination);
+    const drivingConnectionWithMinCo2 = findDrivingConnectionWithMinCo2(fromDestination, toDestination);
+    const flightConnectionWithMinCo2 = findFlightConnectionWithMinCo2(fromDestination, toDestination);
+
+    const trainMinCo2 = trainConnectionWithMinCo2 ? trainConnectionWithMinCo2.co2_kg : Number.MAX_VALUE;
+    const drivingMinCo2 = drivingConnectionWithMinCo2 ? drivingConnectionWithMinCo2.co2_kg : Number.MAX_VALUE;
+    const flightMinCo2 = flightConnectionWithMinCo2 ? flightConnectionWithMinCo2.co2_kg : Number.MAX_VALUE;
+
+    const minimum = Math.min(flightMinCo2, drivingMinCo2, trainMinCo2);
+
+    const minCo2Mode =
+        minimum === trainMinCo2
+            ? { mode: 'Train 🚉', co2: trainMinCo2, duration: formatDuration(trainConnectionWithMinCo2.duration_sec) }
+            : minimum === drivingMinCo2
+            ? { mode: 'Driving 🚗', co2: drivingMinCo2, duration: formatDuration(drivingConnectionWithMinCo2.duration_sec) }
+            : { mode: 'Flight 🛫', co2: flightMinCo2, duration: flightConnectionWithMinCo2.duration_str };
+
+    return minCo2Mode;
+}
+
+export function calculateOffset(sortBy, averages, co2, popularity, seasonality) {
+    if (sortBy === 'emission') {
+        return parseInt((co2 * 100) / averages.co2 - 100);
+    } else if (sortBy === 'popularity') {
+        return parseInt((popularity * 100) / averages.popularity - 100);
+    } else if (sortBy === 'seasonality') {
+        return parseInt((seasonality * 100) / averages.seasonality - 100);
+    }
 }
 
 export function getSortedToDestinations(fromDestination, destinations, sortBy, month) {
@@ -190,18 +237,14 @@ export function getSortedToDestinations(fromDestination, destinations, sortBy, m
                 .sort((a, b) => {
                     if (sortBy === 'emission') {
                         return a.co2_kg - b.co2_kg;
+                    } else if (sortBy === 'popularity') {
+                        const aPopularity = destinations.find((destination) => destination.id === a.to_id).popularity.popularity_score;
+                        const bPopularity = destinations.find((destination) => destination.id === b.to_id).popularity.popularity_score;
+                        return bPopularity - aPopularity;
                     } else if (sortBy === 'seasonality') {
                         const aSeasonality = destinations.find((destination) => destination.id === a.to_id).seasonality[month];
                         const bSeasonality = destinations.find((destination) => destination.id === b.to_id).seasonality[month];
                         return bSeasonality - aSeasonality;
-                    } else if (sortBy === 'popularity') {
-                        const aPopularity = destinations.find((destination) => destination.id === a.to_id).popularity.review_count;
-                        const bPopularity = destinations.find((destination) => destination.id === b.to_id).popularity.review_count;
-                        return bPopularity - aPopularity;
-                    } else if (sortBy === 'duration') {
-                        const aDuration = a.type === 'flight' ? convertToSec(a.duration_str) : a.duration_sec;
-                        const bDuration = b.type === 'flight' ? convertToSec(b.duration_str) : b.duration_sec;
-                        return aDuration - bDuration;
                     }
                     return 0;
                 })
@@ -215,4 +258,14 @@ export function getSortedToDestinations(fromDestination, destinations, sortBy, m
     });
 
     return sortedToDestinations;
+}
+
+export function getAllMapValues(fromDestination, toDestinations, sortBy, month) {
+    if (sortBy === 'emission') {
+        return toDestinations.map((destination) => calculateMinCo2Value(fromDestination, destination));
+    } else if (sortBy === 'popularity') {
+        return toDestinations.map((destination) => destination.popularity.popularity_score);
+    } else if (sortBy === 'seasonality') {
+        return toDestinations.map((destination) => destination.seasonality[month]);
+    }
 }
