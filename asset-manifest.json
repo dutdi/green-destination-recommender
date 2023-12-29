@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/green-destination-recommender/static/css/main.68e55275.css",
-    "main.js": "/green-destination-recommender/static/js/main.52488aca.js",
+    "main.js": "/green-destination-recommender/static/js/main.d022170f.js",
     "static/media/m158.jpg": "/green-destination-recommender/static/media/m158.05f660edcfa2f98f0363.jpg",
     "static/media/m179.jpg": "/green-destination-recommender/static/media/m179.c67307e548d8cae60b52.jpg",
     "static/media/m78.jpg": "/green-destination-recommender/static/media/m78.874221f1a6a3b12a617b.jpg",
@@ -10,7 +10,6 @@
     "static/media/m37.jpg": "/green-destination-recommender/static/media/m37.a9c29e4d57d178c115de.jpg",
     "static/media/m152.jpg": "/green-destination-recommender/static/media/m152.2e75402303656b24e42c.jpg",
     "static/media/m42.jpg": "/green-destination-recommender/static/media/m42.f09be461a851c4eb338e.jpg",
-    "static/media/background-image.jpg": "/green-destination-recommender/static/media/background-image.5813e3bc3ed64bfc8958.jpg",
     "static/media/m16.jpg": "/green-destination-recommender/static/media/m16.53e92132bbf481b7951d.jpg",
     "static/media/m137.jpg": "/green-destination-recommender/static/media/m137.70f84928476214f86c48.jpg",
     "static/media/m33.jpg": "/green-destination-recommender/static/media/m33.74af96d6b261e8ce207f.jpg",
@@ -200,15 +199,16 @@
     "static/media/m192.jpg": "/green-destination-recommender/static/media/m192.164564cfbb3c7933bbb3.jpg",
     "static/media/m128.jpg": "/green-destination-recommender/static/media/m128.e8e4c03998e6e67aac3b.jpg",
     "static/media/m112.jpg": "/green-destination-recommender/static/media/m112.9ff1aee8d074eb1b1ab1.jpg",
+    "static/media/background-image.jpg": "/green-destination-recommender/static/media/background-image.41ae16ac120062b6fc1e.jpg",
     "static/media/m107.jpg": "/green-destination-recommender/static/media/m107.549b2990751001f676db.jpg",
     "static/media/m12.jpg": "/green-destination-recommender/static/media/m12.8efeb4a270f4b1164e8c.jpg",
     "static/media/m136.jpg": "/green-destination-recommender/static/media/m136.f59bb3a6eba605a5e5ce.jpg",
     "index.html": "/green-destination-recommender/index.html",
     "main.68e55275.css.map": "/green-destination-recommender/static/css/main.68e55275.css.map",
-    "main.52488aca.js.map": "/green-destination-recommender/static/js/main.52488aca.js.map"
+    "main.d022170f.js.map": "/green-destination-recommender/static/js/main.d022170f.js.map"
   },
   "entrypoints": [
     "static/css/main.68e55275.css",
-    "static/js/main.52488aca.js"
+    "static/js/main.d022170f.js"
   ]
 }
