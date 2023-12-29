@@ -42,7 +42,15 @@ const UserInput = () => {
     const [selectedInterests, setSelectedInterests] = useState([]);
 
     const defaultProps = {
-        options: destinations,
+        options: destinations.sort((a, b) => {
+            if (a.name < b.name) {
+                return -1;
+            }
+            if (a.name > b.name) {
+                return 1;
+            }
+            return 0;
+        }),
         getOptionLabel: (option) => option.name + ', ' + option.country + ' ' + option.flag,
     };
 

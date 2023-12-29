@@ -15,7 +15,7 @@ const CityDrawer = ({ fromDestination, toDestination, month, averages, sortBy, o
                         gap: 0.5,
                         ml: 'auto',
                         mt: 1,
-                        mr: 2,
+                        mb: 1,
                     }}
                 >
                     <Typography component='label' htmlFor='close-icon' fontSize='sm' fontWeight='lg' sx={{ cursor: 'pointer' }}>

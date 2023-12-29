@@ -240,7 +240,7 @@ export function getSortedToDestinations(fromDestination, destinations, sortBy, m
                     } else if (sortBy === 'popularity') {
                         const aPopularity = destinations.find((destination) => destination.id === a.to_id).popularity.popularity_score;
                         const bPopularity = destinations.find((destination) => destination.id === b.to_id).popularity.popularity_score;
-                        return bPopularity - aPopularity;
+                        return aPopularity - bPopularity;
                     } else if (sortBy === 'seasonality') {
                         const aSeasonality = destinations.find((destination) => destination.id === a.to_id).seasonality[month];
                         const bSeasonality = destinations.find((destination) => destination.id === b.to_id).seasonality[month];

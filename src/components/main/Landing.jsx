@@ -27,6 +27,7 @@ const Landing = () => {
                         backgroundSize: 'cover',
                         height: '70vh',
                         mt: 1,
+                        filter: 'brightness(0.9)',
                     }}
                 >
                     <Grid item>
@@ -34,26 +35,26 @@ const Landing = () => {
                             sx={{
                                 typography: { xs: 'body1', sm: 'h5', md: 'h4' },
                                 textAlign: 'center',
-                                color: Colors.white,
+                                color: Colors.black,
                                 display: 'flex',
                                 flexDirection: 'column',
                                 justifyContent: 'center',
                             }}
                             gutterBottom
                         >
-                            Uncover Sustainable Paradises
+                            Discover Your Sustainable Path
                         </Typography>
                         <Typography
                             sx={{
                                 typography: { xs: 'body2', sm: 'h6', md: 'h5' },
                                 textAlign: 'center',
-                                color: Colors.white,
+                                color: Colors.black,
                                 display: 'flex',
                                 flexDirection: 'column',
                                 justifyContent: 'center',
                             }}
                         >
-                            Where Conservation Meets Adventure
+                            to the Future of Eco-Conscious Travel
                         </Typography>
                     </Grid>
                     <Grid container item>

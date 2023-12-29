@@ -68,7 +68,7 @@ const CityCardItem = ({ index, id, city, country, flag, minCo2Mode, popularity, 
                             px: 0.5,
                         }}
                     >
-                        Popular Pick
+                        Hidden Gem
                     </Chip>
                 )
             );
@@ -88,7 +88,7 @@ const CityCardItem = ({ index, id, city, country, flag, minCo2Mode, popularity, 
                             px: 0.5,
                         }}
                     >
-                        Seasonal Gem
+                        Monthly Seasonal Demand
                     </Chip>
                 )
             );

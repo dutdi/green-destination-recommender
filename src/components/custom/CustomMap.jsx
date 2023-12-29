@@ -30,6 +30,7 @@ const Legend = ({ sortBy, maxValue, getColorForValue }) => {
                 labels.push('<strong>Emissions</strong><br>');
                 for (let i = 1; i <= gradientSteps; i++) {
                     let value = (maxValue / gradientSteps) * i;
+                    value = Math.round(value / 100) * 100;
                     labels.push(
                         '<i style="background:' + getColorForValue(value, maxValue) + ';">&nbsp;</i> ' + Math.round(value) + ' kg CO₂'
                     );
@@ -38,16 +39,58 @@ const Legend = ({ sortBy, maxValue, getColorForValue }) => {
                 labels.push('<strong>Popularity</strong><br>');
                 for (let i = 1; i <= gradientSteps; i++) {
                     let value = (maxValue / gradientSteps) * i;
+                    value = Math.round(value / 10) * 10;
+                    let label = '';
+                    switch (i) {
+                        case 1:
+                            label = 'Quiet and Serene';
+                            break;
+                        case 2:
+                            label = 'Mildly Busy';
+                            break;
+                        case 3:
+                            label = 'Moderately Crowded';
+                            break;
+                        case 4:
+                            label = 'Highly Crowded';
+                            break;
+                        case 5:
+                            label = 'Extremely Crowded';
+                            break;
+                        default:
+                            break;
+                    }
                     labels.push(
-                        '<i style="background:' + getColorForValue(value, maxValue) + ';">&nbsp;</i> ' + Math.round(value) + ' score'
+                        '<i style="background:' + getColorForValue(value, maxValue) + ';">&nbsp;</i> ' + Math.round(value) + ` - ${label}`
                     );
                 }
             } else if (sortBy === 'seasonality') {
                 labels.push('<strong>Seasonality</strong><br>');
                 for (let i = 1; i <= gradientSteps; i++) {
                     let value = (maxValue / gradientSteps) * i;
+                    value = Math.round(value / 10) * 10;
+                    let label = '';
+                    switch (i) {
+                        case 1:
+                            label = 'Low Appeal';
+                            break;
+                        case 2:
+                            label = 'Moderately Attractive';
+                            break;
+                        case 3:
+                            label = 'Attractive';
+                            break;
+                        case 4:
+                            label = 'Highly Attractive';
+                            break;
+                        case 5:
+                            label = 'Irresistibly Attractive';
+                            break;
+                        default:
+                            break;
+                    }
                     labels.push(
-                        '<i style="background:' + getColorForValue(value, maxValue) + ';">&nbsp;</i> ' + Math.round(value) + ' score'
+                        '<i style="background:' + getColorForValue(value, maxValue) + ';">&nbsp;</i> ' + Math.round(value) + ` - ${label}`
                     );
                 }
             }
@@ -102,6 +145,21 @@ const Circles = ({ toDestinations, values, maxValue, getColorForValue, handleDes
                 fillOpacity: 0.8,
             });
 
+            const tooltipText = `${destination.name} ${destination.flag}`;
+
+            circle.bindTooltip(tooltipText, { permanent: index < 5, direction: 'top' });
+            circle.on('mouseover', () => {
+                if (index >= 5) {
+                    circle.unbindTooltip().bindTooltip(tooltipText, { permanent: true }).openTooltip();
+                }
+            });
+
+            circle.on('mouseout', () => {
+                if (index >= 5) {
+                    circle.unbindTooltip().bindTooltip(tooltipText, { permanent: false }).closeTooltip();
+                }
+            });
+
             circle.addTo(map).on('click', () => handleDestinationClick(destination));
         });
     }, [map, toDestinations, values, maxValue, getColorForValue, handleDestinationClick, sortBy]);
@@ -118,8 +176,8 @@ const CustomMap = ({ fromDestination, toDestinations, sortBy, month, height, cli
         const normalizedValue = value / maxValue;
         const highest = normalizedValue < 0.5 ? Math.round(2 * normalizedValue * 255) : 255;
         const lowest = normalizedValue > 0.5 ? Math.round(2 * (1 - normalizedValue) * 255) : 255;
-        const red = sortBy === 'emission' ? highest : lowest;
-        const green = sortBy === 'emission' ? lowest : highest;
+        const red = sortBy === 'seasonality' ? lowest : highest;
+        const green = sortBy === 'seasonality' ? highest : lowest;
         const blue = 0;
         return `rgb(${red}, ${green}, ${blue})`;
     };
