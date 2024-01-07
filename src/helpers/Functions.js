@@ -206,10 +206,30 @@ export function calculateMinCo2Mode(fromDestination, toDestination) {
 
     const minCo2Mode =
         minimum === trainMinCo2
-            ? { mode: 'Train 🚉', co2: trainMinCo2, duration: formatDuration(trainConnectionWithMinCo2.duration_sec) }
+            ? {
+                  mode: 'Train 🚉',
+                  co2: trainMinCo2,
+                  duration: formatDuration(trainConnectionWithMinCo2.duration_sec),
+                  distance_km: trainConnectionWithMinCo2.distance_km,
+              }
             : minimum === drivingMinCo2
-            ? { mode: 'Driving 🚗', co2: drivingMinCo2, duration: formatDuration(drivingConnectionWithMinCo2.duration_sec) }
-            : { mode: 'Flight 🛫', co2: flightMinCo2, duration: flightConnectionWithMinCo2.duration_str };
+            ? {
+                  mode: 'Driving 🚗',
+                  co2: drivingMinCo2,
+                  duration: formatDuration(drivingConnectionWithMinCo2.duration_sec),
+                  distance_km: drivingConnectionWithMinCo2.distance_km,
+              }
+            : {
+                  mode: 'Flight 🛫',
+                  co2: flightMinCo2,
+                  duration: flightConnectionWithMinCo2.duration_str,
+                  distance_km: getDistanceFromLatLonInKm(
+                      fromDestination.latitude,
+                      fromDestination.longitude,
+                      toDestination.latitude,
+                      toDestination.longitude
+                  ),
+              };
 
     return minCo2Mode;
 }
@@ -238,13 +258,13 @@ export function getSortedToDestinations(fromDestination, destinations, sortBy, m
                     if (sortBy === 'emission') {
                         return a.co2_kg - b.co2_kg;
                     } else if (sortBy === 'popularity') {
-                        const aPopularity = destinations.find((destination) => destination.id === a.to_id).popularity.popularity_score;
-                        const bPopularity = destinations.find((destination) => destination.id === b.to_id).popularity.popularity_score;
+                        let aPopularity = destinations.find((destination) => destination.id === a.to_id).popularity.popularity_score;
+                        let bPopularity = destinations.find((destination) => destination.id === b.to_id).popularity.popularity_score;
                         return aPopularity - bPopularity;
                     } else if (sortBy === 'seasonality') {
                         const aSeasonality = destinations.find((destination) => destination.id === a.to_id).seasonality[month];
                         const bSeasonality = destinations.find((destination) => destination.id === b.to_id).seasonality[month];
-                        return bSeasonality - aSeasonality;
+                        return aSeasonality - bSeasonality;
                     }
                     return 0;
                 })
@@ -267,5 +287,33 @@ export function getAllMapValues(fromDestination, toDestinations, sortBy, month) 
         return toDestinations.map((destination) => destination.popularity.popularity_score);
     } else if (sortBy === 'seasonality') {
         return toDestinations.map((destination) => destination.seasonality[month]);
+    }
+}
+
+export function getPopularityIndex(score) {
+    if (score >= 0 && score < 0.08) {
+        return 0;
+    } else if (score >= 0.08 && score < 0.2) {
+        return 1;
+    } else if (score >= 0.2 && score < 0.4) {
+        return 2;
+    } else if (score >= 0.4 && score < 1) {
+        return 3;
+    } else {
+        return -1;
+    }
+}
+
+export function getSeasonalityIndex(score) {
+    if (score >= 0.041 && score < 0.07) {
+        return 0;
+    } else if (score >= 0.07 && score < 0.9) {
+        return 1;
+    } else if (score >= 0.9 && score < 0.115) {
+        return 2;
+    } else if (score >= 0.115 && score < 0.2) {
+        return 3;
+    } else {
+        return -1;
     }
 }

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Box, Drawer, Typography, ModalClose } from '@mui/joy';
 import CityDrawerItem from './CityDrawerItem';
-import { interests } from '../../helpers/Lists.js';
 import { calculateMinCo2Mode } from '../../helpers/Functions.js';
 
 const CityDrawer = ({ fromDestination, toDestination, month, averages, sortBy, open, onClose }) => {
@@ -25,15 +24,9 @@ const CityDrawer = ({ fromDestination, toDestination, month, averages, sortBy, o
                 </Box>
                 <CityDrawerItem
                     index={100}
-                    id={toDestination.id}
-                    city={toDestination.name}
-                    country={toDestination.country}
-                    description={toDestination.description}
-                    flag={toDestination.flag}
+                    toDestination={toDestination}
+                    month={month}
                     minCo2Mode={calculateMinCo2Mode(fromDestination, toDestination)}
-                    popularity={toDestination.popularity.popularity_score}
-                    seasonality={toDestination.seasonality[month]}
-                    interests={interests.filter((i) => toDestination.interests.includes(i))}
                     averages={averages}
                     sortBy={sortBy}
                 ></CityDrawerItem>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation, Navigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Grid, Box, Paper, Pagination, Typography, Divider } from '@mui/material';
 import Stack from '@mui/joy/Stack';
 import CityCardItem from '../city/CityCardItem.jsx';
@@ -10,7 +10,7 @@ import { getSortedToDestinations, calculateAvgValues, calculateMinCo2Mode } from
 
 const Explore = () => {
     const { state } = useLocation();
-    const { destinations, dataFetched } = useData();
+    const { destinations } = useData();
     const fromDestination = state && JSON.parse(state.fromDestination);
     const interests = state && JSON.parse(state.interests);
     const month = state && state.month;
@@ -36,14 +36,15 @@ const Explore = () => {
         setPage(1);
     };
 
-    const sortedToDestinations = getSortedToDestinations(fromDestination, destinations, sortBy, month);
-    const filteredDestinations = sortedToDestinations.filter((toDest) => {
-        return interests.some((interest) => toDest.interests.includes(interest));
-    });
+    const getFilteredDestinations = () => {
+        const sortedToDestinations = getSortedToDestinations(fromDestination, destinations, sortBy, month);
+        return sortedToDestinations.filter((toDest) => interests.some((interest) => toDest?.interests.includes(interest)));
+    };
 
+    const filteredDestinations = getFilteredDestinations();
     const averages = calculateAvgValues(fromDestination, filteredDestinations, month);
 
-    return dataFetched && fromDestination && filteredDestinations && averages ? (
+    return (
         <Box sx={{ m: 3, mb: 10 }}>
             <Typography gutterBottom variant='h4' sx={{ p: 2 }}>
                 Discover Your Ideal Destinations: Top Travel Picks for <b>{month}</b> from <b>{fromDestination.name}</b>!
@@ -55,18 +56,14 @@ const Explore = () => {
                     <Grid container spacing={2} sx={{ p: 3 }}>
                         {view === 'card' ? (
                             filteredDestinations.slice(startIndex, endIndex).map((toDest, index) => {
+                                const adjustedIndex = startIndex + index;
                                 return (
                                     <Grid item xs={12} sm={6} md={3} lg={3} xl={3} key={toDest.id}>
                                         <CityCardItem
-                                            index={index}
-                                            id={toDest.id}
-                                            city={toDest.name}
-                                            country={toDest.country}
-                                            flag={toDest.flag}
+                                            index={adjustedIndex} // Use the adjusted index here
+                                            toDestination={toDest}
+                                            month={month}
                                             minCo2Mode={calculateMinCo2Mode(fromDestination, toDest)}
-                                            popularity={toDest.popularity.popularity_score}
-                                            seasonality={toDest.seasonality[month]}
-                                            interests={interests.filter((i) => toDest.interests.includes(i)).slice(0, 5)}
                                             averages={averages}
                                             sortBy={sortBy}
                                         ></CityCardItem>
@@ -104,8 +101,6 @@ const Explore = () => {
                 />
             )}
         </Box>
-    ) : (
-        <Navigate to='/' replace></Navigate>
     );
 };
 

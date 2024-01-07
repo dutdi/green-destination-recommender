@@ -3,7 +3,7 @@ import { Box, Chip } from '@mui/joy';
 
 export default function InterestChips({ interests }) {
     return (
-        <Box p={1}>
+        <Box p={0.1}>
             {interests.map((interest) => {
                 return (
                     <Chip key={interest} size='sm' variant='plain' color='primary' sx={{ fontWeight: 'bold' }}>

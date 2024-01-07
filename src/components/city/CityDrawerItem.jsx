@@ -14,112 +14,177 @@ import {
     Accordion,
     AccordionDetails,
     AccordionSummary,
+    Tooltip,
 } from '@mui/joy';
+import DiamondIcon from '@mui/icons-material/Diamond';
+import AutoGraphIcon from '@mui/icons-material/AutoGraph';
+import FmdBadIcon from '@mui/icons-material/FmdBad';
+import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import PersonIcon from '@mui/icons-material/Person';
+import PeopleIcon from '@mui/icons-material/People';
+import GroupsIcon from '@mui/icons-material/Groups';
 import InterestChips from '../custom/InterestChips.jsx';
-import { calculateOffset } from '../../helpers/Functions.js';
+import { convertToSec, calculateOffset, getPopularityIndex, getSeasonalityIndex } from '../../helpers/Functions.js';
+import { calculateOverallScore } from '../../helpers/SF.js';
 
-const CityDrawerItem = ({
-    index,
-    id,
-    city,
-    country,
-    description,
-    flag,
-    minCo2Mode,
-    popularity,
-    seasonality,
-    interests,
-    averages,
-    sortBy,
-}) => {
-    const offset = calculateOffset(sortBy, averages, minCo2Mode.co2, popularity, seasonality);
+const CityDrawerItem = ({ index, toDestination, month, minCo2Mode, averages, sortBy }) => {
+    const offset = calculateOffset(
+        'emission',
+        averages,
+        minCo2Mode.co2,
+        toDestination.popularity.popularity_score,
+        toDestination.seasonality[month]
+    );
 
-    const generateOffsetLabel = (sortBy, offset) => {
+    const generateHighlight = (sortBy) => {
+        let label = '';
         if (sortBy === 'emission') {
-            return (
-                <Chip component='span' size='sm' variant='soft' color={offset < 0 ? 'success' : 'danger'}>
-                    {offset > 0 && '+'}
-                    {offset}% emission
-                </Chip>
-            );
+            label = 'Green Recommended';
         } else if (sortBy === 'popularity') {
-            return (
-                <Chip component='span' size='sm' variant='soft' color={offset < 0 ? 'danger' : 'success'}>
-                    {offset > 0 && '+'}
-                    {offset}% popular
-                </Chip>
-            );
+            label = 'Hidden Gem';
         } else if (sortBy === 'seasonality') {
-            return (
-                <Chip component='span' size='sm' variant='soft' color={offset < 0 ? 'danger' : 'success'}>
-                    {offset > 0 && '+'}
-                    {offset}% seasonal
+            label = 'Least Crowded';
+        }
+        return (
+            index < 4 && (
+                <Chip
+                    variant='solid'
+                    color='success'
+                    size='sm'
+                    sx={{
+                        position: 'absolute',
+                        top: 8,
+                        left: -8,
+                        borderRadius: 'sm',
+                        py: 0.25,
+                        px: 0.5,
+                    }}
+                >
+                    {label}
                 </Chip>
-            );
+            )
+        );
+    };
+
+    const generateEmissionLabel = (offset) => {
+        return (
+            <Chip component='span' size='sm' variant='soft' color={offset < 0 ? 'success' : 'danger'}>
+                {offset > 0 && '+'}
+                {offset}% CO₂e
+            </Chip>
+        );
+    };
+
+    const generatePopularityLabel = (popularityScore) => {
+        const popIndex = getPopularityIndex(popularityScore);
+        switch (popIndex) {
+            case 0:
+                return (
+                    <Typography
+                        justifyContent='center'
+                        level='body-xs'
+                        color='success'
+                        startDecorator={<DiamondIcon sx={{ color: 'success' }} />}
+                    >
+                        Rare Find
+                    </Typography>
+                );
+            case 1:
+                return (
+                    <Typography
+                        justifyContent='center'
+                        level='body-xs'
+                        color='primary'
+                        startDecorator={<AutoGraphIcon sx={{ color: 'primary' }} />}
+                    >
+                        Rising
+                    </Typography>
+                );
+            case 2:
+                return (
+                    <Typography
+                        justifyContent='center'
+                        level='body-xs'
+                        color='warning'
+                        startDecorator={<FmdBadIcon sx={{ color: 'warning' }} />}
+                    >
+                        Traffic
+                    </Typography>
+                );
+            case 3:
+                return (
+                    <Typography
+                        justifyContent='center'
+                        level='body-xs'
+                        color='danger'
+                        startDecorator={<ReportGmailerrorredIcon sx={{ color: 'error' }} />}
+                    >
+                        Hotspot
+                    </Typography>
+                );
+            default:
+                return (
+                    <Typography justifyContent='center' level='body-xs' color='neutral'>
+                        No data
+                    </Typography>
+                );
         }
     };
 
-    const generateHighlight = (sortBy) => {
-        if (sortBy === 'emission') {
-            return (
-                index < 4 && (
-                    <Chip
-                        variant='solid'
+    const generateSeasonalityLabel = (seasonalityScore) => {
+        const seasonalityIndex = getSeasonalityIndex(seasonalityScore);
+        switch (seasonalityIndex) {
+            case 0:
+                return (
+                    <Typography
+                        justifyContent='center'
+                        level='body-xs'
                         color='success'
-                        size='sm'
-                        sx={{
-                            position: 'absolute',
-                            top: 8,
-                            left: -8,
-                            borderRadius: 'sm',
-                            py: 0.25,
-                            px: 0.5,
-                        }}
+                        startDecorator={<EventAvailableIcon sx={{ color: 'success' }} />}
                     >
-                        Green Recommended
-                    </Chip>
-                )
-            );
-        } else if (sortBy === 'popularity') {
-            return (
-                index < 4 && (
-                    <Chip
-                        variant='solid'
+                        Available
+                    </Typography>
+                );
+            case 1:
+                return (
+                    <Typography
+                        justifyContent='center'
+                        level='body-xs'
                         color='primary'
-                        size='sm'
-                        sx={{
-                            position: 'absolute',
-                            top: 8,
-                            left: -8,
-                            borderRadius: 'sm',
-                            py: 0.25,
-                            px: 0.5,
-                        }}
+                        startDecorator={<PersonIcon sx={{ color: 'primary' }} />}
                     >
-                        Popular Pick
-                    </Chip>
-                )
-            );
-        } else if (sortBy === 'seasonality') {
-            return (
-                index < 4 && (
-                    <Chip
-                        variant='solid'
+                        Off-Peak
+                    </Typography>
+                );
+            case 2:
+                return (
+                    <Typography
+                        justifyContent='center'
+                        level='body-xs'
+                        color='warning'
+                        startDecorator={<PeopleIcon sx={{ color: 'warning' }} />}
+                    >
+                        Busy
+                    </Typography>
+                );
+            case 3:
+                return (
+                    <Typography
+                        justifyContent='center'
+                        level='body-xs'
                         color='danger'
-                        size='sm'
-                        sx={{
-                            position: 'absolute',
-                            top: 8,
-                            left: -8,
-                            borderRadius: 'sm',
-                            py: 0.25,
-                            px: 0.5,
-                        }}
+                        startDecorator={<GroupsIcon sx={{ color: 'error' }} />}
                     >
-                        Seasonal Gem
-                    </Chip>
-                )
-            );
+                        Crowded
+                    </Typography>
+                );
+            default:
+                return (
+                    <Typography justifyContent='center' level='body-xs' color='neutral'>
+                        No data
+                    </Typography>
+                );
         }
     };
 
@@ -136,35 +201,46 @@ const CityDrawerItem = ({
             <CardOverflow>
                 <Box sx={{ position: 'relative' }}>
                     <AspectRatio sx={{ minWidth: 200 }}>
-                        <img src={require(`../../media/misc/${id}.jpg`)} loading='lazy' alt='city' />
+                        <img src={require(`../../media/misc/${toDestination.id}.jpg`)} loading='lazy' alt='city' />
                     </AspectRatio>
                     {generateHighlight(sortBy)}
-                    <Chip
-                        variant='solid'
-                        color='warning'
-                        size='lg'
-                        sx={{
-                            position: 'absolute',
-                            top: 8,
-                            right: -8,
-                            borderRadius: 'sm',
-                            py: 0.25,
-                            px: 0.5,
-                        }}
-                    >
-                        7.8
-                    </Chip>
+                    <Tooltip color='neutral' placement='top' variant='soft' title='Overall score'>
+                        <Chip
+                            variant='solid'
+                            color='primary'
+                            size='lg'
+                            sx={{
+                                position: 'absolute',
+                                top: 8,
+                                right: -8,
+                                borderRadius: 'sm',
+                                px: 1,
+                                py: 0.5,
+                            }}
+                        >
+                            {calculateOverallScore(
+                                toDestination,
+                                convertToSec(minCo2Mode.duration),
+                                minCo2Mode.co2,
+                                minCo2Mode.distance_km,
+                                month
+                            )}
+                        </Chip>
+                    </Tooltip>
                 </Box>
             </CardOverflow>
             <CardContent>
-                <Typography level='title-md' sx={{ mt: 1, fontWeight: 'xl' }} endDecorator={generateOffsetLabel(sortBy, offset)}>
-                    {city}, {country} {flag}
+                <Typography level='title-md' sx={{ mt: 1, fontWeight: 'xl' }}>
+                    {toDestination.name}, {toDestination.country} {toDestination.flag}
                 </Typography>
                 <Typography level='body-sm'>
                     {minCo2Mode.mode} - {minCo2Mode.duration} -{' '}
                     <Typography color='success'>
                         <b>{minCo2Mode.co2} kg CO₂</b>
                     </Typography>{' '}
+                </Typography>
+                <Typography level='body' sx={{ mt: 1 }}>
+                    {toDestination.description}
                 </Typography>
                 <Sheet variant='soft' sx={{ pt: 1, mt: 2, mb: 2 }}>
                     <Table borderAxis='none' variant='plain' color='neutral' size='sm' stickyHeader sx={{ textAlign: 'center' }}>
@@ -177,9 +253,9 @@ const CityDrawerItem = ({
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{minCo2Mode.co2} kg CO₂</td>
-                                <td>{popularity} / 100</td>
-                                <td> {seasonality} / 100</td>
+                                <td>{generateEmissionLabel(offset)}</td>
+                                <td>{generatePopularityLabel(toDestination.popularity.popularity_score)} </td>
+                                <td>{generateSeasonalityLabel(toDestination.seasonality[month])}</td>
                             </tr>
                         </tbody>
                     </Table>
@@ -188,7 +264,7 @@ const CityDrawerItem = ({
                     <Accordion sx={{ border: '1px solid' }}>
                         <AccordionSummary>Interests</AccordionSummary>
                         <AccordionDetails>
-                            <InterestChips interests={interests}></InterestChips>
+                            <InterestChips interests={toDestination.interests}></InterestChips>
                         </AccordionDetails>
                     </Accordion>
                 </AccordionGroup>{' '}

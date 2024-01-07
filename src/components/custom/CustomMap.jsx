@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
-import { getAllMapValues } from '../../helpers/Functions.js';
+import { getAllMapValues, getPopularityIndex, getSeasonalityIndex } from '../../helpers/Functions.js';
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
@@ -18,7 +18,7 @@ const Legend = ({ sortBy, maxValue, getColorForValue }) => {
 
         legend.onAdd = function () {
             const div = L.DomUtil.create('div', 'info legend');
-            const gradientSteps = 5;
+            const gradientSteps = 4;
             const labels = [];
 
             div.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
@@ -39,62 +39,53 @@ const Legend = ({ sortBy, maxValue, getColorForValue }) => {
                 labels.push('<strong>Popularity</strong><br>');
                 for (let i = 1; i <= gradientSteps; i++) {
                     let value = (maxValue / gradientSteps) * i;
-                    value = Math.round(value / 10) * 10;
                     let label = '';
                     switch (i) {
                         case 1:
-                            label = 'Quiet and Serene';
+                            label = 'Rare Find';
                             break;
                         case 2:
-                            label = 'Mildly Busy';
+                            label = 'Rising';
                             break;
                         case 3:
-                            label = 'Moderately Crowded';
+                            label = 'Traffic';
                             break;
                         case 4:
-                            label = 'Highly Crowded';
-                            break;
-                        case 5:
-                            label = 'Extremely Crowded';
+                            label = 'Hotspot';
                             break;
                         default:
+                            label = 'No data';
                             break;
                     }
-                    labels.push(
-                        '<i style="background:' + getColorForValue(value, maxValue) + ';">&nbsp;</i> ' + Math.round(value) + ` - ${label}`
-                    );
+                    value !== 100 && labels.push('<i style="background:' + getColorForValue(value, maxValue) + `;">&nbsp;</i> ${label}`);
                 }
+                labels.push('<i style="background: rgb(0,0,0);">&nbsp;</i> No data');
             } else if (sortBy === 'seasonality') {
                 labels.push('<strong>Seasonality</strong><br>');
                 for (let i = 1; i <= gradientSteps; i++) {
                     let value = (maxValue / gradientSteps) * i;
-                    value = Math.round(value / 10) * 10;
                     let label = '';
                     switch (i) {
                         case 1:
-                            label = 'Low Appeal';
+                            label = 'Available';
                             break;
                         case 2:
-                            label = 'Moderately Attractive';
+                            label = 'Off-Peak';
                             break;
                         case 3:
-                            label = 'Attractive';
+                            label = 'Busy';
                             break;
                         case 4:
-                            label = 'Highly Attractive';
-                            break;
-                        case 5:
-                            label = 'Irresistibly Attractive';
+                            label = 'Crowded';
                             break;
                         default:
+                            label = 'No data';
                             break;
                     }
-                    labels.push(
-                        '<i style="background:' + getColorForValue(value, maxValue) + ';">&nbsp;</i> ' + Math.round(value) + ` - ${label}`
-                    );
+                    value !== 100 && labels.push('<i style="background:' + getColorForValue(value, maxValue) + `;">&nbsp;</i> ${label}`);
                 }
+                labels.push('<i style="background: rgb(0,0,0);">&nbsp;</i> No data');
             }
-
             div.innerHTML = labels.join('<br>');
             return div;
         };
@@ -138,9 +129,32 @@ const Circles = ({ toDestinations, values, maxValue, getColorForValue, handleDes
 
     useEffect(() => {
         toDestinations.forEach((destination, index) => {
+            let circleColor = '';
+            if (sortBy === 'emission') {
+                circleColor = getColorForValue(values[index], maxValue);
+            } else {
+                const scaleIndex = sortBy === 'popularity' ? getPopularityIndex(values[index]) : getSeasonalityIndex(values[index]);
+                switch (scaleIndex) {
+                    case 0:
+                        circleColor = 'rgb(60, 179, 113)';
+                        break;
+                    case 1:
+                        circleColor = 'rgb(255, 255, 0)';
+                        break;
+                    case 2:
+                        circleColor = 'rgb(255, 165, 0)';
+                        break;
+                    case 3:
+                        circleColor = 'rgb(255, 0, 0)';
+                        break;
+                    default:
+                        circleColor = 'rgb(220, 220, 220)';
+                        break;
+                }
+            }
             const circle = L.circle([destination.latitude, destination.longitude], {
-                fillColor: getColorForValue(values[index], maxValue),
-                color: getColorForValue(values[index], maxValue),
+                fillColor: circleColor,
+                color: 'black',
                 radius: 25000,
                 fillOpacity: 0.8,
             });
@@ -170,14 +184,12 @@ const Circles = ({ toDestinations, values, maxValue, getColorForValue, handleDes
 const CustomMap = ({ fromDestination, toDestinations, sortBy, month, height, clickHandler }) => {
     const [selectedDestination, setSelectedDestination] = useState(null);
     const values = getAllMapValues(fromDestination, toDestinations, sortBy, month);
-    const maxValue = Math.max(...values);
+    const maxValue = values.filter((value) => value !== 100).reduce((a, b) => Math.max(a, b), 0);
 
     const getColorForValue = (value, maxValue) => {
         const normalizedValue = value / maxValue;
-        const highest = normalizedValue < 0.5 ? Math.round(2 * normalizedValue * 255) : 255;
-        const lowest = normalizedValue > 0.5 ? Math.round(2 * (1 - normalizedValue) * 255) : 255;
-        const red = sortBy === 'seasonality' ? lowest : highest;
-        const green = sortBy === 'seasonality' ? highest : lowest;
+        const red = normalizedValue < 0.5 ? Math.round(2 * normalizedValue * 255) : 255;
+        const green = normalizedValue > 0.5 ? Math.round(2 * (1 - normalizedValue) * 255) : 255;
         const blue = 0;
         return `rgb(${red}, ${green}, ${blue})`;
     };
