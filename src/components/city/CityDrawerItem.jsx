@@ -27,6 +27,7 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import InterestChips from '../custom/InterestChips.jsx';
 import { convertToSec, calculateOffset, getPopularityIndex, getSeasonalityIndex } from '../../helpers/Functions.js';
 import { calculateOverallScore } from '../../helpers/SF.js';
+import { Colors } from '../../helpers/Colors.js';
 
 const CityDrawerItem = ({ index, toDestination, month, minCo2Mode, averages, sortBy }) => {
     const offset = calculateOffset(
@@ -95,8 +96,8 @@ const CityDrawerItem = ({ index, toDestination, month, minCo2Mode, averages, sor
                     <Typography
                         justifyContent='center'
                         level='body-xs'
-                        color='primary'
-                        startDecorator={<AutoGraphIcon sx={{ color: 'primary' }} />}
+                        color='warning'
+                        startDecorator={<AutoGraphIcon sx={{ color: 'warning' }} />}
                     >
                         Rising
                     </Typography>
@@ -104,9 +105,9 @@ const CityDrawerItem = ({ index, toDestination, month, minCo2Mode, averages, sor
             case 2:
                 return (
                     <Typography
+                        sx={{ color: Colors.brown }}
                         justifyContent='center'
                         level='body-xs'
-                        color='warning'
                         startDecorator={<FmdBadIcon sx={{ color: 'warning' }} />}
                     >
                         Traffic
@@ -151,8 +152,8 @@ const CityDrawerItem = ({ index, toDestination, month, minCo2Mode, averages, sor
                     <Typography
                         justifyContent='center'
                         level='body-xs'
-                        color='primary'
-                        startDecorator={<PersonIcon sx={{ color: 'primary' }} />}
+                        color='warning'
+                        startDecorator={<PersonIcon sx={{ color: 'warning' }} />}
                     >
                         Off-Peak
                     </Typography>
@@ -160,9 +161,9 @@ const CityDrawerItem = ({ index, toDestination, month, minCo2Mode, averages, sor
             case 2:
                 return (
                     <Typography
+                        sx={{ color: Colors.brown }}
                         justifyContent='center'
                         level='body-xs'
-                        color='warning'
                         startDecorator={<PeopleIcon sx={{ color: 'warning' }} />}
                     >
                         Busy
