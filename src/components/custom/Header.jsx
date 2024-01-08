@@ -1,6 +1,6 @@
 import React from 'react';
-import { Tabs, Tab, Box } from '@mui/material';
-import { Stack, Typography } from '@mui/joy';
+import { Tabs, Tab, Box, Grid } from '@mui/material';
+import { Typography } from '@mui/joy';
 import { FiGrid } from 'react-icons/fi';
 import { FaMap } from 'react-icons/fa6';
 import OrderBy from './OrderBy.jsx';
@@ -32,32 +32,41 @@ const Header = ({ sortBy, handleSortChange, handleViewChange }) => {
     };
 
     return (
-        <Stack
-            useFlexGap
-            direction='row'
-            spacing={{ xs: 0, sm: 2 }}
-            justifyContent={{ xs: 'space-between' }}
-            flexWrap='wrap'
-            sx={{ minWidth: 0, border: '2px solid', borderShadow: 'md', borderColor: Colors.gray }}
+        <Grid
+            container
+            sx={{
+                minWidth: 0,
+                border: '2px solid',
+                borderShadow: 'md',
+                borderColor: Colors.gray,
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}
         >
-            <OrderBy handleSortChange={handleSortChange} />
-            {value === 0 && (
-                <Box display='flex' alignItems='flex-end' justifyContent='space-around'>
-                    {legendItems.map((item, index) => (
-                        <Box key={index} display='flex' flexDirection='column' alignItems='center' sx={{ m: 2 }}>
-                            <Box width={20} height={20} bgcolor={item.color} />
-                            <Typography variant='caption'>{item.label}</Typography>
-                        </Box>
-                    ))}
+            <Grid item xs={12} sm={12} md={2} lg={2} xl={2}>
+                <OrderBy handleSortChange={handleSortChange} />
+            </Grid>
+            <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
+                {value === 0 && (
+                    <Box display='flex' alignItems='center' justifyContent='center'>
+                        {legendItems.map((item, index) => (
+                            <Box key={index} display='flex' flexDirection='column' alignItems='center' sx={{ ml: 1, mr: 1 }}>
+                                <Box width={20} height={20} bgcolor={item.color} />
+                                <Typography variant='caption'>{item.label}</Typography>
+                            </Box>
+                        ))}
+                    </Box>
+                )}
+            </Grid>
+            <Grid item xs={12} sm={12} md={2} lg={2} xl={2}>
+                <Box sx={{ mt: 2, mb: 2, backgroundColor: Colors.gray }}>
+                    <Tabs value={value} onChange={handleTabClicked}>
+                        <Tab label={<Typography startDecorator={<FiGrid></FiGrid>}>Card</Typography>} />
+                        <Tab label={<Typography startDecorator={<FaMap></FaMap>}>Map</Typography>} />
+                    </Tabs>
                 </Box>
-            )}
-            <Box sx={{ mt: 2, mb: 2, backgroundColor: Colors.gray }}>
-                <Tabs value={value} onChange={handleTabClicked}>
-                    <Tab label={<Typography startDecorator={<FiGrid></FiGrid>}>Card</Typography>} />
-                    <Tab label={<Typography startDecorator={<FaMap></FaMap>}>Map</Typography>} />
-                </Tabs>
-            </Box>
-        </Stack>
+            </Grid>
+        </Grid>
     );
 };
 
