@@ -14,6 +14,7 @@ const Explore = () => {
     const fromDestination = state && JSON.parse(state.fromDestination);
     const interests = state && JSON.parse(state.interests);
     const month = state && state.month;
+    const [clickedItems, setClickedItems] = useState({});
     const [view, setView] = useState('card');
     const [sortBy, setSortBy] = useState('emission');
     const [page, setPage] = useState(1);
@@ -34,6 +35,10 @@ const Explore = () => {
     const handleViewChange = (value) => {
         setView(value);
         setPage(1);
+    };
+
+    const handleItemClick = (id) => {
+        setClickedItems((prev) => ({ ...prev, [id]: !prev[id] }));
     };
 
     const getFilteredDestinations = () => {
@@ -60,12 +65,14 @@ const Explore = () => {
                                 return (
                                     <Grid item xs={12} sm={6} md={3} lg={3} xl={3} key={toDest.id}>
                                         <CityCardItem
-                                            index={adjustedIndex} // Use the adjusted index here
+                                            index={adjustedIndex}
                                             toDestination={toDest}
                                             month={month}
                                             minCo2Mode={calculateMinCo2Mode(fromDestination, toDest)}
                                             averages={averages}
                                             sortBy={sortBy}
+                                            clicked={clickedItems[toDest.id]}
+                                            onItemClicked={() => handleItemClick(toDest.id)}
                                         ></CityCardItem>
                                     </Grid>
                                 );
@@ -78,6 +85,8 @@ const Explore = () => {
                                     month={month}
                                     averages={averages}
                                     sortBy={sortBy}
+                                    clickedItems={clickedItems}
+                                    onItemClicked={handleItemClick}
                                 ></CustomMapContainer>
                             </Grid>
                         )}

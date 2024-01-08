@@ -3,7 +3,7 @@ import { Box, Drawer, Typography, ModalClose } from '@mui/joy';
 import CityDrawerItem from './CityDrawerItem';
 import { calculateMinCo2Mode } from '../../helpers/Functions.js';
 
-const CityDrawer = ({ fromDestination, toDestination, month, averages, sortBy, open, onClose }) => {
+const CityDrawer = ({ fromDestination, toDestination, month, averages, sortBy, open, onClose, clicked, onItemClicked }) => {
     return (
         <React.Fragment>
             <Drawer open={open} onClose={onClose}>
@@ -29,6 +29,8 @@ const CityDrawer = ({ fromDestination, toDestination, month, averages, sortBy, o
                     minCo2Mode={calculateMinCo2Mode(fromDestination, toDestination)}
                     averages={averages}
                     sortBy={sortBy}
+                    clicked={clicked}
+                    onItemClicked={onItemClicked}
                 ></CityDrawerItem>
             </Drawer>
         </React.Fragment>

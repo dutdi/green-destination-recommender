@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CustomMap from './CustomMap';
 import CityDrawer from '../city/CityDrawer';
 
-const CustomMapContainer = ({ fromDestination, toDestinations, month, averages, sortBy }) => {
+const CustomMapContainer = ({ fromDestination, toDestinations, month, averages, sortBy, clickedItems, onItemClicked }) => {
     const [activeTooltip, setActiveTooltip] = useState(null);
     const [cityDrawerOpen, setCityDrawerOpen] = useState(false);
     const [selectedToDestination, setSelectedToDestination] = useState(null);
@@ -42,6 +42,8 @@ const CustomMapContainer = ({ fromDestination, toDestinations, month, averages, 
                     sortBy={sortBy}
                     open={cityDrawerOpen}
                     onClose={closeCityDrawer}
+                    clicked={clickedItems[selectedToDestination.id]}
+                    onItemClicked={() => onItemClicked(selectedToDestination.id)}
                 />
             )}
         </div>

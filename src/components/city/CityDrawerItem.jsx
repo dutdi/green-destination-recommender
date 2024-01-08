@@ -21,6 +21,7 @@ import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import FmdBadIcon from '@mui/icons-material/FmdBad';
 import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
 import { PiLeafFill } from 'react-icons/pi';
+import { IoMdCheckmark } from 'react-icons/io';
 import PersonIcon from '@mui/icons-material/Person';
 import PeopleIcon from '@mui/icons-material/People';
 import GroupsIcon from '@mui/icons-material/Groups';
@@ -29,7 +30,7 @@ import { convertToSec, calculateOffset, getPopularityIndex, getSeasonalityIndex 
 import { calculateOverallScore } from '../../helpers/SF.js';
 import { Colors } from '../../helpers/Colors.js';
 
-const CityDrawerItem = ({ index, toDestination, month, minCo2Mode, averages, sortBy }) => {
+const CityDrawerItem = ({ index, toDestination, month, minCo2Mode, averages, sortBy, clicked, onItemClicked }) => {
     const offset = calculateOffset(
         'emission',
         averages,
@@ -271,8 +272,14 @@ const CityDrawerItem = ({ index, toDestination, month, minCo2Mode, averages, sor
                 </AccordionGroup>{' '}
             </CardContent>
             <CardOverflow>
-                <Button variant='solid' color='primary' size='lg'>
-                    Interested
+                <Button
+                    variant='solid'
+                    size='lg'
+                    color={clicked ? 'success' : 'primary'}
+                    onClick={onItemClicked}
+                    startDecorator={clicked && <IoMdCheckmark style={{ color: 'white' }} />}
+                >
+                    {clicked ? 'Interested' : 'Mark as Interested'}
                 </Button>
             </CardOverflow>
         </Card>

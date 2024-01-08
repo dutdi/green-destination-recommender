@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AspectRatio, Box, Button, Card, CardContent, CardOverflow, Chip, Table, Sheet, Typography, Tooltip } from '@mui/joy';
 import DiamondIcon from '@mui/icons-material/Diamond';
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
@@ -14,9 +14,7 @@ import { convertToSec, calculateOffset, getPopularityIndex, getSeasonalityIndex 
 import { calculateOverallScore } from '../../helpers/SF.js';
 import { Colors } from '../../helpers/Colors.js';
 
-const CityCardItem = ({ index, toDestination, month, minCo2Mode, averages, sortBy }) => {
-    const [clicked, setClicked] = useState(false);
-
+const CityCardItem = ({ index, toDestination, month, minCo2Mode, averages, sortBy, clicked, onItemClicked }) => {
     const offset = calculateOffset(
         'emission',
         averages,
@@ -118,10 +116,6 @@ const CityCardItem = ({ index, toDestination, month, minCo2Mode, averages, sortB
                     </Typography>
                 );
         }
-    };
-
-    const handleClick = () => {
-        setClicked(!clicked);
     };
 
     const generateSeasonalityLabel = (seasonalityScore) => {
@@ -255,7 +249,7 @@ const CityCardItem = ({ index, toDestination, month, minCo2Mode, averages, sortB
                     variant='solid'
                     size='lg'
                     color={clicked ? 'success' : 'primary'}
-                    onClick={handleClick}
+                    onClick={onItemClicked}
                     startDecorator={clicked && <IoMdCheckmark style={{ color: 'white' }} />}
                 >
                     {clicked ? 'Interested' : 'Mark as Interested'}
