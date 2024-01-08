@@ -4,7 +4,7 @@ import { Grid, Box, Paper, Pagination, Typography, Divider } from '@mui/material
 import Stack from '@mui/joy/Stack';
 import CityCardItem from '../city/CityCardItem.jsx';
 import CustomMapContainer from '../custom/CustomMapContainer.jsx';
-import Filters from '../custom/Filters.jsx';
+import Header from '../custom/Header.jsx';
 import { useData } from '../main/DataContext.jsx';
 import { getSortedToDestinations, calculateAvgValues, calculateMinCo2Mode } from '../../helpers/Functions.js';
 
@@ -51,7 +51,7 @@ const Explore = () => {
             </Typography>
             <Divider />
             <Stack spacing={2} sx={{ pt: 2, minHeight: 0 }}>
-                <Filters handleSortChange={handleSortChange} handleViewChange={handleViewChange} />
+                <Header sortBy={sortBy} handleSortChange={handleSortChange} handleViewChange={handleViewChange} />
                 <Paper>
                     <Grid container spacing={2} sx={{ p: 3 }}>
                         {view === 'card' ? (

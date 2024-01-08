@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AspectRatio, Box, Button, Card, CardContent, CardOverflow, Chip, Table, Sheet, Typography, Tooltip } from '@mui/joy';
 import DiamondIcon from '@mui/icons-material/Diamond';
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import FmdBadIcon from '@mui/icons-material/FmdBad';
 import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
-import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import { PiLeafFill } from 'react-icons/pi';
+import { IoMdCheckmark } from 'react-icons/io';
 import PersonIcon from '@mui/icons-material/Person';
 import PeopleIcon from '@mui/icons-material/People';
 import GroupsIcon from '@mui/icons-material/Groups';
@@ -14,6 +15,8 @@ import { calculateOverallScore } from '../../helpers/SF.js';
 import { Colors } from '../../helpers/Colors.js';
 
 const CityCardItem = ({ index, toDestination, month, minCo2Mode, averages, sortBy }) => {
+    const [clicked, setClicked] = useState(false);
+
     const offset = calculateOffset(
         'emission',
         averages,
@@ -117,6 +120,10 @@ const CityCardItem = ({ index, toDestination, month, minCo2Mode, averages, sortB
         }
     };
 
+    const handleClick = () => {
+        setClicked(!clicked);
+    };
+
     const generateSeasonalityLabel = (seasonalityScore) => {
         const seasonalityIndex = getSeasonalityIndex(seasonalityScore);
         switch (seasonalityIndex) {
@@ -126,9 +133,9 @@ const CityCardItem = ({ index, toDestination, month, minCo2Mode, averages, sortB
                         justifyContent='center'
                         level='body-xs'
                         color='success'
-                        startDecorator={<EventAvailableIcon sx={{ color: 'success' }} />}
+                        startDecorator={<PiLeafFill sx={{ color: 'green' }} />}
                     >
-                        Available
+                        Quiet
                     </Typography>
                 );
             case 1:
@@ -223,7 +230,7 @@ const CityCardItem = ({ index, toDestination, month, minCo2Mode, averages, sortB
                         <b>{minCo2Mode.co2} kg CO₂</b>
                     </Typography>{' '}
                 </Typography>
-                <Sheet variant='soft' sx={{ pt: 1 }}>
+                <Sheet variant='soft' sx={{ mt: 1 }}>
                     <Table borderAxis='none' variant='plain' color='neutral' size='sm' stickyHeader sx={{ textAlign: 'center' }}>
                         <thead>
                             <tr>
@@ -244,8 +251,14 @@ const CityCardItem = ({ index, toDestination, month, minCo2Mode, averages, sortB
                 <InterestChips interests={toDestination.interests}></InterestChips>
             </CardContent>
             <CardOverflow>
-                <Button variant='solid' color='primary' size='lg'>
-                    Interested
+                <Button
+                    variant='solid'
+                    size='lg'
+                    color={clicked ? 'success' : 'primary'}
+                    onClick={handleClick}
+                    startDecorator={clicked && <IoMdCheckmark style={{ color: 'white' }} />}
+                >
+                    {clicked ? 'Interested' : 'Mark as Interested'}
                 </Button>
             </CardOverflow>
         </Card>

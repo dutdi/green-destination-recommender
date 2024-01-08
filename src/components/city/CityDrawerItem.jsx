@@ -20,7 +20,7 @@ import DiamondIcon from '@mui/icons-material/Diamond';
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import FmdBadIcon from '@mui/icons-material/FmdBad';
 import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
-import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import { PiLeafFill } from 'react-icons/pi';
 import PersonIcon from '@mui/icons-material/Person';
 import PeopleIcon from '@mui/icons-material/People';
 import GroupsIcon from '@mui/icons-material/Groups';
@@ -142,9 +142,9 @@ const CityDrawerItem = ({ index, toDestination, month, minCo2Mode, averages, sor
                         justifyContent='center'
                         level='body-xs'
                         color='success'
-                        startDecorator={<EventAvailableIcon sx={{ color: 'success' }} />}
+                        startDecorator={<PiLeafFill sx={{ color: 'green' }} />}
                     >
-                        Available
+                        Quiet
                     </Typography>
                 );
             case 1:

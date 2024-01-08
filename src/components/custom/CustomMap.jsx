@@ -67,7 +67,7 @@ const Legend = ({ sortBy, maxValue, getColorForValue }) => {
                     let label = '';
                     switch (i) {
                         case 1:
-                            label = 'Available';
+                            label = 'Quiet';
                             break;
                         case 2:
                             label = 'Off-Peak';
