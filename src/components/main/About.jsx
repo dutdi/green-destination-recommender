@@ -132,7 +132,8 @@ const About = () => {
                         <Typography level='body-sm'>
                             The application is deployed on Github Pages and is developed using the following technologies:{' '}
                             <a href='https://reactjs.org/'>React</a>, <a href='https://mui.com/'>Material-UI</a>,{' '}
-                            <a href='https://react-leaflet.js.org/'>React-Leaflet</a>.
+                            <a href='https://react-leaflet.js.org/'>React-Leaflet</a>,{' '}
+                            <a href='https://react-icons.github.io/react-icons/'>React-Icons</a>.
                         </Typography>
                         <Typography level='body-sm'>
                             The images used in the application are sourced from <a href='https://www.pexels.com/'>Pexels</a> and{' '}

@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { Menu, MenuButton, MenuItem, Dropdown } from '@mui/joy';
 import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
+import { MdOutlineCo2 } from 'react-icons/md';
+import { FcBullish } from 'react-icons/fc';
+import { FcCalendar } from 'react-icons/fc';
 
 export default function OrderBy({ handleSortChange }) {
     const items = [
-        { id: 'emission', name: 'Emission 🌿' },
-        { id: 'popularity', name: 'Popularity 💹' },
-        { id: 'seasonality', name: 'Seasonality 📅' },
+        { id: 'emission', name: 'Emission', icon: <MdOutlineCo2 /> },
+        { id: 'popularity', name: 'Popularity', icon: <FcBullish /> },
+        { id: 'seasonality', name: 'Seasonality', icon: <FcCalendar /> },
     ];
     const [selectedItem, setSelectedItem] = useState(null);
 
@@ -23,7 +26,7 @@ export default function OrderBy({ handleSortChange }) {
             <Menu sx={{ minWidth: 150 }}>
                 {items.map((item) => (
                     <MenuItem key={item.id} selected={item === selectedItem} onClick={() => handleMenuItemClick(item)}>
-                        {item.name}
+                        {item.icon} {item.name}
                     </MenuItem>
                 ))}
             </Menu>

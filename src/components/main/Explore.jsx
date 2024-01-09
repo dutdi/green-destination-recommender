@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Grid, Box, Paper, Pagination, Typography, Divider } from '@mui/material';
+import { Grid, Box, Paper, Pagination, Divider } from '@mui/material';
+import { Typography } from '@mui/joy';
 import Stack from '@mui/joy/Stack';
 import CityCardItem from '../city/CityCardItem.jsx';
 import CustomMapContainer from '../custom/CustomMapContainer.jsx';
@@ -51,7 +52,7 @@ const Explore = () => {
 
     return (
         <Box sx={{ m: 3, mb: 10 }}>
-            <Typography gutterBottom variant='h4' sx={{ p: 2 }}>
+            <Typography gutterBottom level='h3' sx={{ p: 2 }}>
                 Discover Your Ideal Destinations: Top Travel Picks for <b>{month}</b> from <b>{fromDestination.name}</b>!
             </Typography>
             <Divider />

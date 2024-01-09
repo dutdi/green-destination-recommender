@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { ImSearch } from 'react-icons/im';
 import { useData } from './DataContext';
 import MonthPicker from '../custom/MonthPicker.jsx';
 import { Colors } from '../../helpers/Colors.js';
@@ -156,8 +157,9 @@ const UserInput = () => {
                             borderRadius: '4px',
                             p: 2,
                         }}
+                        startIcon={<ImSearch />}
                     >
-                        🔍 Explore
+                        Explore
                     </Button>
                 </Grid>
             </Grid>
