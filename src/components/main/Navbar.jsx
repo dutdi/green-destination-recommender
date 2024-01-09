@@ -7,7 +7,6 @@ import { Colors } from '../../helpers/Colors.js';
 const pages = [
     { title: 'Home', link: '/' },
     { title: 'About', link: '/about' },
-    { title: 'Contact', link: '/contact' },
 ];
 
 const Navbar = () => {
