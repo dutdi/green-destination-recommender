@@ -5,6 +5,7 @@ import Navbar from './components/main/Navbar.jsx';
 import Landing from './components/main/Landing.jsx';
 import Explore from './components/main/Explore.jsx';
 import Contact from './components/main/Contact.jsx';
+import About from './components/main/About.jsx';
 import Footer from './components/main/Footer.jsx';
 import CityDetails from './components/city/CityDetails.jsx';
 import Parse from 'parse/dist/parse.min.js';
@@ -29,6 +30,7 @@ const App = () => {
                         <Route exact path='/explore' element={<Explore></Explore>}></Route>
                         <Route exact path='/details' element={<CityDetails></CityDetails>}></Route>
                         <Route exact path='/contact' element={<Contact></Contact>}></Route>
+                        <Route exact path='/about' element={<About></About>}></Route>
                     </Routes>
                 </DataProvider>
                 <Footer />
