@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/green-destination-recommender/static/css/main.68e55275.css",
-    "main.js": "/green-destination-recommender/static/js/main.3d8257a5.js",
+    "main.css": "/green-destination-recommender/static/css/main.1158f734.css",
+    "main.js": "/green-destination-recommender/static/js/main.15b2a4a6.js",
     "static/media/m158.jpg": "/green-destination-recommender/static/media/m158.05f660edcfa2f98f0363.jpg",
     "static/media/m179.jpg": "/green-destination-recommender/static/media/m179.c67307e548d8cae60b52.jpg",
     "static/media/m78.jpg": "/green-destination-recommender/static/media/m78.874221f1a6a3b12a617b.jpg",
@@ -132,10 +132,10 @@
     "static/media/m153.jpg": "/green-destination-recommender/static/media/m153.9ea5f9e733c7c47a3e33.jpg",
     "static/media/m52.jpg": "/green-destination-recommender/static/media/m52.d981fdd3209110f432c6.jpg",
     "static/media/m121.jpg": "/green-destination-recommender/static/media/m121.064d7cde9eef0ec39774.jpg",
-    "static/media/m39.jpg": "/green-destination-recommender/static/media/m39.9acd44cf3d621d19322e.jpg",
     "static/media/m134.jpg": "/green-destination-recommender/static/media/m134.fa9ee12ab0ddbf646093.jpg",
     "static/media/m63.jpg": "/green-destination-recommender/static/media/m63.d0ec6e05c600bff8b89d.jpg",
     "static/media/m53.jpg": "/green-destination-recommender/static/media/m53.b483fcadd4f771395c48.jpg",
+    "static/media/m39.jpg": "/green-destination-recommender/static/media/m39.437b8e6291c8e106984d.jpg",
     "static/media/m110.jpg": "/green-destination-recommender/static/media/m110.859c10e75f1c89bb20b6.jpg",
     "static/media/m4.jpg": "/green-destination-recommender/static/media/m4.c37c2e3bb4c8363e343e.jpg",
     "static/media/m159.jpg": "/green-destination-recommender/static/media/m159.aba35c5a4425a3608eac.jpg",
@@ -205,11 +205,11 @@
     "static/media/m136.jpg": "/green-destination-recommender/static/media/m136.f59bb3a6eba605a5e5ce.jpg",
     "static/media/TUM-Uhrenturm.png": "/green-destination-recommender/static/media/TUM-Uhrenturm.13e63225523f4661a116.png",
     "index.html": "/green-destination-recommender/index.html",
-    "main.68e55275.css.map": "/green-destination-recommender/static/css/main.68e55275.css.map",
-    "main.3d8257a5.js.map": "/green-destination-recommender/static/js/main.3d8257a5.js.map"
+    "main.1158f734.css.map": "/green-destination-recommender/static/css/main.1158f734.css.map",
+    "main.15b2a4a6.js.map": "/green-destination-recommender/static/js/main.15b2a4a6.js.map"
   },
   "entrypoints": [
-    "static/css/main.68e55275.css",
-    "static/js/main.3d8257a5.js"
+    "static/css/main.1158f734.css",
+    "static/js/main.15b2a4a6.js"
   ]
 }
