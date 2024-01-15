@@ -326,3 +326,43 @@ export function getSeasonalityIndex(score) {
         return -1;
     }
 }
+
+export function getSortedMinCo2Modes(fromDestination, toDestination) {
+    const modes = [];
+    const minDrivingCo2Mode = findDrivingConnectionWithMinCo2(fromDestination, toDestination);
+    if (minDrivingCo2Mode) {
+        const md = {
+            mode: 'Driving 🚗',
+            duration: minDrivingCo2Mode.duration_sec,
+            co2: minDrivingCo2Mode.co2_kg,
+        };
+        modes.push(md);
+    }
+    const minFlightCo2Mode = findFlightConnectionWithMinCo2(fromDestination, toDestination);
+    if (minFlightCo2Mode) {
+        const mf = {
+            mode: 'Flight ✈️',
+            duration: convertToSec(minFlightCo2Mode.duration_str),
+            co2: minFlightCo2Mode.co2_kg,
+        };
+        modes.push(mf);
+    }
+    const minTrainCo2Mode = findTrainConnectionWithMinCo2(fromDestination, toDestination);
+    if (minTrainCo2Mode) {
+        const mt = {
+            mode: 'Train 🚉',
+            duration: minTrainCo2Mode.duration_sec,
+            co2: minTrainCo2Mode.co2_kg,
+        };
+        modes.push(mt);
+    }
+    return modes.sort((a, b) => a.co2 - b.co2);
+}
+
+export function getColorForValue(value, maxValue) {
+    const normalizedValue = value / maxValue;
+    const red = normalizedValue < 0.5 ? Math.round(2 * normalizedValue * 255) : 255;
+    const green = normalizedValue > 0.5 ? Math.round(2 * (1 - normalizedValue) * 255) : 255;
+    const blue = 0;
+    return `rgb(${red}, ${green}, ${blue})`;
+}

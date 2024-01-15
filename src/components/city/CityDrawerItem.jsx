@@ -1,21 +1,6 @@
 import React from 'react';
-import {
-    AspectRatio,
-    Box,
-    Button,
-    Card,
-    CardContent,
-    CardOverflow,
-    Chip,
-    Table,
-    Sheet,
-    Typography,
-    AccordionGroup,
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Tooltip,
-} from '@mui/joy';
+import { Paper } from '@mui/material';
+import { AspectRatio, Box, Button, Card, CardContent, CardOverflow, Chip, Table, Sheet, Typography, Tooltip } from '@mui/joy';
 import DiamondIcon from '@mui/icons-material/Diamond';
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import FmdBadIcon from '@mui/icons-material/FmdBad';
@@ -26,7 +11,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import PeopleIcon from '@mui/icons-material/People';
 import GroupsIcon from '@mui/icons-material/Groups';
 import InterestChips from '../custom/InterestChips.jsx';
-import { calculateOffset, getPopularityIndex, getSeasonalityIndex } from '../../helpers/Functions.js';
+import ChartComponent from '../custom/CustomChart.jsx';
+import { calculateOffset, getPopularityIndex, getSeasonalityIndex, getSortedMinCo2Modes } from '../../helpers/Functions.js';
 import { calculateOverallScore } from '../../helpers/SF.js';
 import { Colors } from '../../helpers/Colors.js';
 
@@ -192,6 +178,7 @@ const CityDrawerItem = ({ index, fromDestination, toDestination, month, minCo2Mo
         }
     };
 
+    const modesSortedByCo2 = getSortedMinCo2Modes(fromDestination, toDestination);
     const overallScore = calculateOverallScore(fromDestination, toDestination, month);
 
     return (
@@ -213,7 +200,9 @@ const CityDrawerItem = ({ index, fromDestination, toDestination, month, minCo2Mo
                     <Tooltip color='neutral' placement='top' variant='soft' title='Overall score'>
                         <Chip
                             variant='solid'
-                            color='primary'
+                            color={
+                                overallScore >= 40 ? 'danger' : overallScore >= 20 ? 'warning' : overallScore >= 0 ? 'success' : 'neutral'
+                            }
                             size='lg'
                             sx={{
                                 position: 'absolute',
@@ -224,7 +213,7 @@ const CityDrawerItem = ({ index, fromDestination, toDestination, month, minCo2Mo
                                 py: 0.5,
                             }}
                         >
-                            {overallScore}
+                            {Math.floor(overallScore)}/100
                         </Chip>
                     </Tooltip>
                 </Box>
@@ -233,15 +222,10 @@ const CityDrawerItem = ({ index, fromDestination, toDestination, month, minCo2Mo
                 <Typography level='title-md' sx={{ mt: 1, fontWeight: 'xl' }}>
                     {toDestination.name}, {toDestination.country} {toDestination.flag}
                 </Typography>
-                <Typography level='body-sm'>
-                    {minCo2Mode.mode} - {minCo2Mode.duration} -{' '}
-                    <Typography color='success'>
-                        <b>{minCo2Mode.co2} kg CO₂</b>
-                    </Typography>{' '}
-                </Typography>
-                <Typography level='body' sx={{ mt: 1 }}>
+                <Typography level='body-xs' sx={{ mt: 1 }}>
                     {toDestination.description}
                 </Typography>
+                <InterestChips interests={toDestination.interests}></InterestChips>
                 <Sheet variant='soft' sx={{ pt: 1, mt: 2, mb: 2 }}>
                     <Table borderAxis='none' variant='plain' color='neutral' size='sm' stickyHeader sx={{ textAlign: 'center' }}>
                         <thead>
@@ -260,14 +244,15 @@ const CityDrawerItem = ({ index, fromDestination, toDestination, month, minCo2Mo
                         </tbody>
                     </Table>
                 </Sheet>
-                <AccordionGroup sx={{ maxWidth: 400, mt: 1 }}>
-                    <Accordion sx={{ border: '1px solid' }}>
-                        <AccordionSummary>Interests</AccordionSummary>
-                        <AccordionDetails>
-                            <InterestChips interests={toDestination.interests}></InterestChips>
-                        </AccordionDetails>
-                    </Accordion>
-                </AccordionGroup>{' '}
+                <Paper sx={{ p: 2, backgroundColor: '#f0f4f8', borderRadius: 0 }}>
+                    {modesSortedByCo2.map((mode, index) => (
+                        <ChartComponent
+                            mode={mode}
+                            index={index}
+                            sum={modesSortedByCo2.reduce((acc, mode) => acc + mode.co2, 0)}
+                        ></ChartComponent>
+                    ))}
+                </Paper>
             </CardContent>
             <CardOverflow>
                 <Button

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
-import { getAllMapValues, getPopularityIndex, getSeasonalityIndex } from '../../helpers/Functions.js';
+import { getAllMapValues, getPopularityIndex, getSeasonalityIndex, getColorForValue } from '../../helpers/Functions.js';
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
@@ -38,10 +38,7 @@ const Legend = ({ sortBy, maxValue, getColorForValue }) => {
                 labels.push('<strong>Emissions</strong><br>');
                 for (let i = 1; i <= gradientSteps; i++) {
                     let value = (maxValue / gradientSteps) * i;
-                    value = Math.round(value / 100) * 100;
-                    labels.push(
-                        '<i style="background:' + getColorForValue(value, maxValue) + ';">&nbsp;</i> ' + Math.round(value) + ' kg CO₂'
-                    );
+                    labels.push('<i style="background:' + getColorForValue(value, maxValue) + ';">&nbsp;</i> ' + value + ' kg CO₂e');
                 }
             } else if (sortBy === 'popularity') {
                 labels.push('<strong>Popularity</strong><br>');
@@ -195,14 +192,6 @@ const CustomMap = ({ fromDestination, toDestinations, sortBy, month, height, cli
     const [selectedDestination, setSelectedDestination] = useState(null);
     const values = getAllMapValues(fromDestination, toDestinations, sortBy, month);
     const maxValue = values.filter((value) => value !== 100).reduce((a, b) => Math.max(a, b), 0);
-
-    const getColorForValue = (value, maxValue) => {
-        const normalizedValue = value / maxValue;
-        const red = normalizedValue < 0.5 ? Math.round(2 * normalizedValue * 255) : 255;
-        const green = normalizedValue > 0.5 ? Math.round(2 * (1 - normalizedValue) * 255) : 255;
-        const blue = 0;
-        return `rgb(${red}, ${green}, ${blue})`;
-    };
 
     const handleDestinationClick = (destination) => {
         setSelectedDestination(destination);

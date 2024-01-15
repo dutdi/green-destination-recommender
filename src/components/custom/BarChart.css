@@ -1,0 +1,34 @@
+.bar-chart {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.bar-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.bar {
+    margin-left: 10px;
+    height: 20px;
+    background-color: #888;
+}
+
+.co2-label {
+    font-size: 0.75em;
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+.time-label {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    width: 100%;
+    text-align: left;
+    margin-left: 25px;
+    font-size: 0.75em;
+}

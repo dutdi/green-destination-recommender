@@ -6,12 +6,11 @@ import Stack from '@mui/joy/Stack';
 import CityCardItem from '../city/CityCardItem.jsx';
 import CustomMapContainer from '../custom/CustomMapContainer.jsx';
 import Header from '../custom/Header.jsx';
-import { useData } from '../main/DataContext.jsx';
 import { getSortedToDestinations, calculateAvgValues, calculateMinCo2Mode } from '../../helpers/Functions.js';
+import destinations from '../../data/data.json';
 
 const Explore = () => {
     const { state } = useLocation();
-    const { destinations } = useData();
     const fromDestination = state && JSON.parse(state.fromDestination);
     const interests = state && JSON.parse(state.interests);
     const month = state && state.month;
@@ -20,7 +19,7 @@ const Explore = () => {
     const [sortBy, setSortBy] = useState('overall');
     const [page, setPage] = useState(1);
 
-    const itemsPerPage = 8;
+    const itemsPerPage = 6;
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = page * itemsPerPage;
 
@@ -50,6 +49,7 @@ const Explore = () => {
     const filteredDestinations = getFilteredDestinations();
     const averages = calculateAvgValues(fromDestination, filteredDestinations, month);
 
+    console.log('state', state);
     return (
         <Box sx={{ m: 3, mb: 10 }}>
             <Typography gutterBottom level='h3' sx={{ p: 2 }}>
@@ -64,7 +64,7 @@ const Explore = () => {
                             filteredDestinations.slice(startIndex, endIndex).map((toDest, index) => {
                                 const adjustedIndex = startIndex + index;
                                 return (
-                                    <Grid item xs={12} sm={6} md={3} lg={3} xl={3} key={toDest.id}>
+                                    <Grid item xs={12} sm={6} md={4} lg={4} xl={4} key={toDest.id}>
                                         <CityCardItem
                                             index={adjustedIndex}
                                             fromDestination={fromDestination}

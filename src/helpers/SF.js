@@ -16,12 +16,6 @@ export function calculateOverallScore(fromDestination, toDestination, month) {
 function calculateTransportationScore(fromDestination, toDestination) {
     const zScores = normalizeTransportationScore(fromDestination, toDestination);
     const minZScore = Math.min(...Object.values(zScores).filter((z) => z !== null));
-
-    if (isNaN(minZScore)) {
-        console.error('Not enough data to calculate transportation score: ', toDestination.name);
-        console.error('zScores: ', zScores);
-        return 0;
-    }
     return minZScore;
 }
 
