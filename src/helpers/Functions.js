@@ -1,4 +1,5 @@
 import Papa from 'papaparse';
+import { calculateOverallScore } from './SF';
 
 export async function fetchDataFromFile(filePath) {
     return new Promise((resolve, reject) => {
@@ -255,7 +256,13 @@ export function getSortedToDestinations(fromDestination, destinations, sortBy, m
         ...new Set(
             allConnections
                 .sort((a, b) => {
-                    if (sortBy === 'emission') {
+                    if (sortBy === 'overall') {
+                        const aDestination = destinations.find((destination) => destination.id === a.to_id);
+                        const bDestination = destinations.find((destination) => destination.id === b.to_id);
+                        let aOverall = calculateOverallScore(fromDestination, aDestination, month);
+                        let bOverall = calculateOverallScore(fromDestination, bDestination, month);
+                        return aOverall - bOverall;
+                    } else if (sortBy === 'emission') {
                         return a.co2_kg - b.co2_kg;
                     } else if (sortBy === 'popularity') {
                         let aPopularity = destinations.find((destination) => destination.id === a.to_id).popularity.popularity_score;
@@ -281,7 +288,9 @@ export function getSortedToDestinations(fromDestination, destinations, sortBy, m
 }
 
 export function getAllMapValues(fromDestination, toDestinations, sortBy, month) {
-    if (sortBy === 'emission') {
+    if (sortBy === 'overall') {
+        return toDestinations.map((destination) => calculateOverallScore(fromDestination, destination, month));
+    } else if (sortBy === 'emission') {
         return toDestinations.map((destination) => calculateMinCo2Value(fromDestination, destination));
     } else if (sortBy === 'popularity') {
         return toDestinations.map((destination) => destination.popularity.popularity_score);

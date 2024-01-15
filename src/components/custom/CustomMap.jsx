@@ -26,7 +26,15 @@ const Legend = ({ sortBy, maxValue, getColorForValue }) => {
             div.style.border = '1px solid #ccc';
             div.style.borderRadius = '5px';
 
-            if (sortBy === 'emission') {
+            if (sortBy === 'overall') {
+                labels.push('<strong>Overall Score</strong><br>');
+                for (let i = 1; i < gradientSteps; i++) {
+                    let value = (maxValue / gradientSteps) * i;
+                    labels.push(
+                        '<i style="background:' + getColorForValue(value, maxValue) + ';">&nbsp;</i> ' + Math.round(value) + ' score'
+                    );
+                }
+            } else if (sortBy === 'emission') {
                 labels.push('<strong>Emissions</strong><br>');
                 for (let i = 1; i <= gradientSteps; i++) {
                     let value = (maxValue / gradientSteps) * i;
@@ -130,7 +138,9 @@ const Circles = ({ toDestinations, values, maxValue, getColorForValue, handleDes
     useEffect(() => {
         toDestinations.forEach((destination, index) => {
             let circleColor = '';
-            if (sortBy === 'emission') {
+            if (sortBy === 'overall') {
+                circleColor = getColorForValue(values[index], maxValue);
+            } else if (sortBy === 'emission') {
                 circleColor = getColorForValue(values[index], maxValue);
             } else {
                 const scaleIndex = sortBy === 'popularity' ? getPopularityIndex(values[index]) : getSeasonalityIndex(values[index]);

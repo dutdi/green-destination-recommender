@@ -24,6 +24,7 @@ const CityDrawer = ({ fromDestination, toDestination, month, averages, sortBy, o
                 </Box>
                 <CityDrawerItem
                     index={100}
+                    fromDestination={fromDestination}
                     toDestination={toDestination}
                     month={month}
                     minCo2Mode={calculateMinCo2Mode(fromDestination, toDestination)}

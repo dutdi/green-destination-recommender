@@ -26,11 +26,11 @@ import PersonIcon from '@mui/icons-material/Person';
 import PeopleIcon from '@mui/icons-material/People';
 import GroupsIcon from '@mui/icons-material/Groups';
 import InterestChips from '../custom/InterestChips.jsx';
-import { convertToSec, calculateOffset, getPopularityIndex, getSeasonalityIndex } from '../../helpers/Functions.js';
+import { calculateOffset, getPopularityIndex, getSeasonalityIndex } from '../../helpers/Functions.js';
 import { calculateOverallScore } from '../../helpers/SF.js';
 import { Colors } from '../../helpers/Colors.js';
 
-const CityDrawerItem = ({ index, toDestination, month, minCo2Mode, averages, sortBy, clicked, onItemClicked }) => {
+const CityDrawerItem = ({ index, fromDestination, toDestination, month, minCo2Mode, averages, sortBy, clicked, onItemClicked }) => {
     const offset = calculateOffset(
         'emission',
         averages,
@@ -41,8 +41,10 @@ const CityDrawerItem = ({ index, toDestination, month, minCo2Mode, averages, sor
 
     const generateHighlight = (sortBy) => {
         let label = '';
-        if (sortBy === 'emission') {
+        if (sortBy === 'overall') {
             label = 'Green Recommended';
+        } else if (sortBy === 'emission') {
+            label = 'Lowest Emission';
         } else if (sortBy === 'popularity') {
             label = 'Hidden Gem';
         } else if (sortBy === 'seasonality') {
@@ -190,6 +192,8 @@ const CityDrawerItem = ({ index, toDestination, month, minCo2Mode, averages, sor
         }
     };
 
+    const overallScore = calculateOverallScore(fromDestination, toDestination, month);
+
     return (
         <Card
             sx={{
@@ -220,13 +224,7 @@ const CityDrawerItem = ({ index, toDestination, month, minCo2Mode, averages, sor
                                 py: 0.5,
                             }}
                         >
-                            {calculateOverallScore(
-                                toDestination,
-                                convertToSec(minCo2Mode.duration),
-                                minCo2Mode.co2,
-                                minCo2Mode.distance_km,
-                                month
-                            )}
+                            {overallScore}
                         </Chip>
                     </Tooltip>
                 </Box>

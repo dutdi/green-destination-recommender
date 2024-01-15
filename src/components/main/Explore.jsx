@@ -17,10 +17,10 @@ const Explore = () => {
     const month = state && state.month;
     const [clickedItems, setClickedItems] = useState({});
     const [view, setView] = useState('card');
-    const [sortBy, setSortBy] = useState('emission');
+    const [sortBy, setSortBy] = useState('overall');
     const [page, setPage] = useState(1);
 
-    const itemsPerPage = view === 'card' ? 8 : 4;
+    const itemsPerPage = 8;
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = page * itemsPerPage;
 
@@ -67,6 +67,7 @@ const Explore = () => {
                                     <Grid item xs={12} sm={6} md={3} lg={3} xl={3} key={toDest.id}>
                                         <CityCardItem
                                             index={adjustedIndex}
+                                            fromDestination={fromDestination}
                                             toDestination={toDest}
                                             month={month}
                                             minCo2Mode={calculateMinCo2Mode(fromDestination, toDest)}
