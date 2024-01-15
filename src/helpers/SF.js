@@ -27,12 +27,12 @@ function calculateTransportationScore(fromDestination, toDestination) {
 
 function calculatePopularityScore(toDestination) {
     const popularityScore = toDestination.popularity.popularity_score;
-    return popularityScore < 1 ? popularityScore : 0;
+    return popularityScore < 1 ? popularityScore : 0.5;
 }
 
 function calculateSeasonalityScore(toDestination, month) {
     const seasonalityScore = toDestination.seasonality[month];
-    return seasonalityScore < 1 ? seasonalityScore : 0;
+    return seasonalityScore < 1 ? seasonalityScore : 0.5;
 }
 
 function normalizeTransportationScore(fromDestination, toDestination) {
@@ -105,5 +105,5 @@ function normalizeTransportationScore(fromDestination, toDestination) {
 }
 
 const calculateNormalized = (value, min, max) => {
-    return min === max ? 1 : (value - min) / (max - min);
+    return min === max ? 0.5 : (value - min) / (max - min);
 };

@@ -182,7 +182,7 @@ const CityCardItem = ({ index, fromDestination, toDestination, month, minCo2Mode
         <Card
             sx={{
                 width: 320,
-                minHeight: 460,
+                minHeight: 480,
                 maxWidth: '100%',
                 boxShadow: 'lg',
             }}
