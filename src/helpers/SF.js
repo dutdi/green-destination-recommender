@@ -61,7 +61,6 @@ function normalizeTransportationScore(fromDestination, toDestination) {
     let costs = [drivingCost, trainCost, flightCost].filter((c) => c !== undefined);
 
     if (emissions.length === 0 || times.length === 0 || costs.length === 0) {
-        console.error('Not enough data to calculate scores.');
         return scores;
     }
 

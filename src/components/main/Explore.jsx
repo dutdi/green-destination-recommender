@@ -49,7 +49,6 @@ const Explore = () => {
     const filteredDestinations = getFilteredDestinations();
     const averages = calculateAvgValues(fromDestination, filteredDestinations, month);
 
-    console.log('state', state);
     return (
         <Box sx={{ m: 3, mb: 10 }}>
             <Typography gutterBottom level='h3' sx={{ p: 2 }}>
