@@ -1,0 +1,122 @@
+[
+  {
+    "from_id": "m102",
+    "to_id": "m35",
+    "type": "train",
+    "distance_km": 162,
+    "duration_sec": 6420,
+    "co2_kg": 4
+  },
+  {
+    "from_id": "m102",
+    "to_id": "m96",
+    "type": "train",
+    "distance_km": 127,
+    "duration_sec": 4920,
+    "co2_kg": 3
+  },
+  {
+    "from_id": "m102",
+    "to_id": "m53",
+    "type": "train",
+    "distance_km": 242,
+    "duration_sec": 5700,
+    "co2_kg": 6
+  },
+  {
+    "from_id": "m51",
+    "to_id": "m53",
+    "type": "train",
+    "distance_km": 89,
+    "duration_sec": 2640,
+    "co2_kg": 2
+  },
+  {
+    "from_id": "m51",
+    "to_id": "m54",
+    "type": "train",
+    "distance_km": 101,
+    "duration_sec": 1500,
+    "co2_kg": 2
+  },
+  {
+    "from_id": "m51",
+    "to_id": "m34",
+    "type": "train",
+    "distance_km": 101,
+    "duration_sec": 1500,
+    "co2_kg": 2
+  },
+  {
+    "from_id": "m35",
+    "to_id": "m102",
+    "type": "train",
+    "distance_km": 160,
+    "duration_sec": 7800,
+    "co2_kg": 4
+  },
+  {
+    "from_id": "m53",
+    "to_id": "m51",
+    "type": "train",
+    "distance_km": 250,
+    "duration_sec": 8700,
+    "co2_kg": 6
+  },
+  {
+    "from_id": "m53",
+    "to_id": "m54",
+    "type": "train",
+    "distance_km": 121,
+    "duration_sec": 4200,
+    "co2_kg": 3
+  },
+  {
+    "from_id": "m53",
+    "to_id": "m102",
+    "type": "train",
+    "distance_km": 253,
+    "duration_sec": 6600,
+    "co2_kg": 6
+  },
+  {
+    "from_id": "m53",
+    "to_id": "m34",
+    "type": "train",
+    "distance_km": 331,
+    "duration_sec": 11400,
+    "co2_kg": 8
+  },
+  {
+    "from_id": "m54",
+    "to_id": "m51",
+    "type": "train",
+    "distance_km": 101,
+    "duration_sec": 1260,
+    "co2_kg": 2
+  },
+  {
+    "from_id": "m54",
+    "to_id": "m53",
+    "type": "train",
+    "distance_km": 121,
+    "duration_sec": 4080,
+    "co2_kg": 3
+  },
+  {
+    "from_id": "m54",
+    "to_id": "m96",
+    "type": "train",
+    "distance_km": 132,
+    "duration_sec": 4740,
+    "co2_kg": 3
+  },
+  {
+    "from_id": "m96",
+    "to_id": "m102",
+    "type": "train",
+    "distance_km": 116,
+    "duration_sec": 840,
+    "co2_kg": 3
+  }
+]
