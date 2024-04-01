@@ -1,6 +1,6 @@
 # Green Destination Recommender
 
-This project is deployed at [Green Destination Recommender](https://tunargs.github.io/green-destination-recommender/).
+This project is deployed at [Green Destination Recommender](https://dutdi.github.io/green-destination-recommender/).
 
 ## What is it?
 
